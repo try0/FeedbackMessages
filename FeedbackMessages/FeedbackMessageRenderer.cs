@@ -1,30 +1,47 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using System.Web;
+using static FeedbackMessages.FeedbackMessage;
+using static FeedbackMessages.FeedbackMessageAttributeCollection;
 
 namespace FeedbackMessages
 {
+    /// <summary>
+    /// Message renderer.
+    /// </summary>
     public class FeedbackMessageRenderer
     {
         /// <summary>
-        /// Per-Level tag
+        /// Outer tag
         /// </summary>
         public string OuterTagName { get; set; } = "ul";
 
         /// <summary>
-        /// Per-Message tag
+        /// Inner tag
         /// </summary>
         public string InnerTagName { get; set; } = "li";
 
         /// <summary>
-        /// Per-Level attributes
+        /// Outer tag attributes
         /// </summary>
-        private IDictionary<string, string> OuterTagAttributes { get; set; } = new Dictionary<string, string>();
+        private FeedbackMessageAttributeCollection OuterTagAttributes { get; set; } = new FeedbackMessageAttributeCollection();
 
         /// <summary>
-        /// Per-Message attributes
+        /// Inner tag attributes
         /// </summary>
-        private IDictionary<string, string> InnerTagAttributes { get; set; } = new Dictionary<string, string>();
+        private FeedbackMessageAttributeCollection InnerTagAttributes { get; set; } = new FeedbackMessageAttributeCollection();
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private IDictionary<FeedbackMessage.FeedbackMessageLevel, FeedbackMessageAttributeCollection> PerLevelOuterTagAttributes { get; set; } = new Dictionary<FeedbackMessage.FeedbackMessageLevel, FeedbackMessageAttributeCollection>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private IDictionary<FeedbackMessage.FeedbackMessageLevel, FeedbackMessageAttributeCollection> PerLevelInnerTagAttributes { get; set; } = new Dictionary<FeedbackMessage.FeedbackMessageLevel, FeedbackMessageAttributeCollection>();
+
 
         /// <summary>
         /// Wheter escape message or not
@@ -32,71 +49,91 @@ namespace FeedbackMessages
         public bool EscapeMessage { get; set; } = false;
 
 
-        private void AppendAttributeValue(IDictionary<string, string> attrs, string key, string value)
+        /// <summary>
+        /// Appends attribute value to outer tag.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="attrValue"></param>
+        /// <returns></returns>
+        public FeedbackMessageRenderer AppendOuterAttributeValue(string key, string attrValue)
+        {
+            OuterTagAttributes.AppendAttribute(key, attrValue);
+            return this;
+        }
+
+        /// <summary>
+        /// Appends attribute value to inner tag.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="attrValue"></param>
+        /// <returns></returns>
+        public FeedbackMessageRenderer AppendInnerAttributeValue(string key, string attrValue)
+        {
+            InnerTagAttributes.AppendAttribute(key, attrValue);
+            return this;
+        }
+
+        /// <summary>
+        /// Appends attribute value to outer tag.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="key"></param>
+        /// <param name="attrValue"></param>
+        /// <returns></returns>
+        public FeedbackMessageRenderer AppendOuterAttributeValue(FeedbackMessageLevel level, string key, string attrValue)
         {
 
-            if (attrs.ContainsKey(key))
+            FeedbackMessageAttributeCollection attrCollection;
+            if (PerLevelOuterTagAttributes.ContainsKey(level))
             {
-                var attr = attrs[key];
-
-                attrs[key] = attr + " " + value;
+                attrCollection = PerLevelOuterTagAttributes[level];
             }
             else
             {
-                attrs[key] = value;
+                attrCollection = new FeedbackMessageAttributeCollection();
+                PerLevelOuterTagAttributes[level] = attrCollection;
             }
-        }
 
-        public FeedbackMessageRenderer AppendOuterAttributeValue(string key, string attrValue)
-        {
-            AppendAttributeValue(OuterTagAttributes, key, attrValue);
+            attrCollection.AppendAttribute(key, attrValue);
             return this;
         }
 
-        public FeedbackMessageRenderer AppendInnerAttributeValue(string key, string attrValue)
+        /// <summary>
+        /// Appends attribute value to inner tag.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="key"></param>
+        /// <param name="attrValue"></param>
+        /// <returns></returns>
+        public FeedbackMessageRenderer AppendInnerAttributeValue(FeedbackMessageLevel level, string key, string attrValue)
         {
-            AppendAttributeValue(InnerTagAttributes, key, attrValue);
+
+            FeedbackMessageAttributeCollection attrCollection;
+            if (PerLevelInnerTagAttributes.ContainsKey(level))
+            {
+                attrCollection = PerLevelInnerTagAttributes[level];
+            }
+            else
+            {
+                attrCollection = new FeedbackMessageAttributeCollection();
+                PerLevelInnerTagAttributes[level] = attrCollection;
+            }
+
+            attrCollection.AppendAttribute(key, attrValue);
             return this;
         }
 
 
-
-
+        /// <summary>
+        /// Render messages tag.
+        /// </summary>
+        /// <returns></returns>
         public StringBuilder RenderMessages()
         {
 
             StringBuilder output = new StringBuilder();
 
 
-            string outerAttrClass = OuterTagAttributes["class"];
-            if (outerAttrClass == null)
-            {
-                outerAttrClass = "";
-            }
-
-            StringBuilder outerAttrBuilder = new StringBuilder(); 
-            foreach (var attrEntry in OuterTagAttributes)
-            {
-
-                if (attrEntry.Key.Equals("class"))
-                {
-                    continue;
-                }
-
-                outerAttrBuilder.Append(attrEntry.Key).Append("=\"").Append(attrEntry.Value).Append("\" ");
-            }
-
-            StringBuilder innerAttrBuilder = new StringBuilder();
-            foreach (var attrEntry in InnerTagAttributes)
-            {
-
-                if (attrEntry.Key.Equals("class"))
-                {
-                    continue;
-                }
-
-                innerAttrBuilder.Append(attrEntry.Key).Append("=\"").Append(attrEntry.Value).Append("\" ");
-            }
 
             var messageStore = FeedbackMessageStore.Current;
             foreach (var messages in messageStore.Messages)
@@ -107,11 +144,36 @@ namespace FeedbackMessages
                     continue;
                 }
 
- 
-                output.Append($"<{OuterTagName} class=\"feedback-{ messages.Key.ToString().ToLower() } {outerAttrClass}\" {outerAttrBuilder.ToString()}>");
+
+
+                FeedbackMessageAttributeCollection outerAttrs;
+                if (PerLevelOuterTagAttributes.ContainsKey(messages.Key))
+                {
+                    outerAttrs = OuterTagAttributes.Merge(PerLevelOuterTagAttributes[messages.Key]);
+                }
+                else
+                {
+                    outerAttrs = new FeedbackMessageAttributeCollection(OuterTagAttributes);
+                }
+
+                outerAttrs.AppendAttribute("class", $"feedback-{ messages.Key.ToString().ToLower() }");
+
+
+                FeedbackMessageAttributeCollection innerAttrs;
+                if (PerLevelInnerTagAttributes.ContainsKey(messages.Key))
+                {
+                    innerAttrs = InnerTagAttributes.Merge(PerLevelInnerTagAttributes[messages.Key]);
+                }
+                else
+                {
+                    innerAttrs = new FeedbackMessageAttributeCollection(InnerTagAttributes);
+                }
+
+
+                output.Append($"<{OuterTagName} {outerAttrs.Build().ToString()}>");
                 messages.Value.ForEach(msg =>
                 {
-                    output.Append($"<{InnerTagName} {innerAttrBuilder.ToString()}>");
+                    output.Append($"<{InnerTagName} {innerAttrs.Build().ToString()}>");
 
                     string message = msg.Message.ToString();
                     output.Append(EscapeMessage ? HttpUtility.HtmlEncode(message) : message);

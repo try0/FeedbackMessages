@@ -48,6 +48,7 @@
     <Compile Include="Components\FeedbackMessagePanel.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="FeedbackMessage.cs" />
+    <Compile Include="FeedbackMessageAttributeCollection.cs" />
     <Compile Include="FeedbackMessageRenderer.cs" />
     <Compile Include="FeedbackMessageStore.cs" />
     <Compile Include="FeedbackMessageHttpModule.cs" />
