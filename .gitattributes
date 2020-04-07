@@ -1,2 +1,2 @@
-Scripts/jquery-* linguist-vendored
-Scripts/WebForms/* linguist-vendored
+FeedbackMessages.Example.WebForms/Scripts/jquery-* linguist-vendored
+FeedbackMessages.Example.WebForms/Scripts/WebForms/* linguist-vendored
