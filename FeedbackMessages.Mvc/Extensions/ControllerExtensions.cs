@@ -10,7 +10,7 @@ namespace FeedbackMessages.Mvc.Extensions
     {
 
         /// <summary>
-        /// Sets information message to <see cref="MessageStore"/>.
+        /// Sets information message to <see cref="FeedbackMessageStore"/>.
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="message"></param>
@@ -18,11 +18,11 @@ namespace FeedbackMessages.Mvc.Extensions
         {
             var feedbackMessage = FeedbackMessage.Info(message);
 
-            MessageStore.Current.AddMessage(feedbackMessage);
+            FeedbackMessageStore.Current.AddMessage(feedbackMessage);
         }
 
         /// <summary>
-        /// Sets success message to <see cref="MessageStore"/>.
+        /// Sets success message to <see cref="FeedbackMessageStore"/>.
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="message"></param>
@@ -30,11 +30,11 @@ namespace FeedbackMessages.Mvc.Extensions
         {
             var feedbackMessage = FeedbackMessage.Success(message);
 
-            MessageStore.Current.AddMessage(feedbackMessage);
+            FeedbackMessageStore.Current.AddMessage(feedbackMessage);
         }
 
         /// <summary>
-        /// Sets warning message to <see cref="MessageStore"/>.
+        /// Sets warning message to <see cref="FeedbackMessageStore"/>.
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="message"></param>
@@ -42,11 +42,11 @@ namespace FeedbackMessages.Mvc.Extensions
         {
             var feedbackMessage = FeedbackMessage.Warn(message);
 
-            MessageStore.Current.AddMessage(feedbackMessage);
+            FeedbackMessageStore.Current.AddMessage(feedbackMessage);
         }
 
         /// <summary>
-        /// Sets error message to <see cref="MessageStore"/>.
+        /// Sets error message to <see cref="FeedbackMessageStore"/>.
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="message"></param>
@@ -54,7 +54,7 @@ namespace FeedbackMessages.Mvc.Extensions
         {
             var feedbackMessage = FeedbackMessage.Error(message);
 
-            MessageStore.Current.AddMessage(feedbackMessage);
+            FeedbackMessageStore.Current.AddMessage(feedbackMessage);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FeedbackMessages.Extensions
     {
 
         /// <summary>
-        /// Sets information message to <see cref="MessageStore"/>.
+        /// Sets information message to <see cref="FeedbackMessageStore"/>.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="message"></param>
@@ -24,7 +24,7 @@ namespace FeedbackMessages.Extensions
         }
 
         /// <summary>
-        /// Sets success message to <see cref="MessageStore"/>.
+        /// Sets success message to <see cref="FeedbackMessageStore"/>.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="message"></param>
@@ -36,7 +36,7 @@ namespace FeedbackMessages.Extensions
         }
 
         /// <summary>
-        /// Sets warning message to <see cref="MessageStore"/>.
+        /// Sets warning message to <see cref="FeedbackMessageStore"/>.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="message"></param>
@@ -48,7 +48,7 @@ namespace FeedbackMessages.Extensions
         }
 
         /// <summary>
-        /// Sets error message to <see cref="MessageStore"/>.
+        /// Sets error message to <see cref="FeedbackMessageStore"/>.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="message"></param>

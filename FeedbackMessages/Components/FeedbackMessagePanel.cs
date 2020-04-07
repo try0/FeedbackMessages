@@ -13,6 +13,8 @@ namespace FeedbackMessages.Components
 
         public FeedbackMessageRenderer MessageRenderer { get; set; }
 
+        protected override string TagName => "div";
+
         protected override void RenderContents(HtmlTextWriter output)
         {
 
