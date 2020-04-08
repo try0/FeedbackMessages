@@ -80,7 +80,7 @@ namespace FeedbackMessages
 
             var messageStore = Current;
 
-            messageStore.Clean();
+            messageStore.CleanRendered();
 
             if (messageStore.HasUnrenderedMessage())
             {
@@ -120,7 +120,7 @@ namespace FeedbackMessages
         /// </summary>
         /// <param name="level"></param>
         /// <returns></returns>
-        private List<FeedbackMessage> GetFeedbackMessageList(FeedbackMessage.FeedbackMessageLevel level)
+        public List<FeedbackMessage> GetFeedbackMessages(FeedbackMessage.FeedbackMessageLevel level)
         {
             if (!Messages.ContainsKey(level))
             {
@@ -143,7 +143,7 @@ namespace FeedbackMessages
                 return;
             }
 
-            var messageList = GetFeedbackMessageList(message.Level);
+            var messageList = GetFeedbackMessages(message.Level);
             messageList.Add(message);
         }
 
@@ -162,7 +162,7 @@ namespace FeedbackMessages
         /// <summary>
         /// Cleans rendered messages.
         /// </summary>
-        public void Clean()
+        public void CleanRendered()
         {
             foreach (var messageList in Messages.Values)
             {
