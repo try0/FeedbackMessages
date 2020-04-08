@@ -10,6 +10,15 @@
 namespace FeedbackMessages.Example.WebForms {
     
     
-    public partial class _Default {
+    public partial class SecondPage {
+        
+        /// <summary>
+        /// FeedbackMessagePanel コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::FeedbackMessages.Components.FeedbackMessagePanel FeedbackMessagePanel;
     }
 }
