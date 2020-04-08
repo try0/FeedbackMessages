@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 
 [assembly: PreApplicationStartMethod(typeof(FeedbackMessageStore), "Initialize")]
 
@@ -54,16 +55,25 @@ namespace FeedbackMessages
         /// </summary>
         public static void Load()
         {
-            if (!ExistsSession())
+            FeedbackMessageStore messageStore = (FeedbackMessageStore)HttpContext.Current.Items[ITEM_KEY];
+            if (messageStore != null)
             {
                 return;
             }
-             
-            var messageStore = HttpContext.Current.Session[ITEM_KEY];
+
+            if (!ExistsSession())
+            {
+                HttpContext.Current.Items[ITEM_KEY] = new FeedbackMessageStore();
+                return;
+            }
+
+            messageStore = (FeedbackMessageStore)HttpContext.Current.Session[ITEM_KEY];
             if (messageStore == null)
             {
                 messageStore = new FeedbackMessageStore();
             }
+
+            messageStore.Session = HttpContext.Current.Session;
 
             HttpContext.Current.Items[ITEM_KEY] = messageStore;
         }
@@ -73,14 +83,29 @@ namespace FeedbackMessages
         /// </summary>
         public static void Flash()
         {
+
+            var messageStore = Current;
+            messageStore.CleanRendered();
+
+            if (messageStore.Session != null)
+            {
+                if (messageStore.HasUnrenderedMessage())
+                {
+                    messageStore.Session[ITEM_KEY] = messageStore;
+                }
+                else
+                {
+                    messageStore.Session[ITEM_KEY] = null;
+                }
+
+                return;
+            }
+
             if (!ExistsSession())
             {
                 return;
             }
 
-            var messageStore = Current;
-
-            messageStore.CleanRendered();
 
             if (messageStore.HasUnrenderedMessage())
             {
@@ -90,6 +115,14 @@ namespace FeedbackMessages
         }
 
 
+        [NonSerialized]
+        private HttpSessionState session;
+
+        public HttpSessionState Session
+        {
+            get { return session; }
+            set { session = value; }
+        }
 
         /// <summary>
         /// Feedback messages holder
@@ -192,6 +225,6 @@ namespace FeedbackMessages
             return false;
         }
 
-      
+
     }
 }
