@@ -6,6 +6,8 @@ Messages that could not be rendered in the current request are persisted in the 
 
 ## Usage
 
+[NuGet](https://www.nuget.org/packages/FeedbackMessages/)
+
 In code behind of component that inherits System.Web.UI.Control
 ```C#
 using FeedbackMessages.Extensions;
