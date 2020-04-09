@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("FeedbackMessages")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("ASP.NET utility that feedback messages to web-client, users easily.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FeedbackMessages")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright ©  2020 RyoTsunoda")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
