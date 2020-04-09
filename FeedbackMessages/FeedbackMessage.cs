@@ -13,6 +13,7 @@ namespace FeedbackMessages
         /// <summary>
         /// Message levels.
         /// </summary>
+        [Serializable]
         public enum FeedbackMessageLevel
         {
             /// <summary>
@@ -110,10 +111,17 @@ namespace FeedbackMessages
         /// </summary>
         public Object Message { get; set; }
 
+        [NonSerialized]
+        private Control control;
+
         /// <summary>
         /// The message reporter
         /// </summary>
-        public Control Reporter { get; set; }
+        public Control Reporter
+        {
+            get { return control; }
+            set { control = value; }
+        }
 
         /// <summary>
         /// Wheter message is rendered or not
