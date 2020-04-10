@@ -1,0 +1,27 @@
+﻿
+@using FeedbackMessages.Mvc.Extensions;
+@using FeedbackMessages;
+@using FeedbackMessages.Example.Mvc.Models;
+
+@model FeedbackMessages.Example.Mvc.Models.MessageModel
+
+
+
+<!-- render message area -->
+@Html.FeedbackMessagePanel(MessageModel.MESSAGE_RENDERER)
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+
+    <div class="ui form" style="padding-top:3em;">
+        <div class="field">
+            @Html.TextAreaFor(m => m.Message, new { rows = 4 })
+        </div>
+
+        <div class="field">
+            <input type="submit" name="submitButton" value="SecondPage" class="ui primary button" />
+            <input type="submit" name="submitButton" value="Submit" class="ui primary button" />
+        </div>
+    </div>
+
+}

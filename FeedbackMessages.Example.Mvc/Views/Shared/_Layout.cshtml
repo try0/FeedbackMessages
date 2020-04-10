@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedbackMessages</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+
+    @Styles.Render("~/Content/css")
+
+</head>
+<body>
+
+    <div>
+
+        <div>
+            <div class="ui secondary pointing blue inverted menu">
+                <span class="item large header">FeedbackMessages</span>
+                <div class="right menu">
+                    <a class="ui item" href="https://github.com/try0/FeedbackMessages"><i class="github large icon"></i></a>
+                </div>
+            </div>
+
+            <div class="ui container">
+                @RenderBody()
+            </div>
+        </div>
+
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
