@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI;
 
 namespace FeedbackMessages
@@ -7,7 +8,7 @@ namespace FeedbackMessages
     /// The message that feedback to web client, users. Message object wrapper. 
     /// </summary>
     [Serializable]
-    public class FeedbackMessage
+    public class FeedbackMessage 
     {
 
         /// <summary>
@@ -136,6 +137,30 @@ namespace FeedbackMessages
             IsRendered = true;
         }
 
+        /// <summary>
+        /// <see cref="FeedbackMessage.Message.ToString()"/>
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return Message.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            var message = obj as FeedbackMessage;
+            return message != null &&
+                   Level == message.Level &&
+                   EqualityComparer<object>.Default.Equals(Message, message.Message);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1024348279;
+            hashCode = hashCode * -1521134295 + Level.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<object>.Default.GetHashCode(Message);
+            return hashCode;
+        }
 
     }
 }

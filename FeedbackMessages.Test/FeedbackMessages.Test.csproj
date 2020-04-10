@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="FeedbackMessageStoreUnitTest.cs" />
     <Compile Include="FeedbackMessagesUnitTestBase.cs" />
+    <Compile Include="FeedbackMessageUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
