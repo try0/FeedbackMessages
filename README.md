@@ -1,4 +1,7 @@
 # FeedbackMessages
+
+[![Build status](https://ci.appveyor.com/api/projects/status/p8ia0pbkjtqx9i50?svg=true)](https://ci.appveyor.com/project/try0/feedbackmessages)
+
 ASP.NET feedback messages utility.  
 Feedback messages to web-client, users easily.  
 Messages that could not be rendered in the current request are persisted in the session.
