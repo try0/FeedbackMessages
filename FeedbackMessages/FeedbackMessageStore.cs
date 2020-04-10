@@ -1,6 +1,7 @@
 ﻿using FeedbackMessages;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ namespace FeedbackMessages
     /// Message store that manage <see cref="FeedbackMessage"/>.
     /// </summary>
     [Serializable]
-    public class FeedbackMessageStore
+    public class FeedbackMessageStore : IEnumerable<FeedbackMessage>, ICollection<FeedbackMessage>
     {
         /// <summary>
         /// MessageStore key string that for use add store to session or request items.
@@ -127,7 +128,23 @@ namespace FeedbackMessages
         /// <summary>
         /// Feedback messages holder
         /// </summary>
-        public IDictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>> Messages { get; set; } = new Dictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>>();
+        public IDictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>> Messages { get; } = new Dictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>>();
+
+        public int Count
+        {
+            get
+            {
+                int cnt = 0;
+                foreach (var entry in Messages)
+                {
+                    cnt += entry.Value.Count;
+                }
+
+                return cnt;
+            }
+        }
+
+        public bool IsReadOnly => false;
 
 
 
@@ -163,6 +180,26 @@ namespace FeedbackMessages
             }
 
             return Messages[level];
+        }
+
+        /// <summary>
+        /// Gets feedback messages.
+        /// </summary>
+        /// <returns></returns>
+        public List<FeedbackMessage> GetFeedbackMessages()
+        {
+            var messages = new List<FeedbackMessage>();
+            if (Messages.Keys.Count == 0)
+            {
+                return messages;
+            }
+
+            foreach (var entry in Messages)
+            {
+                messages.AddRange(entry.Value);
+            }
+
+            return messages;
         }
 
         /// <summary>
@@ -225,6 +262,70 @@ namespace FeedbackMessages
             return false;
         }
 
+        /// <summary>
+        /// Clear messages.
+        /// </summary>
+        /// <param name="level"></param>
+        public void Clear(FeedbackMessage.FeedbackMessageLevel level)
+        {
+            GetFeedbackMessages(level).Clear();
+        }
 
+        public IEnumerator<FeedbackMessage> GetEnumerator()
+        {
+            return GetFeedbackMessages().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetFeedbackMessages().GetEnumerator();
+        }
+
+        public void Add(FeedbackMessage item)
+        {
+            AddMessage(item);
+        }
+
+        public void Clear()
+        {
+            Messages.Clear();
+        }
+
+        public bool Contains(FeedbackMessage item)
+        {
+            foreach (var entry in Messages)
+            {
+
+                if (entry.Value.Contains(item))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void CopyTo(FeedbackMessage[] array, int arrayIndex)
+        {
+            int index = arrayIndex;
+            foreach (var item in this)
+            {
+                array[index] = item;
+                index++;
+            }
+        }
+
+        public bool Remove(FeedbackMessage item)
+        {
+            foreach (var entry in Messages)
+            {
+                if (entry.Value.Remove(item))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
