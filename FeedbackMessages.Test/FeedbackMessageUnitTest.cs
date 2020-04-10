@@ -25,5 +25,19 @@ namespace FeedbackMessages.Test
             // same level, different message
             Assert.AreNotEqual(messageC, messageD);
         }
+
+
+        [TestMethod]
+        public void TestMarkRendered()
+        {
+
+            var message = FeedbackMessage.Info("test message");
+
+            Assert.IsFalse(message.IsRendered);
+
+            message.MarkRendered();
+
+            Assert.IsTrue(message.IsRendered);
+        }
     }
 }
