@@ -178,7 +178,7 @@ namespace FeedbackMessages
                     string message = msg.Message.ToString();
                     output.Append(EscapeMessage ? HttpUtility.HtmlEncode(message) : message);
                     output.Append($"</{InnerTagName}>");
-                    msg.MarkRender();
+                    msg.MarkRendered();
                 });
                 output.Append($"</{OuterTagName}>");
 

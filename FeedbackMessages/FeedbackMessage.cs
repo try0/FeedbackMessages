@@ -132,7 +132,7 @@ namespace FeedbackMessages
         /// <summary>
         /// Change state to rendered.
         /// </summary>
-        public void MarkRender()
+        public void MarkRendered()
         {
             IsRendered = true;
         }

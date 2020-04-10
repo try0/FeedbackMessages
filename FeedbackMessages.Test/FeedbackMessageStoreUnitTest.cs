@@ -152,7 +152,7 @@ namespace FeedbackMessages.Test
 
             Assert.IsTrue(store.HasUnrenderedMessage());
 
-            message.MarkRender();
+            message.MarkRendered();
 
             Assert.IsFalse(store.HasUnrenderedMessage());
 
@@ -184,8 +184,8 @@ namespace FeedbackMessages.Test
 
             Assert.AreEqual(infoMessages.Count, 3);
 
-            infoMessage1.MarkRender();
-            infoMessage2.MarkRender();
+            infoMessage1.MarkRendered();
+            infoMessage2.MarkRendered();
             store.CleanRendered();
 
             var infoMessagesCleanedRendered = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
@@ -193,7 +193,7 @@ namespace FeedbackMessages.Test
             Assert.AreEqual(infoMessagesCleanedRendered.Count, 1);
             Assert.IsTrue(infoMessagesCleanedRendered.Contains(infoMessage3));
 
-            infoMessage3.MarkRender();
+            infoMessage3.MarkRendered();
             store.CleanRendered();
 
             Assert.IsFalse(store.HasUnrenderedMessage());
