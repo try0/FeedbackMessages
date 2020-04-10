@@ -5,7 +5,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div style="padding-bottom: 3em;">
-        <a href="FirstPage.aspx" class="ui button">戻る</a>
+        <a href="FirstPage.aspx" class="ui button">Back</a>
     </div>
 
     <!-- feedback message area -->
