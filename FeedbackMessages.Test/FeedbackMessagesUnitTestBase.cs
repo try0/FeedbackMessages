@@ -60,6 +60,8 @@ namespace FeedbackMessages.Test
             SessionStateUtility.AddHttpSessionStateToContext(testContext, sessionStateContainer);
 
             HttpContext.Current = testContext;
+
+            FeedbackMessageStore.Initialize(FeedbackMessageStoreHolder.Instance);
             return testContext;
         }
     }

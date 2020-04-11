@@ -196,6 +196,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FeedbackMessages.Abstractions\FeedbackMessages.Abstractions.csproj">
+      <Project>{11695fdc-30cb-4a39-a9d5-a5523f819b3c}</Project>
+      <Name>FeedbackMessages.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FeedbackMessages\FeedbackMessages.csproj">
       <Project>{0d84f8de-3acf-40f2-ad6f-b56ec636b5af}</Project>
       <Name>FeedbackMessages</Name>

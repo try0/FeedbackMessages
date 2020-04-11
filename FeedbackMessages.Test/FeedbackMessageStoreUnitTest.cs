@@ -26,12 +26,12 @@ namespace FeedbackMessages.Test
 
             var store = new FeedbackMessageStore();
 
-            HttpContext.Current.Session[FeedbackMessageStore.ITEM_KEY] = store;
+            HttpContext.Current.Session[FeedbackMessageStoreHolder.ITEM_KEY] = store;
 
 
             FeedbackMessageStore.Load();
 
-            var loadedStore = HttpContext.Current.Items[FeedbackMessageStore.ITEM_KEY];
+            var loadedStore = HttpContext.Current.Items[FeedbackMessageStoreHolder.ITEM_KEY];
 
             Assert.IsNotNull(loadedStore);
             Assert.IsTrue(store == loadedStore);
@@ -47,11 +47,11 @@ namespace FeedbackMessages.Test
 
             var store = new FeedbackMessageStore();
 
-            HttpContext.Current.Items[FeedbackMessageStore.ITEM_KEY] = store;
+            HttpContext.Current.Items[FeedbackMessageStoreHolder.ITEM_KEY] = store;
 
             FeedbackMessageStore.Flash();
 
-            var flashedStore = HttpContext.Current.Session[FeedbackMessageStore.ITEM_KEY];
+            var flashedStore = HttpContext.Current.Session[FeedbackMessageStoreHolder.ITEM_KEY];
 
             Assert.IsNull(flashedStore);
 
@@ -68,11 +68,11 @@ namespace FeedbackMessages.Test
             var store = new FeedbackMessageStore();
             store.AddMessage(FeedbackMessage.Info("test message."));
 
-            HttpContext.Current.Items[FeedbackMessageStore.ITEM_KEY] = store;
+            HttpContext.Current.Items[FeedbackMessageStoreHolder.ITEM_KEY] = store;
 
             FeedbackMessageStore.Flash();
 
-            var flashedStore = HttpContext.Current.Session[FeedbackMessageStore.ITEM_KEY];
+            var flashedStore = HttpContext.Current.Session[FeedbackMessageStoreHolder.ITEM_KEY];
 
             Assert.IsNotNull(flashedStore);
             Assert.IsTrue(store == flashedStore);

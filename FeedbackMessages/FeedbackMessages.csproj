@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\FeedbackMessages.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -48,15 +49,18 @@
   <ItemGroup>
     <Compile Include="Components\FeedbackMessagePanel.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
-    <Compile Include="FeedbackMessage.cs" />
-    <Compile Include="FeedbackMessageAttributeCollection.cs" />
-    <Compile Include="FeedbackMessageRenderer.cs" />
-    <Compile Include="FeedbackMessageStore.cs" />
     <Compile Include="FeedbackMessageHttpModule.cs" />
+    <Compile Include="FeedbackMessageStoreHolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FeedbackMessages.Abstractions\FeedbackMessages.Abstractions.csproj">
+      <Project>{11695fdc-30cb-4a39-a9d5-a5523f819b3c}</Project>
+      <Name>FeedbackMessages.Abstractions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

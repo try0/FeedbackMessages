@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.UI;
+
 
 namespace FeedbackMessages
 {
@@ -8,7 +8,7 @@ namespace FeedbackMessages
     /// The message that feedback to web client, users. Message object wrapper. 
     /// </summary>
     [Serializable]
-    public class FeedbackMessage 
+    public class FeedbackMessage
     {
 
         /// <summary>
@@ -41,64 +41,56 @@ namespace FeedbackMessages
         /// <summary>
         /// Creates information feedback message.
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="reporter"></param>
+        /// <param name="message"></param> 
         /// <returns></returns>
-        public static FeedbackMessage Info(Object message, Control reporter = null)
+        public static FeedbackMessage Info(Object message)
         {
             return new FeedbackMessage()
             {
                 Level = FeedbackMessageLevel.INFO,
-                Message = message,
-                Reporter = reporter
+                Message = message
             };
         }
 
         /// <summary>
         /// Creates success feedback message.
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="reporter"></param>
+        /// <param name="message"></param> 
         /// <returns></returns>
-        public static FeedbackMessage Success(Object message, Control reporter = null)
+        public static FeedbackMessage Success(Object message)
         {
             return new FeedbackMessage()
             {
                 Level = FeedbackMessageLevel.SUCCESS,
-                Message = message,
-                Reporter = reporter
+                Message = message
             };
         }
 
         /// <summary>
         /// Creates warning feedback message.
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="reporter"></param>
+        /// <param name="message"></param> 
         /// <returns></returns>
-        public static FeedbackMessage Warn(Object message, Control reporter = null)
+        public static FeedbackMessage Warn(Object message)
         {
             return new FeedbackMessage()
             {
                 Level = FeedbackMessageLevel.WARN,
-                Message = message,
-                Reporter = reporter
+                Message = message
             };
         }
 
         /// <summary>
         /// Creates error feedback message.
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="reporter"></param>
+        /// <param name="message"></param> 
         /// <returns></returns>
-        public static FeedbackMessage Error(Object message, Control reporter = null)
+        public static FeedbackMessage Error(Object message)
         {
             return new FeedbackMessage()
             {
                 Level = FeedbackMessageLevel.ERROR,
-                Message = message,
-                Reporter = reporter
+                Message = message
             };
         }
 
@@ -112,17 +104,24 @@ namespace FeedbackMessages
         /// </summary>
         public Object Message { get; set; }
 
-        [NonSerialized]
-        private Control control;
+
 
         /// <summary>
-        /// The message reporter
+        /// Constructor.
         /// </summary>
-        public Control Reporter
+        public FeedbackMessage()
         {
-            get { return control; }
-            set { control = value; }
         }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        public FeedbackMessage(FeedbackMessageLevel level, Object message)
+        {
+            this.Level = level;
+            this.Message = message;
+        }
+
 
         /// <summary>
         /// Wheter message is rendered or not
@@ -132,13 +131,13 @@ namespace FeedbackMessages
         /// <summary>
         /// Change state to rendered.
         /// </summary>
-        public void MarkRendered()
+        public virtual void MarkRendered()
         {
             IsRendered = true;
         }
 
         /// <summary>
-        /// <see cref="FeedbackMessage.Message.ToString()"/>
+        /// <see cref="FeedbackMessage.Message"/>.ToString()
         /// </summary>
         /// <returns></returns>
         public override string ToString()

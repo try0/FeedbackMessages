@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\ryoMac\Source\Repos\FeedbackMessages\FeedbackMessages.Abstractions\FeedbackMessages.Abstractions.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>

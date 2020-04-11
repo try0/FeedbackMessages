@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\FeedbackMessages.Mvc.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -72,6 +73,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FeedbackMessages.Abstractions\FeedbackMessages.Abstractions.csproj">
+      <Project>{11695fdc-30cb-4a39-a9d5-a5523f819b3c}</Project>
+      <Name>FeedbackMessages.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FeedbackMessages\FeedbackMessages.csproj">
       <Project>{0d84f8de-3acf-40f2-ad6f-b56ec636b5af}</Project>
       <Name>FeedbackMessages</Name>

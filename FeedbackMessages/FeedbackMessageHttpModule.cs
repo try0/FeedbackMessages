@@ -1,6 +1,9 @@
-﻿using System;
-using System.Diagnostics;
+﻿using FeedbackMessages;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using System;
 using System.Web;
+
+[assembly: PreApplicationStartMethod(typeof(FeedbackMessageHttpModule), "Initialize")]
 
 namespace FeedbackMessages
 {
@@ -9,6 +12,17 @@ namespace FeedbackMessages
     /// </summary>
     public class FeedbackMessageHttpModule : IHttpModule
     {
+
+        /// <summary>
+        /// Initializes message store. This method called from pre-application-start process automatically.
+        /// </summary>
+        public static void Initialize()
+        {
+            DynamicModuleUtility.RegisterModule(typeof(FeedbackMessageHttpModule));
+
+            FeedbackMessageStore.Initialize(FeedbackMessageStoreHolder.Instance);
+        }
+
         public void Dispose()
         {
         }

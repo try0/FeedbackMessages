@@ -18,7 +18,7 @@ namespace FeedbackMessages.Extensions
         /// <param name="message"></param>
         public static void InfoMessage(this Control control, Object message)
         {
-            var feedbackMessage = FeedbackMessage.Info(message, control);
+            var feedbackMessage = FeedbackMessage.Info(message);
 
             FeedbackMessageStore.Current.AddMessage(feedbackMessage);
         }
@@ -30,7 +30,7 @@ namespace FeedbackMessages.Extensions
         /// <param name="message"></param>
         public static void SuccessMessage(this Control control, Object message)
         {
-            var feedbackMessage = FeedbackMessage.Success(message, control);
+            var feedbackMessage = FeedbackMessage.Success(message);
 
             FeedbackMessageStore.Current.AddMessage(feedbackMessage);
         }
@@ -42,7 +42,7 @@ namespace FeedbackMessages.Extensions
         /// <param name="message"></param>
         public static void WarnMessage(this Control control, Object message)
         {
-            var feedbackMessage = FeedbackMessage.Warn(message, control);
+            var feedbackMessage = FeedbackMessage.Warn(message);
 
             FeedbackMessageStore.Current.AddMessage(feedbackMessage);
         }
@@ -54,7 +54,7 @@ namespace FeedbackMessages.Extensions
         /// <param name="message"></param>
         public static void ErrorMessage(this Control control, Object message)
         {
-            var feedbackMessage = FeedbackMessage.Error(message, control);
+            var feedbackMessage = FeedbackMessage.Error(message);
 
             FeedbackMessageStore.Current.AddMessage(feedbackMessage);
         }

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using System.Web;
+
 using static FeedbackMessages.FeedbackMessage;
-using static FeedbackMessages.FeedbackMessageAttributeCollection;
 
 namespace FeedbackMessages
 {
@@ -176,7 +175,7 @@ namespace FeedbackMessages
                     output.Append($"<{InnerTagName} {innerAttrs.Build().ToString()}>");
 
                     string message = msg.Message.ToString();
-                    output.Append(EscapeMessage ? HttpUtility.HtmlEncode(message) : message);
+                    output.Append(EscapeMessage ? System.Web.HttpUtility.HtmlEncode(message) : message);
                     output.Append($"</{InnerTagName}>");
                     msg.MarkRendered();
                 });

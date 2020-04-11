@@ -10,14 +10,6 @@ namespace FeedbackMessages
     public class FeedbackMessageAttributeCollection : Dictionary<string, ISet<string>>
     {
 
-        public enum BuildAttributeConfig
-        {
-            ACCEPT,
-            IGNORE
-        }
-
-        private static readonly string[] DUMMY_ARRAY = new string[] { };
-
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -31,7 +23,6 @@ namespace FeedbackMessages
         /// <param name="attrCollection"></param>
         public FeedbackMessageAttributeCollection(FeedbackMessageAttributeCollection attrCollection) : base(attrCollection)
         {
-
         }
 
         /// <summary>
@@ -116,38 +107,10 @@ namespace FeedbackMessages
         /// <returns></returns>
         public StringBuilder Build()
         {
-            return Build(BuildAttributeConfig.IGNORE, DUMMY_ARRAY);
-        }
-
-        /// <summary>
-        /// Build attributes as StringBuilder.
-        /// </summary>
-        /// <param name="config"></param>
-        /// <param name="attributes"></param>
-        /// <returns></returns>
-        public StringBuilder Build(BuildAttributeConfig config, params string[] attributes)
-        {
-            Func<KeyValuePair<string, ISet<string>>, bool> predicate;
-
-            if (config == BuildAttributeConfig.ACCEPT)
-            {
-                predicate = entry => ContainsAttribute(attributes, entry.Key);
-            }
-            else
-            {
-                predicate = entry => !ContainsAttribute(attributes, entry.Key);
-            }
-
             StringBuilder builder = new StringBuilder();
 
             foreach (var attrEntry in this)
             {
-
-                if (!predicate.Invoke(attrEntry))
-                {
-                    continue;
-                }
-
                 builder.Append(attrEntry.Key).Append("=\"").Append(String.Join(" ", attrEntry.Value)).Append("\" ");
             }
 

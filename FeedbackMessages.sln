@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.Test", "Fe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.Example.Mvc", "FeedbackMessages.Example.Mvc\FeedbackMessages.Example.Mvc.csproj", "{350A55A3-EFA4-4EE7-B2E1-60C3B41D39FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.Abstractions", "FeedbackMessages.Abstractions\FeedbackMessages.Abstractions.csproj", "{11695FDC-30CB-4A39-A9D5-A5523F819B3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{350A55A3-EFA4-4EE7-B2E1-60C3B41D39FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{350A55A3-EFA4-4EE7-B2E1-60C3B41D39FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{350A55A3-EFA4-4EE7-B2E1-60C3B41D39FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11695FDC-30CB-4A39-A9D5-A5523F819B3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11695FDC-30CB-4A39-A9D5-A5523F819B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11695FDC-30CB-4A39-A9D5-A5523F819B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11695FDC-30CB-4A39-A9D5-A5523F819B3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,13 +1,9 @@
-﻿using FeedbackMessages;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.SessionState;
 
-[assembly: PreApplicationStartMethod(typeof(FeedbackMessageStore), "Initialize")]
+
 
 namespace FeedbackMessages
 {
@@ -18,111 +14,50 @@ namespace FeedbackMessages
     [Serializable]
     public class FeedbackMessageStore : IEnumerable<FeedbackMessage>, ICollection<FeedbackMessage>
     {
-        /// <summary>
-        /// MessageStore key string that for use add store to session or request items.
-        /// </summary>
-        public static readonly string ITEM_KEY = typeof(FeedbackMessageStore).ToString();
 
         /// <summary>
-        /// Initializes message store. This method called from pre-application-start process automatically.
+        /// Store holder
         /// </summary>
-        public static void Initialize()
+        private static IFeedbackMessageStoreHolder holder;
+
+
+        [NonSerialized]
+        private readonly IDictionary<Object, Object> items = new Dictionary<Object, Object>();
+
+        /// <summary>
+        /// Temporary objects in current request.
+        /// </summary>
+        public IDictionary<Object, Object> Items => items;
+
+        /// <summary>
+        /// Initialize FeedbackMessageStore.
+        /// </summary>
+        /// <param name="holder"></param>
+        public static void Initialize(IFeedbackMessageStoreHolder holder)
         {
-            DynamicModuleUtility.RegisterModule(typeof(FeedbackMessageHttpModule));
+            FeedbackMessageStore.holder = holder;
         }
 
         /// <summary>
         /// Gets message sotre from current http context.
         /// </summary>
-        public static FeedbackMessageStore Current
-        {
-            get
-            {
-                var store = HttpContext.Current.Items[ITEM_KEY];
-
-                if (store != null)
-                {
-                    return (FeedbackMessageStore)store;
-                }
-
-                store = new FeedbackMessageStore();
-                HttpContext.Current.Items[ITEM_KEY] = store;
-                return (FeedbackMessageStore)store;
-            }
-        }
+        public static FeedbackMessageStore Current => holder.Current;
 
         /// <summary>
-        /// Loads message store from the session if exists.
+        /// Loads message store.
         /// </summary>
         public static void Load()
         {
-            FeedbackMessageStore messageStore = (FeedbackMessageStore)HttpContext.Current.Items[ITEM_KEY];
-            if (messageStore != null)
-            {
-                return;
-            }
-
-            if (!ExistsSession())
-            {
-                HttpContext.Current.Items[ITEM_KEY] = new FeedbackMessageStore();
-                return;
-            }
-
-            messageStore = (FeedbackMessageStore)HttpContext.Current.Session[ITEM_KEY];
-            if (messageStore == null)
-            {
-                messageStore = new FeedbackMessageStore();
-            }
-
-            messageStore.Session = HttpContext.Current.Session;
-
-            HttpContext.Current.Items[ITEM_KEY] = messageStore;
+            holder.LoadFeedbackMessageStore();
         }
 
         /// <summary>
-        /// Flashs unrendere messages to session if exists.
+        /// Flashs message sotre.
         /// </summary>
         public static void Flash()
         {
 
-            var messageStore = Current;
-            messageStore.CleanRendered();
-
-            if (messageStore.Session != null)
-            {
-                if (messageStore.HasUnrenderedMessage())
-                {
-                    messageStore.Session[ITEM_KEY] = messageStore;
-                }
-                else
-                {
-                    messageStore.Session[ITEM_KEY] = null;
-                }
-
-                return;
-            }
-
-            if (!ExistsSession())
-            {
-                return;
-            }
-
-
-            if (messageStore.HasUnrenderedMessage())
-            {
-                HttpContext.Current.Session[ITEM_KEY] = messageStore;
-            }
-
-        }
-
-
-        [NonSerialized]
-        private HttpSessionState session;
-
-        public HttpSessionState Session
-        {
-            get { return session; }
-            set { session = value; }
+            holder.FlashFeedbackMessageStore();
         }
 
         /// <summary>
@@ -130,6 +65,9 @@ namespace FeedbackMessages
         /// </summary>
         public IDictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>> Messages { get; } = new Dictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>>();
 
+        /// <summary>
+        /// Gets messages count.
+        /// </summary>
         public int Count
         {
             get
@@ -144,6 +82,9 @@ namespace FeedbackMessages
             }
         }
 
+        /// <summary>
+        /// Gets readonly status.
+        /// </summary>
         public bool IsReadOnly => false;
 
 
@@ -153,16 +94,6 @@ namespace FeedbackMessages
         /// </summary>
         public FeedbackMessageStore()
         {
-        }
-
-        /// <summary>
-        /// Whether exists session or not.
-        /// </summary>
-        /// <returns></returns>
-        private static bool ExistsSession()
-        {
-            var context = HttpContext.Current;
-            return context != null && context.Session != null;
         }
 
         /// <summary>
@@ -271,26 +202,46 @@ namespace FeedbackMessages
             GetFeedbackMessages(level).Clear();
         }
 
+        /// <summary>
+        /// Gets messages as enumerator.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<FeedbackMessage> GetEnumerator()
         {
             return GetFeedbackMessages().GetEnumerator();
         }
 
+        /// <summary>
+        /// Gets messages as enumerator.
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetFeedbackMessages().GetEnumerator();
         }
 
+        /// <summary>
+        /// Adds message. Delegates to <see cref="AddMessage(FeedbackMessage)"/>.
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(FeedbackMessage item)
         {
             AddMessage(item);
         }
 
+        /// <summary>
+        /// Clear messages.
+        /// </summary>
         public void Clear()
         {
             Messages.Clear();
         }
 
+        /// <summary>
+        /// Whether contains message or not.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Contains(FeedbackMessage item)
         {
             foreach (var entry in Messages)
@@ -305,6 +256,11 @@ namespace FeedbackMessages
             return false;
         }
 
+        /// <summary>
+        /// Copys to array.
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="arrayIndex"></param>
         public void CopyTo(FeedbackMessage[] array, int arrayIndex)
         {
             int index = arrayIndex;
@@ -315,6 +271,11 @@ namespace FeedbackMessages
             }
         }
 
+        /// <summary>
+        /// Removes message.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Remove(FeedbackMessage item)
         {
             foreach (var entry in Messages)
