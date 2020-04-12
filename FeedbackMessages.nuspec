@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>FeedbackMessages</id>
+    <version>0.2.0-alpha</version>
+    <title>FeedbackMessages</title>
+    <authors>Ryo Tsunoda</authors>
+    <owners>Ryo Tsunoda</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/try0/FeedbackMessages</projectUrl>
+    <description>ASP.NET feedback messages utility. Display your feedbacks for web clients and users easily.</description>
+    <releaseNotes>pre-release.</releaseNotes>
+    <copyright>Copyright 2020 Ryo Tsunoda</copyright>
+    <tags>web asp utility message feedback </tags>
+
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System"/>
+      <frameworkAssembly assemblyName="System.Data"/>
+      <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.6.1"/>
+    </frameworkAssemblies>
+
+    <dependencies>
+      <group targetFramework="netstandard2.0">
+        <dependency id="FeedbackMessages.Abstractions" version="0.2.0-alpha"/>
+        <dependency id="Microsoft.AspNetCore.Session" version="2.1.1" />
+        <dependency id="Microsoft.AspNetCore.Http.Extensions" version="2.1.1" />
+        <dependency id="Microsoft.AspNetCore.Http" version="2.1.1" />
+        <dependency id="Microsoft.AspNetCore.Html.Abstractions" version="2.1.1" /> 
+      </group>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="FeedbackMessages.Abstractions" version="0.2.0-alpha"/>
+        <dependency id="Microsoft.Web.Infrastructure" version="1.0.0"/>
+      </group>
+    </dependencies>
+       
+  </metadata>
+
+  <files>
+    <file src="FeedbackMessages\bin\Release\FeedbackMessages.dll" target="lib\net461" />
+    <file src="FeedbackMessages\bin\Release\FeedbackMessages.pdb" target="lib\net461" />
+    <file src="FeedbackMessages\bin\Release\FeedbackMessages.xml" target="lib\net461" />
+
+    <file src="FeedbackMessages.AspNetCore\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.dll" target="lib\netstandard2.0" />
+    <file src="FeedbackMessages.AspNetCore\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.pdb" target="lib\netstandard2.0" />
+    <file src="FeedbackMessages.AspNetCore\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.xml" target="lib\netstandard2.0" />
+
+  </files>
+</package>

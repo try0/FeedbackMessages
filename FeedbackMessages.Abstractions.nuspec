@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>FeedbackMessages.Abstractions</id>
+    <version>0.2.0-alpha</version>
+    <title>FeedbackMessages.Abstractions</title>
+    <authors>Ryo Tsunoda</authors>
+    <owners>Ryo Tsunoda</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/try0/FeedbackMessages</projectUrl>
+    <description>ASP.NET feedback messages utility. Display your feedbacks for web clients and users easily.</description>
+    <releaseNotes>pre-release.</releaseNotes>
+    <copyright>Copyright 2020 Ryo Tsunoda</copyright>
+    <tags>web asp utility message feedback </tags>
+
+    <frameworkAssemblies>
+    </frameworkAssemblies>
+    
+    <dependencies>
+    </dependencies>   
+  
+  </metadata>
+
+  <files>
+    <file src="FeedbackMessages.Abstractions\bin\Release\netstandard2.0\FeedbackMessages.Abstractions.dll" target="lib\netstandard2.0" />
+    <file src="FeedbackMessages.Abstractions\bin\Release\netstandard2.0\FeedbackMessages.Abstractions.pdb" target="lib\netstandard2.0" />
+    <file src="FeedbackMessages.Abstractions\bin\Release\netstandard2.0\FeedbackMessages.Abstractions.xml" target="lib\netstandard2.0" />
+  </files>
+</package>
