@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package >
+<package>
   <metadata>
     <id>FeedbackMessages</id>
     <version>0.2.0-alpha</version>
@@ -12,7 +12,7 @@
     <description>ASP.NET feedback messages utility. Display your feedbacks for web clients and users easily.</description>
     <releaseNotes>pre-release.</releaseNotes>
     <copyright>Copyright 2020 Ryo Tsunoda</copyright>
-    <tags>web asp utility message feedback </tags>
+    <tags>web asp utility message feedback netcoreapp </tags>
 
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System"/>
@@ -27,13 +27,14 @@
         <dependency id="Microsoft.AspNetCore.Http.Extensions" version="2.1.1" />
         <dependency id="Microsoft.AspNetCore.Http" version="2.1.1" />
         <dependency id="Microsoft.AspNetCore.Html.Abstractions" version="2.1.1" /> 
+        <dependency id="System.Text.Json" version="4.7.1" /> 
       </group>
       <group targetFramework=".NETFramework4.6.1">
         <dependency id="FeedbackMessages.Abstractions" version="0.2.0-alpha"/>
         <dependency id="Microsoft.Web.Infrastructure" version="1.0.0"/>
       </group>
     </dependencies>
-       
+
   </metadata>
 
   <files>

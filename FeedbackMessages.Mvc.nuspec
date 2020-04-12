@@ -17,7 +17,6 @@
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.6.1"/>
       <frameworkAssembly assemblyName="System.Web.Mvc" targetFramework=".NETFramework4.6.1"/>
-      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0-Client, .NETFramework4.0" />
     </frameworkAssemblies>
 
     <dependencies>
