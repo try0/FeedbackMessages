@@ -23,10 +23,17 @@ namespace FeedbackMessages
             FeedbackMessageStore.Initialize(FeedbackMessageStoreHolder.Instance);
         }
 
+        /// <summary>
+        /// Finalize http module.
+        /// </summary>
         public void Dispose()
         {
         }
 
+        /// <summary>
+        /// Initialize application.
+        /// </summary>
+        /// <param name="context"></param>
         public void Init(HttpApplication context)
         {
             context.PreRequestHandlerExecute += (object sender, EventArgs e) =>

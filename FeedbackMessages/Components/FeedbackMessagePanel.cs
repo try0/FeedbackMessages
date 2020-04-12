@@ -11,10 +11,20 @@ namespace FeedbackMessages.Components
     public class FeedbackMessagePanel : WebControl
     {
 
+        /// <summary>
+        /// Message renderer
+        /// </summary>
         public FeedbackMessageRenderer MessageRenderer { get; set; }
 
+        /// <summary>
+        /// Tag key
+        /// </summary>
         protected override HtmlTextWriterTag TagKey => HtmlTextWriterTag.Div;
 
+        /// <summary>
+        /// Renders contents.
+        /// </summary>
+        /// <param name="output"></param>
         protected override void RenderContents(HtmlTextWriter output)
         {
 
