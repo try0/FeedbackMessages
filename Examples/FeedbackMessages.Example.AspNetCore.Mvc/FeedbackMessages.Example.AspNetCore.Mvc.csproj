@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FeedbackMessages.Abstractions\FeedbackMessages.Abstractions.csproj" />
-    <ProjectReference Include="..\FeedbackMessages.AspNetCore.Mvc\FeedbackMessages.AspNetCore.Mvc.csproj" />
-    <ProjectReference Include="..\FeedbackMessages.AspNetCore\FeedbackMessages.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\FeedbackMessages.Abstractions\FeedbackMessages.Abstractions.csproj" />
+    <ProjectReference Include="..\..\FeedbackMessages.AspNetCore.Mvc\FeedbackMessages.AspNetCore.Mvc.csproj" />
+    <ProjectReference Include="..\..\FeedbackMessages.AspNetCore\FeedbackMessages.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>
