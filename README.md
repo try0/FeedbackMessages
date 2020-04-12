@@ -16,7 +16,7 @@ version >=.NETFramework 4.6.1, .NET Standard 2.0
 
 ---
 
-### WebForms .NetFramework  
+### WebForms .NETFramework  
 
 Add FeedbackMessages dependency.  
 There is nothing you need to do to initialize. When start up application, add FeedbackMessages.FeedbackMessageHttpModule automatically.
