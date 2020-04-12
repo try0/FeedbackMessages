@@ -1,5 +1,5 @@
 ﻿using FeedbackMessages.Example.Mvc.Models;
-using FeedbackMessages.Mvc.Extensions;
+using FeedbackMessages.Extensions;
 using System.Web.Mvc;
 
 namespace FeedbackMessages.Example.Mvc.Controllers

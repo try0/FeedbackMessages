@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace FeedbackMessages.Mvc.Extensions
+namespace FeedbackMessages.Extensions
 {
     /// <summary>
     /// Controller extensions for message store.

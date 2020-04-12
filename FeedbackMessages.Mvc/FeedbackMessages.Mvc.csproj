@@ -7,7 +7,7 @@
     <ProjectGuid>{55351A64-B92C-4480-AEFA-65A9A4F115AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FeedbackMessages.Mvc</RootNamespace>
+    <RootNamespace>FeedbackMessages</RootNamespace>
     <AssemblyName>FeedbackMessages.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

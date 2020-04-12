@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace FeedbackMessages.Mvc.Extensions
+namespace FeedbackMessages.Extensions
 {
     /// <summary>
     /// HtmlHelper extensions for message store.

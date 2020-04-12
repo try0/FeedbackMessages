@@ -20,14 +20,12 @@ namespace FeedbackMessages
         /// </summary>
         private static IFeedbackMessageStoreHolder holder;
 
-
-        [NonSerialized]
-        private readonly IDictionary<Object, Object> items = new Dictionary<Object, Object>();
-
         /// <summary>
-        /// Temporary objects in current request.
+        /// Gets message sotre from current http context.
         /// </summary>
-        public IDictionary<Object, Object> Items => items;
+        public static FeedbackMessageStore Current => holder.Current;
+
+
 
         /// <summary>
         /// Initialize FeedbackMessageStore.
@@ -37,11 +35,6 @@ namespace FeedbackMessages
         {
             FeedbackMessageStore.holder = holder;
         }
-
-        /// <summary>
-        /// Gets message sotre from current http context.
-        /// </summary>
-        public static FeedbackMessageStore Current => holder.Current;
 
         /// <summary>
         /// Loads message store.
@@ -59,6 +52,15 @@ namespace FeedbackMessages
 
             holder.FlashFeedbackMessageStore();
         }
+
+
+        [NonSerialized]
+        private readonly IDictionary<Object, Object> items = new Dictionary<Object, Object>();
+
+        /// <summary>
+        /// Temporary objects in current request.
+        /// </summary>
+        public IDictionary<Object, Object> Items => items;
 
         /// <summary>
         /// Feedback messages holder
