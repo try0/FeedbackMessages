@@ -12,7 +12,12 @@ version >=.NETFramework 4.6.1, .NET Standard 2.0
 
 ## Usage
 
-[NuGet](https://www.nuget.org/packages/FeedbackMessages/)
+[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.2.0-alpha)
+
+[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.2.0-alpha)
+
+[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.2.0-alpha)
+
 
 ---
 
