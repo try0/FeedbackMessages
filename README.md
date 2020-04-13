@@ -173,3 +173,11 @@ this.ErrorMessage("Error feedback message.");
 @addTagHelper *, FeedbackMessages.AspNetCore.Mvc
 <feedback-message-panel></feedback-message-panel>
 ```
+
+
+---
+
+
+FeedbackMessagePanel renders ul and li tags that has "feedback-LEVEL" class attribute value.
+![output](https://user-images.githubusercontent.com/17096601/79125786-b2d68580-7dd9-11ea-9bd4-4e067d844d17.PNG)
+
