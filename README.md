@@ -168,6 +168,7 @@ this.WarnMessage("Warning feedback message.");
 this.ErrorMessage("Error feedback message.");
 ```
 
+.cshtml file
 ```xml
 @addTagHelper *, FeedbackMessages.AspNetCore.Mvc
 <feedback-message-panel></feedback-message-panel>
