@@ -7,27 +7,69 @@ Display your feedbacks for web clients and users easily.
 Messages that could not be rendered in the current request are persisted in the session.
 
 ## Version
+
+0.2.0
+
 version >=.NETFramework 4.6.1, .NET Standard 2.0
 
 
 ## Usage
 
-[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.2.0-alpha)
+### NuGet
+[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.2.0)
 
-[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.2.0-alpha)
+[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.2.0)
 
-[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.2.0-alpha)
+[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.2.0)
 
 
 ---
+
+
+### Initialize settings (optional)
+
+In your application's start up process.
+```C#
+FeedbackMessageSettings.Initializer
+    // custom renderer for feedback-message-panel
+    .SetMessageRenderer(() => {
+
+        var messageRenderer = new FeedbackMessageRenderer();
+        messageRenderer.OuterTagName = "div";
+        messageRenderer.InnerTagName = "span";
+
+        messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.INFO, "class", "ui info message");
+        messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.SUCCESS, "class", "ui success message");
+        messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.WARN, "class", "ui warning message");
+        messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.ERROR, "class", "ui error message");
+
+        return messageRenderer;
+    })
+    // custom script builder.
+    .SetScriptBuilder(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+    // init configs
+    .Initialize();
+```
+
+#### Default
+* FeedbackMessageRenderer renders ul and li tags that has "feedback-LEVEL" class attribute value.  
+![output](https://user-images.githubusercontent.com/17096601/79125786-b2d68580-7dd9-11ea-9bd4-4e067d844d17.PNG)
+
+* FeedbackMessageScriptBuilder throws Exception.
+
+
+---
+
 
 ### WebForms .NETFramework  
 
 Add FeedbackMessages dependency.  
 There is nothing you need to do to initialize. When start up application, add FeedbackMessages.FeedbackMessageHttpModule automatically.
 
-Control that inherits System.Web.UI.Control
+Add messages.
 ```C#
+// Control that inherits System.Web.UI.Control
+
 using FeedbackMessages.Extensions;
 
 ...
@@ -39,14 +81,24 @@ this.ErrorMessage("Error feedback message.");
 
 ```
 
-.aspx file
+In the case of display messages as html element.
 ```xml
+<!-- .aspx file -->
+
 <%@ Register Assembly="FeedbackMessages" Namespace="FeedbackMessages.Components" TagPrefix="fm" %>
 
 <!-- render message area -->
 <fm:FeedbackMessagePanel runat="server" ID="FeedbackMessagePanel"></fm:FeedbackMessagePanel>
 ```
 
+In the case of display messages using JavaScript. 
+```C#
+// Control that inherits System.Web.UI.Control
+
+using FeedbackMessages.Extensions;
+
+this.AppendFeedbackMessageScripts();
+```
 
 ---
 
@@ -56,8 +108,10 @@ this.ErrorMessage("Error feedback message.");
 Add FeedbackMessages.Mvc dependency.  
 There is nothing you need to do to initialize. When start up application, add FeedbackMessages.FeedbackMessageHttpModule automatically.
 
-Controller that inherits System.Web.Mvc.Controller
+Add messages.
 ```C#
+// Controller that inherits System.Web.Mvc.Controller
+
 using FeedbackMessages.Extensions;
 
 ・・・
@@ -69,13 +123,24 @@ this.ErrorMessage("Error feedback message.");
 
 ```
 
-.cshtml file
+In the case of display messages as html element.
 ```xml
+<!-- .cshtml file -->
+
 @using FeedbackMessages.Extensions;
 
 <!-- render message area -->
 @Html.FeedbackMessagePanel()
 
+```
+
+In the case of display messages using JavaScript. 
+```xml
+<!-- .cshtml file -->
+
+@using FeedbackMessages.Extensions;
+
+@Html.FeedbackMessageScripts()
 ```
 
 
@@ -106,8 +171,10 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Controller that inherits Microsoft.AspNetCore.Mvc.Controller
+Add messages.
 ```C#
+// Controller that inherits Microsoft.AspNetCore.Mvc.Controller
+
 using FeedbackMessages.Extensions;
 
 ・・・
@@ -119,12 +186,25 @@ this.ErrorMessage("Error feedback message.");
 
 ```
 
-.cshtml file
+In the case of display messages as html element.
 ```xml
+<!-- .cshtml file -->
+
 @using FeedbackMessages.Extensions;
 
 <!-- render message area -->
 @Html.FeedbackMessagePanel()
+
+```
+
+In the case of display messages using JavaScript. 
+```xml
+<!-- .cshtml file -->
+
+@using FeedbackMessages.Extensions;
+
+<!-- render message area -->
+@Html.FeedbackMessageScripts()
 
 ```
 
@@ -156,8 +236,10 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-PageModel that inherits Microsoft.AspNetCore.Mvc.RazorPages.PageModel
+Add messages.
 ```C#
+// PageModel that inherits Microsoft.AspNetCore.Mvc.RazorPages.PageModel
+
 using FeedbackMessages.Extensions;
 
 ・・・
@@ -168,16 +250,21 @@ this.WarnMessage("Warning feedback message.");
 this.ErrorMessage("Error feedback message.");
 ```
 
-.cshtml file
+In the case of display messages as html element.
 ```xml
+<!-- .cshtml file -->
+
 @addTagHelper *, FeedbackMessages.AspNetCore.Mvc
 <feedback-message-panel></feedback-message-panel>
 ```
 
+In the case of display messages using JavaScript. 
+```xml
+<!-- .cshtml file -->
+@addTagHelper *, FeedbackMessages.AspNetCore.Mvc
+<feedback-message-script></feedback-message-script>
+```
+
 
 ---
-
-
-FeedbackMessagePanel renders ul and li tags that has "feedback-LEVEL" class attribute value.
-![output](https://user-images.githubusercontent.com/17096601/79125786-b2d68580-7dd9-11ea-9bd4-4e067d844d17.PNG)
 
