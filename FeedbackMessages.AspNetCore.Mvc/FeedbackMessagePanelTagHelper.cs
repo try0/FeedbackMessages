@@ -17,7 +17,7 @@ namespace FeedbackMessages
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";
-            output.Content.AppendHtml(new FeedbackMessageRenderer().RenderMessages().ToString());
+            output.Content.AppendHtml(FeedbackMessageSettings.Instance.MessageRenderer.RenderMessages().ToString());
         }
 
     }
