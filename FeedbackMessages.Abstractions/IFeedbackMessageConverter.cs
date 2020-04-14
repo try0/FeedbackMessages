@@ -11,7 +11,7 @@ namespace FeedbackMessages
     public interface IFeedbackMessageConverter<out T>
     {
         /// <summary>
-        /// Converts message to type parameter <see cref="T"/> instance.
+        /// Converts message to type parameter instance.
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
