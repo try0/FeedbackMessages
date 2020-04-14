@@ -23,9 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.Example.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.Test", "Tests\FeedbackMessages.Test\FeedbackMessages.Test.csproj", "{B236C815-EB6E-44C2-B354-018B80E2B0B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.AspNetCore", "FeedbackMessages.AspNetCore\FeedbackMessages.AspNetCore.csproj", "{C37D5B90-2C20-455E-AF26-BD6640AF46DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedbackMessages.AspNetCore", "FeedbackMessages.AspNetCore\FeedbackMessages.AspNetCore.csproj", "{C37D5B90-2C20-455E-AF26-BD6640AF46DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.AspNetCore.Mvc", "FeedbackMessages.AspNetCore.Mvc\FeedbackMessages.AspNetCore.Mvc.csproj", "{671CCAB4-5228-406D-B217-B60673CB23A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedbackMessages.AspNetCore.Mvc", "FeedbackMessages.AspNetCore.Mvc\FeedbackMessages.AspNetCore.Mvc.csproj", "{671CCAB4-5228-406D-B217-B60673CB23A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

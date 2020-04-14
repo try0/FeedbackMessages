@@ -1,6 +1,6 @@
 ﻿
+using FeedbackMessages.Frontends;
 using System;
-using System.Web;
 using System.Web.UI;
 
 namespace FeedbackMessages.Extensions
@@ -57,6 +57,28 @@ namespace FeedbackMessages.Extensions
             var feedbackMessage = FeedbackMessage.Error(message);
 
             FeedbackMessageStore.Current.AddMessage(feedbackMessage);
+        }
+
+
+        /// <summary>
+        /// Appends javascript for display messages.
+        /// </summary>
+        /// <param name="control"></param>
+        public static void AppendFeedbackMessageScripts(this Control control)
+        {
+            control.Page.PreRenderComplete += Page_PreRenderComplete;
+        }
+
+        /// <summary>
+        /// Appends script for display messages.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void Page_PreRenderComplete(object sender, System.EventArgs e)
+        {
+            Page page = (Page)sender;
+
+            page.ClientScript.RegisterStartupScript(page.GetType(), "FeedbackMessages.OnReady", FeedbackMessageSettings.Instance.ScriptBuilder.GetDomReadyScript(), true);
         }
     }
 }

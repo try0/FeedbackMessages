@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using FeedbackMessages.Frontends;
+using System.Web;
 using System.Web.Mvc;
 
 namespace FeedbackMessages.Extensions
@@ -29,5 +30,14 @@ namespace FeedbackMessages.Extensions
             return MvcHtmlString.Create(messageRenderer.RenderMessages().ToString());
         }
 
+        /// <summary>
+        /// Renders script block for display messages.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <returns></returns>
+        public static IHtmlString FeedbackMessageScripts(this HtmlHelper helper)
+        {
+            return MvcHtmlString.Create("<script>" + FeedbackMessageSettings.Instance.ScriptBuilder.GetDomReadyScript() + "</script>");
+        }
     }
 }

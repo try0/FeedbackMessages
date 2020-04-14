@@ -14,7 +14,7 @@ namespace FeedbackMessages.Components
         /// <summary>
         /// Message renderer
         /// </summary>
-        public FeedbackMessageRenderer MessageRenderer { get; set; }
+        public FeedbackMessageRenderer MessageRenderer { get; set; } = FeedbackMessageSettings.Instance.MessageRenderer;
 
         /// <summary>
         /// Tag key
@@ -27,11 +27,6 @@ namespace FeedbackMessages.Components
         /// <param name="output"></param>
         protected override void RenderContents(HtmlTextWriter output)
         {
-
-            if (MessageRenderer == null)
-            {
-                MessageRenderer = new FeedbackMessageRenderer();
-            }
 
             StringBuilder messagesArea = MessageRenderer.RenderMessages();
 

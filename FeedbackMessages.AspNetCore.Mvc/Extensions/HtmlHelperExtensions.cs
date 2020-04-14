@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿using FeedbackMessages.Frontends;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FeedbackMessages.Extensions
@@ -29,5 +30,15 @@ namespace FeedbackMessages.Extensions
             return new HtmlString(messageRenderer.RenderMessages().ToString());
         }
 
+
+        /// <summary>
+        /// Renders script block for display messages.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <returns></returns>
+        public static IHtmlContent FeedbackMessageScripts(this IHtmlHelper helper)
+        {
+            return new HtmlString("<script>" + FeedbackMessageSettings.Instance.ScriptBuilder.GetDomReadyScript() + "</script>");
+        }
     }
 }
