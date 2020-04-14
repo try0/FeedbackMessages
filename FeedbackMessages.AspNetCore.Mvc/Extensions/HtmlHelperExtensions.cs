@@ -1,5 +1,4 @@
-﻿using FeedbackMessages.Frontends;
-using Microsoft.AspNetCore.Html;
+﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FeedbackMessages.Extensions
@@ -16,7 +15,7 @@ namespace FeedbackMessages.Extensions
         /// <returns></returns>
         public static IHtmlContent FeedbackMessagePanel(this IHtmlHelper helper)
         {
-            return new HtmlString(new FeedbackMessageRenderer().RenderMessages().ToString());
+            return new HtmlString(FeedbackMessageSettings.Instance.MessageRenderer.RenderMessages().ToString());
         }
 
         /// <summary>
