@@ -16,11 +16,11 @@ version >=.NETFramework 4.6.1, .NET Standard 2.0
 ## Usage
 
 ### NuGet
-[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.2.0)
+[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.2.0) .NETFramework WebForms
 
-[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.2.0)
+[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.2.0) .NETFramework Mvc
 
-[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.2.0)
+[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.2.0) .NETCore Mvc, RazorPages
 
 
 ---
@@ -261,6 +261,7 @@ In the case of display messages as html element.
 In the case of display messages using JavaScript. 
 ```xml
 <!-- .cshtml file -->
+
 @addTagHelper *, FeedbackMessages.AspNetCore.Mvc
 <feedback-message-script></feedback-message-script>
 ```
