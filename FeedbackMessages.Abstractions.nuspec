@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>FeedbackMessages.Abstractions</id>
-    <version>0.2.0-alpha</version>
+    <version>0.2.0</version>
     <title>FeedbackMessages.Abstractions</title>
     <authors>Ryo Tsunoda</authors>
     <owners>Ryo Tsunoda</owners>
