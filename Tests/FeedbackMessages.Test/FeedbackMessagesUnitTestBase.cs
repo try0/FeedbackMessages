@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FeedbackMessages.Frontends;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Web;
 using System.Web.SessionState;
@@ -63,6 +64,21 @@ namespace FeedbackMessages.Test
 
             FeedbackMessageStore.Initialize(FeedbackMessageStoreHolder.Instance);
             return testContext;
+        }
+
+        public FeedbackMessageSettings InitializeSettings()
+        {
+            var renderer = new FeedbackMessageRenderer();
+            var scriptBuilder = new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}')");
+            var config = new FeedbackMessageSettings.FeedbackMessageConfig();
+
+            FeedbackMessageSettings.Initializer
+                .SetMessageRenderer(renderer)
+                .SetScriptBuilder(scriptBuilder)
+                .SetConfig(config)
+                .Initialize();
+
+            return FeedbackMessageSettings.Instance;
         }
     }
 }

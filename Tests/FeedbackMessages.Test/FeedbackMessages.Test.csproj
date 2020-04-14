@@ -52,6 +52,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeedbackMessageScriptBuilderUnitTest.cs" />
+    <Compile Include="FeedbackMessageSettingsUnitTest.cs" />
     <Compile Include="FeedbackMessageStoreUnitTest.cs" />
     <Compile Include="FeedbackMessagesUnitTestBase.cs" />
     <Compile Include="FeedbackMessageUnitTest.cs" />
