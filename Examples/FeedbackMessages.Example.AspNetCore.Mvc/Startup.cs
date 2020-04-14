@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FeedbackMessages.Frontends;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using static FeedbackMessages.FeedbackMessage;
 
 namespace FeedbackMessages.Example.AspNetCore.Mvc
 {
@@ -59,6 +61,23 @@ namespace FeedbackMessages.Example.AspNetCore.Mvc
 
             app.UseSession();
             app.UseFeedackMessages();
+
+            FeedbackMessageSettings.Initializer
+                .SetMessageRenderer(() => {
+
+                    var messageRenderer = new FeedbackMessageRenderer();
+                    messageRenderer.OuterTagName = "div";
+                    messageRenderer.InnerTagName = "span";
+
+                    messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.INFO, "class", "ui info message");
+                    messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.SUCCESS, "class", "ui success message");
+                    messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.WARN, "class", "ui warning message");
+                    messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.ERROR, "class", "ui error message");
+
+                    return messageRenderer;
+                })
+                .SetScriptBuilder(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+                .Initialize();
 
             app.UseMvc(routes =>
             {

@@ -1,11 +1,6 @@
 ﻿using FeedbackMessages.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using static FeedbackMessages.FeedbackMessage;
 
 namespace FeedbackMessages.Example.WebForms
 {
@@ -16,17 +11,18 @@ namespace FeedbackMessages.Example.WebForms
         {
             base.OnInit(e);
 
+            this.AppendFeedbackMessageScripts();
 
-            var messageRenderer = new FeedbackMessageRenderer();
-            messageRenderer.OuterTagName = "div";
-            messageRenderer.InnerTagName = "span";
+            //var messageRenderer = new FeedbackMessageRenderer();
+            //messageRenderer.OuterTagName = "div";
+            //messageRenderer.InnerTagName = "span";
 
-            messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.INFO,  "class", "ui info message");
-            messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.SUCCESS, "class", "ui success message");
-            messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.WARN, "class", "ui warn message");
-            messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.ERROR, "class", "ui error message");
+            //messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.INFO,  "class", "ui info message");
+            //messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.SUCCESS, "class", "ui success message");
+            //messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.WARN, "class", "ui warn message");
+            //messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.ERROR, "class", "ui error message");
 
-            FeedbackMessagePanel.MessageRenderer = messageRenderer;
+            //FeedbackMessagePanel.MessageRenderer = messageRenderer;
 
         }
 

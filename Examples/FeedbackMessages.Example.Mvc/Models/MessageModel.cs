@@ -14,10 +14,10 @@ namespace FeedbackMessages.Example.Mvc.Models
             MESSAGE_RENDERER.OuterTagName = "div";
             MESSAGE_RENDERER.InnerTagName = "span";
 
-            MESSAGE_RENDERER.AppendOuterAttributeValue(FeedbackMessageLevel.INFO, "class", "ui info message");
-            MESSAGE_RENDERER.AppendOuterAttributeValue(FeedbackMessageLevel.SUCCESS, "class", "ui success message");
-            MESSAGE_RENDERER.AppendOuterAttributeValue(FeedbackMessageLevel.WARN, "class", "ui warn message");
-            MESSAGE_RENDERER.AppendOuterAttributeValue(FeedbackMessageLevel.ERROR, "class", "ui error message");
+            MESSAGE_RENDERER.AppendOuterAttributeValue(FeedbackMessageLevel.INFO, "class", "ui info message MessageModel");
+            MESSAGE_RENDERER.AppendOuterAttributeValue(FeedbackMessageLevel.SUCCESS, "class", "ui success message MessageModel");
+            MESSAGE_RENDERER.AppendOuterAttributeValue(FeedbackMessageLevel.WARN, "class", "ui warn message MessageModel");
+            MESSAGE_RENDERER.AppendOuterAttributeValue(FeedbackMessageLevel.ERROR, "class", "ui error message MessageModel");
 
  
         }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FeedbackMessages;
+using FeedbackMessages.Frontends;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using static FeedbackMessages.FeedbackMessage;
 
 namespace FeedbackMessages.Example.WebForms
 {
@@ -16,6 +19,23 @@ namespace FeedbackMessages.Example.WebForms
             // アプリケーションのスタートアップで実行するコードです
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            FeedbackMessageSettings.Initializer
+                .SetMessageRenderer(() => {
+
+                    var messageRenderer = new FeedbackMessageRenderer();
+                    messageRenderer.OuterTagName = "div";
+                    messageRenderer.InnerTagName = "span";
+
+                    messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.INFO, "class", "ui info message");
+                    messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.SUCCESS, "class", "ui success message");
+                    messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.WARN, "class", "ui warning message");
+                    messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.ERROR, "class", "ui error message");
+
+                    return messageRenderer;
+                })
+                .SetScriptBuilder(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+                .Initialize();
         }
     }
 }

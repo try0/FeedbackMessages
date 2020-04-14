@@ -9,6 +9,6 @@
     </div>
 
     <!-- feedback message area -->
-    <fm:FeedbackMessagePanel runat="server" ID="FeedbackMessagePanel"></fm:FeedbackMessagePanel>
+    <%--<fm:FeedbackMessagePanel runat="server" ID="FeedbackMessagePanel"></fm:FeedbackMessagePanel>--%>
 
 </asp:Content>
