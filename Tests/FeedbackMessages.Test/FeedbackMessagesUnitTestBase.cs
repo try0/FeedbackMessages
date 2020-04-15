@@ -80,5 +80,25 @@ namespace FeedbackMessages.Test
 
             return FeedbackMessageSettings.Instance;
         }
+
+        public void InfoMessage(object message)
+        {
+            FeedbackMessageStore.Current.AddMessage(FeedbackMessage.Info(message));
+        }
+
+        public void SuccessMessage(object message)
+        {
+            FeedbackMessageStore.Current.AddMessage(FeedbackMessage.Success(message));
+        }
+
+        public void WarnMessage(object message)
+        {
+            FeedbackMessageStore.Current.AddMessage(FeedbackMessage.Warn(message));
+        }
+
+        public void ErrorMessage(object message)
+        {
+            FeedbackMessageStore.Current.AddMessage(FeedbackMessage.Error(message));
+        }
     }
 }
