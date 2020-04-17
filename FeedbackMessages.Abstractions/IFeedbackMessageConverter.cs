@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FeedbackMessages
+﻿namespace FeedbackMessages
 {
     /// <summary>
     /// <see cref="FeedbackMessage"/> converter.
