@@ -184,7 +184,7 @@ namespace FeedbackMessages
         {
             foreach (var messageList in Messages.Values)
             {
-                var hasUnrenderd = messageList.Where(msg => !msg.IsRendered).Any();
+                var hasUnrenderd = messageList.Any(msg => !msg.IsRendered);
 
                 if (hasUnrenderd)
                 {
