@@ -3,9 +3,9 @@ before_build:
   - nuget restore
 build_script:
  - choco install "sonarscanner-msbuild-net46" -y
- - SonarScanner.MSBuild.exe begin /k:"FeedbackMessages" /d:"sonar.host.url=https://sonarcloud.io" /o:%SONAR_ORG_KEY% /d:sonar.login=%SONAR_TOKEN%
+ - SonarScanner.MSBuild.exe begin /k:"FeedbackMessages" /d:"sonar.cs.vstest.reportsPaths=C:\projects\feedbackmessages\TestResults\*.trx" /d:"sonar.host.url=https://sonarcloud.io" /o:%SONAR_ORG_KEY% /d:sonar.login=%SONAR_TOKEN%
  - msbuild /verbosity:quiet "FeedbackMessages.sln"
 test_script:
   - vstest.console /logger:trx; "C:\projects\feedbackmessages\Tests\FeedbackMessages.Test\bin\Debug\FeedbackMessages.Test.dll"
 after_test:
- - SonarScanner.MSBuild.exe end /d:sonar.login=%SONAR_TOKEN% /d:"sonar.cs.vstest.reportsPaths=C:\projects\feedbackmessages\TestResults\*.trx"
+ - SonarScanner.MSBuild.exe end /d:sonar.login=%SONAR_TOKEN%
