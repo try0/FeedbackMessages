@@ -12,7 +12,7 @@ namespace FeedbackMessages
     /// Message store that manage <see cref="FeedbackMessage"/>.
     /// </summary>
     [Serializable]
-    public class FeedbackMessageStore : IEnumerable<FeedbackMessage>, ICollection<FeedbackMessage>
+    public class FeedbackMessageStore : ICollection<FeedbackMessage>
     {
 
         /// <summary>
