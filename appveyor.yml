@@ -5,4 +5,5 @@ build_script:
  - choco install "sonarscanner-msbuild-net46" -y
  - SonarScanner.MSBuild.exe begin /k:"FeedbackMessages" /d:"sonar.host.url=https://sonarcloud.io" /o:%SONAR_ORG_KEY% /d:sonar.login=%SONAR_TOKEN%
  - msbuild /verbosity:quiet "FeedbackMessages.sln"
+after_test:
  - SonarScanner.MSBuild.exe end /d:sonar.login=%SONAR_TOKEN%
