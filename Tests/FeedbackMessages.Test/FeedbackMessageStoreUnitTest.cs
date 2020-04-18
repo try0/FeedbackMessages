@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FeedbackMessages.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Web;
 using static FeedbackMessages.FeedbackMessage;
@@ -31,10 +32,10 @@ namespace FeedbackMessages.Test
 
             FeedbackMessageStore.Load();
 
-            var loadedStore = HttpContext.Current.Items[FeedbackMessageStoreHolder.ITEM_KEY];
+            var loadedStore = HttpContext.Current.Items[FeedbackMessageStoreHolder.ITEM_KEY] as FeedbackMessageStore;
 
             Assert.IsNotNull(loadedStore);
-            Assert.IsTrue(store == loadedStore);
+            Assert.AreEqual(loadedStore.Count, 0);
         }
 
         /// <summary>
@@ -72,10 +73,16 @@ namespace FeedbackMessages.Test
 
             FeedbackMessageStore.Flash();
 
-            var flashedStore = HttpContext.Current.Session[FeedbackMessageStoreHolder.ITEM_KEY];
+            var flashedStore = HttpContext.Current.Session.GetStore(FeedbackMessageStoreHolder.ITEM_KEY);
 
             Assert.IsNotNull(flashedStore);
-            Assert.IsTrue(store == flashedStore);
+            Assert.AreEqual(flashedStore.Count, 1);
+
+            Assert.IsTrue(flashedStore.HasUnrenderedMessage());
+
+            var message = flashedStore.GetFeedbackMessages()[0];
+            Assert.AreEqual(message.Level, FeedbackMessageLevel.INFO);
+            Assert.AreEqual(message.ToString(), "test message.");
         }
 
         /// <summary>
