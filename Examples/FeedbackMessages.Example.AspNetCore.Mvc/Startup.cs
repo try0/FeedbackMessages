@@ -31,7 +31,7 @@ namespace FeedbackMessages.Example.AspNetCore.Mvc
 
             services.AddMvc(options =>
             {
-                options.Filters.Add(FeedbackMessageFilter.Instance);
+                options.Filters.Add(FeedbackMessageActionFilter.Instance);
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

@@ -6,12 +6,12 @@ namespace FeedbackMessages
     /// <summary>
     /// Filter that for initialize and finalize the message store.
     /// </summary>
-    public class FeedbackMessageFilter : Attribute, IActionFilter, IPageFilter
+    public class FeedbackMessageActionFilter : Attribute, IActionFilter, IPageFilter
     {
         /// <summary>
         /// Default instance
         /// </summary>
-        public static readonly FeedbackMessageFilter Instance = new FeedbackMessageFilter();
+        public static readonly FeedbackMessageActionFilter Instance = new FeedbackMessageActionFilter();
 
         /// <summary>
         /// Finalizes message store.
