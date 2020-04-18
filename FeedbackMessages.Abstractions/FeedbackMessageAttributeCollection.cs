@@ -25,25 +25,7 @@ namespace FeedbackMessages
         {
         }
 
-        /// <summary>
-        /// Wether contains attribute value or not.
-        /// </summary>
-        /// <param name="attributes"></param>
-        /// <param name="attribute"></param>
-        /// <returns></returns>
-        private bool ContainsAttribute(string[] attributes, string attribute)
-        {
 
-            foreach (string attr in attributes)
-            {
-                if (attr.Equals(attribute))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
 
         /// <summary>
         /// Appends attribute value.
