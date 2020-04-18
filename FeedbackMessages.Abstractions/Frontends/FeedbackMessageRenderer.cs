@@ -47,6 +47,10 @@ namespace FeedbackMessages
         /// </summary>
         public bool EscapeMessage { get; set; } = false;
 
+        /// <summary>
+        /// Converter that convert <see cref="FeedbackMessage"/> to string.
+        /// </summary>
+        public IFeedbackMessageConverter<string> StringConverter { get; set; } = new FeedbackMessageStringConverter(msg => msg.ToString());
 
         /// <summary>
         /// Appends attribute value to outer tag.
@@ -174,7 +178,7 @@ namespace FeedbackMessages
                 {
                     output.Append($"<{InnerTagName} {innerAttrs.Build().ToString()}>");
 
-                    string message = msg.Message.ToString();
+                    string message = StringConverter.Convert(msg);
                     output.Append(EscapeMessage ? System.Web.HttpUtility.HtmlEncode(message) : message);
                     output.Append($"</{InnerTagName}>");
                     msg.MarkRendered();
