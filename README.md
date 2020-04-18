@@ -1,6 +1,7 @@
 # FeedbackMessages
 
 [![Build status](https://ci.appveyor.com/api/projects/status/p8ia0pbkjtqx9i50?svg=true)](https://ci.appveyor.com/project/try0/feedbackmessages)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=FeedbackMessages&metric=alert_status)](https://sonarcloud.io/dashboard?id=FeedbackMessages)
 
 ASP.NET feedback messages utility.  
 Display your feedbacks for web clients and users easily.  
