@@ -1,6 +1,6 @@
 ﻿
+using FeedbackMessages.Extensions;
 using Microsoft.AspNetCore.Http;
-using System.Text.Json;
 
 namespace FeedbackMessages
 {
@@ -65,7 +65,7 @@ namespace FeedbackMessages
 
                 if (messageStore.HasUnrenderedMessage())
                 {
-                    session.Set(ITEM_KEY, messageStore);
+                    session.SetStore(ITEM_KEY, messageStore);
                 }
                 else
                 {
@@ -84,7 +84,7 @@ namespace FeedbackMessages
 
             if (messageStore.HasUnrenderedMessage())
             {
-                ContextAccessor.HttpContext.Session.Set(ITEM_KEY, messageStore);
+                ContextAccessor.HttpContext.Session.SetStore(ITEM_KEY, messageStore);
             }
             else
             {
@@ -112,7 +112,7 @@ namespace FeedbackMessages
                 return;
             }
 
-            messageStore = context.Session.Get<FeedbackMessageStore>(ITEM_KEY);
+            messageStore = context.Session.GetStore(ITEM_KEY);
             if (messageStore == null)
             {
                 messageStore = new FeedbackMessageStore();
@@ -136,32 +136,5 @@ namespace FeedbackMessages
                 && context.Session != null;
         }
 
-
-
-    }
-
-    static class ISessionExtensions
-    {
-        public static void Set<T>(this ISession session, string key, T value)
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            string json = JsonSerializer.Serialize<T>(value);
-            session.SetString(key, json);
-        }
-        public static T Get<T>(this ISession session, string key) where T : class
-        {
-            var json = session.GetString(key);
-            if (string.IsNullOrEmpty(json))
-            {
-                return null;
-            }
-
-            T obj = JsonSerializer.Deserialize<T>(json);
-            return obj;
-        }
     }
 }

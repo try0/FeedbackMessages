@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using FeedbackMessages.Extensions;
+using System.Web;
 using System.Web.SessionState;
 
 namespace FeedbackMessages
@@ -53,7 +54,7 @@ namespace FeedbackMessages
                 HttpSessionState session = (HttpSessionState)messageStore.Items[META_DATA_SESSION_KEY];
 
                 if (messageStore.HasUnrenderedMessage())
-                { 
+                {
                     session[ITEM_KEY] = messageStore;
                 }
                 else
@@ -73,7 +74,7 @@ namespace FeedbackMessages
 
             if (messageStore.HasUnrenderedMessage())
             {
-                HttpContext.Current.Session[ITEM_KEY] = messageStore;
+                HttpContext.Current.Session.SetStore(ITEM_KEY, messageStore);
             }
             else
             {
@@ -99,7 +100,7 @@ namespace FeedbackMessages
                 return;
             }
 
-            messageStore = (FeedbackMessageStore)HttpContext.Current.Session[ITEM_KEY];
+            messageStore = HttpContext.Current.Session.GetStore(ITEM_KEY);
             if (messageStore == null)
             {
                 messageStore = new FeedbackMessageStore();

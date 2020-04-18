@@ -51,6 +51,7 @@
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="FeedbackMessageHttpModule.cs" />
     <Compile Include="FeedbackMessageStoreHolder.cs" />
+    <Compile Include="Extensions\HttpSessionStateExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

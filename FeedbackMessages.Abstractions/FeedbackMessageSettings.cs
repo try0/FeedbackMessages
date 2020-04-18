@@ -25,6 +25,7 @@ namespace FeedbackMessages
 
             FeedbackMessageRenderer messageRenderer;
             FeedbackMessageScriptBuilder scriptBuilder;
+            IFeedbackMessageStoreSerializer storeSerializer;
             FeedbackMessageConfig config;
 
             /// <summary>
@@ -71,6 +72,18 @@ namespace FeedbackMessages
                 return this;
             }
 
+            public FeedbackMessageSettingsInitializer SetStoreSerializer(IFeedbackMessageStoreSerializer storeSerializer)
+            {
+                this.storeSerializer = storeSerializer;
+                return this;
+            }
+
+            public FeedbackMessageSettingsInitializer SetStoreSerializer(Func<IFeedbackMessageStoreSerializer> factory)
+            {
+                this.storeSerializer = factory.Invoke();
+                return this;
+            }
+
             /// <summary>
             /// Sets default congig.
             /// </summary>
@@ -112,6 +125,11 @@ namespace FeedbackMessages
                     settings.ScriptBuilder = scriptBuilder;
                 }
 
+                if (storeSerializer != null)
+                {
+                    settings.StoreSerializer = storeSerializer;
+                }
+
                 if (config != null)
                 {
                     settings.Config = config;
@@ -150,6 +168,11 @@ namespace FeedbackMessages
         /// </summary>
         public FeedbackMessageScriptBuilder ScriptBuilder { get; protected set; } = new FeedbackMessageScriptBuilder(msg => throw new System.Exception("FeedbackMessageSettings.ScriptBuilder: must set your instance."));
 
+        /// <summary>
+        /// <see cref="FeedbackMessageStore"/> serializer.
+        /// </summary>
+        public IFeedbackMessageStoreSerializer StoreSerializer { get; protected set; } = new FeedbackMessageStoreSerializer();
+        
         /// <summary>
         /// Config values
         /// </summary>
