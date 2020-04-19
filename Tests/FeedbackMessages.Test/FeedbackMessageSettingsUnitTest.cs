@@ -15,7 +15,7 @@ namespace FeedbackMessages.Test
         public void TestInitializeSettings() {
 
             var renderer = new FeedbackMessageRenderer();
-            var scriptBuilder = new FeedbackMessageScriptBuilder();
+            var scriptBuilder = new FeedbackMessageScriptBuilder(msg => msg.ToString());
             var config = new FeedbackMessageSettings.FeedbackMessageConfig();
 
             FeedbackMessageSettings.Initializer

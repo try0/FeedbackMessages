@@ -1,5 +1,6 @@
 ﻿using FeedbackMessages.Frontends;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace FeedbackMessages.Test
 {
@@ -29,6 +30,36 @@ namespace FeedbackMessages.Test
 
             Assert.IsTrue(str2.Contains("Info message1;"));
             Assert.IsTrue(str2.Contains("Info message2;"));
+
+        }
+
+        [TestMethod]
+        public void TestGetOnDomReadyScripts()
+        {
+            InitializeHttpContext();
+
+            var builder = new FeedbackMessageScriptBuilder(msg => msg.ToString());
+
+            FeedbackMessageStore.Current.AddMessage(FeedbackMessage.Info("Info message"));
+
+            var str = builder.GetDomReadyScript();
+
+            Assert.IsTrue(str.Contains(builder.GetScripts()));
+
+        }
+
+        [TestMethod]
+        public void TestSetFactory()
+        {
+            InitializeHttpContext();
+
+            Func<FeedbackMessage, string> func = msg => msg.ToString();
+            var builder = new FeedbackMessageScriptBuilder(func);
+
+            var message = FeedbackMessage.Info("Info message");
+
+            Assert.IsNotNull(builder.ScriptFactory);
+            Assert.AreEqual(builder.ScriptFactory.Convert(message), func.Invoke(message));
 
         }
     }
