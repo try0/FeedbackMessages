@@ -206,5 +206,29 @@ namespace FeedbackMessages.Test
             Assert.IsFalse(store.HasUnrenderedMessage());
 
         }
+
+
+        [TestMethod]
+        public void TestSerializeAndDeserializeStore()
+        {
+
+            var store = new FeedbackMessageStore();
+            store.Add(FeedbackMessage.Info("情報メッセージ"));
+
+            var serializer = new FeedbackMessageStoreSerializer();
+
+            var str = serializer.Serialize(store);
+
+
+            var deserializeStore = serializer.Deserialize(str);
+
+            Assert.IsTrue(deserializeStore.HasUnrenderedMessage());
+            Assert.AreEqual(deserializeStore.GetFeedbackMessages()[0].ToString(), "情報メッセージ");
+
+            Assert.AreEqual(deserializeStore.Count, 1);
+
+        }
     }
+
+
 }
