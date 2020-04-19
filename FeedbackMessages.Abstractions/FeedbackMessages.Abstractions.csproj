@@ -11,7 +11,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\ryoMac\Source\Repos\FeedbackMessages\FeedbackMessages.Abstractions\FeedbackMessages.Abstractions.xml</DocumentationFile>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="FeedbackMessages.Abstractions.xml" />
   </ItemGroup>
