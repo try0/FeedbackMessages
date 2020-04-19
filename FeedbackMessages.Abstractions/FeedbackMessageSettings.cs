@@ -78,7 +78,7 @@ namespace FeedbackMessages
                 return this;
             }
 
-            public FeedbackMessageSettingsInitializer SetStoreSerializer(Func<IFeedbackMessageStoreSerializer> factory)
+            public FeedbackMessageSettingsInitializer SetStoreSerializerFactory(Func<IFeedbackMessageStoreSerializer> factory)
             {
                 this.storeSerializerFactory = factory;
                 return this;
