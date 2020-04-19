@@ -25,15 +25,9 @@ namespace FeedbackMessages.Frontends
         /// <summary>
         /// Converter that convert <see cref="FeedbackMessage"/> to JavaScript.
         /// </summary>
-        public IFeedbackMessageConverter<string> ScriptFactory { get; private set; }
+        public IFeedbackMessageConverter<string> ScriptFactory { get; set; }
 
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public FeedbackMessageScriptBuilder()
-        {
-        }
 
         /// <summary>
         /// Constructor.
