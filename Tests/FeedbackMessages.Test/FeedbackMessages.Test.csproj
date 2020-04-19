@@ -142,6 +142,7 @@
     <Compile Include="ControllerExtensionsUnitTest.cs" />
     <Compile Include="FeedbackMessageRendererUnitTest.cs" />
     <Compile Include="FeedbackMessageScriptBuilderUnitTest.cs" />
+    <Compile Include="FeedbackMessageAttributeCollectionUnitTest.cs" />
     <Compile Include="FeedbackMessageSettingsUnitTest.cs" />
     <Compile Include="FeedbackMessageStoreUnitTest.cs" />
     <Compile Include="FeedbackMessagesUnitTestBase.cs" />
