@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControllerExtensionsUnitTest.cs" />
+    <Compile Include="FeedbackMessagePanelUnitTest.cs" />
     <Compile Include="FeedbackMessageRendererUnitTest.cs" />
     <Compile Include="FeedbackMessageScriptBuilderUnitTest.cs" />
     <Compile Include="FeedbackMessageAttributeCollectionUnitTest.cs" />
