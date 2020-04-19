@@ -60,7 +60,7 @@ namespace FeedbackMessages.Example.AspNetCore.RazorPages
             app.UseFeedackMessages();
 
             FeedbackMessageSettings.Initializer
-                .SetMessageRenderer(() => {
+                .SetMessageRendererFactory(() => {
 
                     var messageRenderer = new FeedbackMessageRenderer();
                     messageRenderer.OuterTagName = "div";
@@ -73,7 +73,7 @@ namespace FeedbackMessages.Example.AspNetCore.RazorPages
 
                     return messageRenderer;
                 })
-                .SetScriptBuilder(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+                .SetScriptBuilderInstance(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
                 .Initialize();
 
             app.UseMvc();

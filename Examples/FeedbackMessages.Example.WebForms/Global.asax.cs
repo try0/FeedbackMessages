@@ -21,7 +21,7 @@ namespace FeedbackMessages.Example.WebForms
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             FeedbackMessageSettings.Initializer
-                .SetMessageRenderer(() => {
+                .SetMessageRendererFactory(() => {
 
                     var messageRenderer = new FeedbackMessageRenderer();
                     messageRenderer.OuterTagName = "div";
@@ -34,7 +34,7 @@ namespace FeedbackMessages.Example.WebForms
 
                     return messageRenderer;
                 })
-                .SetScriptBuilder(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+                .SetScriptBuilderInstance(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
                 .Initialize();
         }
     }

@@ -16,7 +16,7 @@ namespace FeedbackMessages.Example.Mvc
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             FeedbackMessageSettings.Initializer
-                .SetMessageRenderer(() =>
+                .SetMessageRendererFactory(() =>
                 {
 
                     var messageRenderer = new FeedbackMessageRenderer();
@@ -30,7 +30,7 @@ namespace FeedbackMessages.Example.Mvc
 
                     return messageRenderer;
                 })
-                .SetScriptBuilder(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+                .SetScriptBuilderInstance(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
                 .Initialize();
         }
     }

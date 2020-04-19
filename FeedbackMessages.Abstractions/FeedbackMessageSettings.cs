@@ -23,19 +23,19 @@ namespace FeedbackMessages
         public class FeedbackMessageSettingsInitializer
         {
 
-            FeedbackMessageRenderer messageRenderer;
-            FeedbackMessageScriptBuilder scriptBuilder;
-            IFeedbackMessageStoreSerializer storeSerializer;
-            FeedbackMessageConfig config;
+            Func<FeedbackMessageRenderer> messageRendererFactory;
+            Func<FeedbackMessageScriptBuilder> scriptBuilderFactory;
+            Func<IFeedbackMessageStoreSerializer> storeSerializerFactory;
+            Func<FeedbackMessageConfig> configFactory;
 
             /// <summary>
             /// Sets default message renderer.
             /// </summary>
             /// <param name="messageRenderer"></param>
             /// <returns></returns>
-            public FeedbackMessageSettingsInitializer SetMessageRenderer(FeedbackMessageRenderer messageRenderer)
+            public FeedbackMessageSettingsInitializer SetMessageRendererInstance(FeedbackMessageRenderer messageRenderer)
             {
-                this.messageRenderer = messageRenderer;
+                this.messageRendererFactory = () => messageRenderer;
                 return this;
             }
 
@@ -44,9 +44,9 @@ namespace FeedbackMessages
             /// </summary>
             /// <param name="factory"></param>
             /// <returns></returns>
-            public FeedbackMessageSettingsInitializer SetMessageRenderer(Func<FeedbackMessageRenderer> factory)
+            public FeedbackMessageSettingsInitializer SetMessageRendererFactory(Func<FeedbackMessageRenderer> factory)
             {
-                this.messageRenderer = factory.Invoke();
+                this.messageRendererFactory = factory;
                 return this;
             }
 
@@ -55,9 +55,9 @@ namespace FeedbackMessages
             /// </summary>
             /// <param name="scriptBuilder"></param>
             /// <returns></returns>
-            public FeedbackMessageSettingsInitializer SetScriptBuilder(FeedbackMessageScriptBuilder scriptBuilder)
+            public FeedbackMessageSettingsInitializer SetScriptBuilderInstance(FeedbackMessageScriptBuilder scriptBuilder)
             {
-                this.scriptBuilder = scriptBuilder;
+                this.scriptBuilderFactory = () => scriptBuilder;
                 return this;
             }
 
@@ -66,21 +66,21 @@ namespace FeedbackMessages
             /// </summary>
             /// <param name="factory"></param>
             /// <returns></returns>
-            public FeedbackMessageSettingsInitializer SetScriptBuilder(Func<FeedbackMessageScriptBuilder> factory)
+            public FeedbackMessageSettingsInitializer SetScriptBuilderFactory(Func<FeedbackMessageScriptBuilder> factory)
             {
-                this.scriptBuilder = factory.Invoke();
+                this.scriptBuilderFactory = factory;
                 return this;
             }
 
-            public FeedbackMessageSettingsInitializer SetStoreSerializer(IFeedbackMessageStoreSerializer storeSerializer)
+            public FeedbackMessageSettingsInitializer SetStoreSerializerInstance(IFeedbackMessageStoreSerializer storeSerializer)
             {
-                this.storeSerializer = storeSerializer;
+                this.storeSerializerFactory = () => storeSerializer;
                 return this;
             }
 
             public FeedbackMessageSettingsInitializer SetStoreSerializer(Func<IFeedbackMessageStoreSerializer> factory)
             {
-                this.storeSerializer = factory.Invoke();
+                this.storeSerializerFactory = factory;
                 return this;
             }
 
@@ -89,9 +89,9 @@ namespace FeedbackMessages
             /// </summary>
             /// <param name="config"></param>
             /// <returns></returns>
-            public FeedbackMessageSettingsInitializer SetConfig(FeedbackMessageConfig config)
+            public FeedbackMessageSettingsInitializer SetConfigInstance(FeedbackMessageConfig config)
             {
-                this.config = config;
+                this.configFactory = () => config;
                 return this;
             }
 
@@ -100,9 +100,9 @@ namespace FeedbackMessages
             /// </summary>
             /// <param name="factory"></param>
             /// <returns></returns>
-            public FeedbackMessageSettingsInitializer SetConfig(Func<FeedbackMessageConfig> factory)
+            public FeedbackMessageSettingsInitializer SetConfigFactory(Func<FeedbackMessageConfig> factory)
             {
-                this.config = factory.Invoke();
+                this.configFactory = factory;
                 return this;
             }
 
@@ -115,24 +115,24 @@ namespace FeedbackMessages
 
                 var settings = new FeedbackMessageSettings();
 
-                if (messageRenderer != null)
+                if (messageRendererFactory != null)
                 {
-                    settings.MessageRenderer = messageRenderer;
+                    settings.messageRendererFactory = messageRendererFactory;
                 }
 
-                if (scriptBuilder != null)
+                if (scriptBuilderFactory != null)
                 {
-                    settings.ScriptBuilder = scriptBuilder;
+                    settings.scriptBuilderFactory = scriptBuilderFactory;
                 }
 
-                if (storeSerializer != null)
+                if (storeSerializerFactory != null)
                 {
-                    settings.StoreSerializer = storeSerializer;
+                    settings.storeSerializerFactory = storeSerializerFactory;
                 }
 
-                if (config != null)
+                if (configFactory != null)
                 {
-                    settings.Config = config;
+                    settings.configFactory = configFactory;
                 }
 
                 FeedbackMessageSettings.Instance = settings;
@@ -158,24 +158,30 @@ namespace FeedbackMessages
             return settings;
         }
 
+
+        Func<FeedbackMessageRenderer> messageRendererFactory = () => new FeedbackMessageRenderer();
+        Func<FeedbackMessageScriptBuilder> scriptBuilderFactory = () => new FeedbackMessageScriptBuilder(msg => throw new System.Exception("FeedbackMessageSettings.ScriptBuilder: must set your instance."));
+        Func<IFeedbackMessageStoreSerializer> storeSerializerFactory = () => new FeedbackMessageStoreSerializer();
+        Func<FeedbackMessageConfig> configFactory = () => new FeedbackMessageConfig();
+
         /// <summary>
         /// Message renderer
         /// </summary>
-        public FeedbackMessageRenderer MessageRenderer { get; protected set; } = new FeedbackMessageRenderer();
+        public FeedbackMessageRenderer MessageRenderer => messageRendererFactory.Invoke();
 
         /// <summary>
         /// Script builder
         /// </summary>
-        public FeedbackMessageScriptBuilder ScriptBuilder { get; protected set; } = new FeedbackMessageScriptBuilder(msg => throw new System.Exception("FeedbackMessageSettings.ScriptBuilder: must set your instance."));
+        public FeedbackMessageScriptBuilder ScriptBuilder => scriptBuilderFactory.Invoke();
 
         /// <summary>
         /// <see cref="FeedbackMessageStore"/> serializer.
         /// </summary>
-        public IFeedbackMessageStoreSerializer StoreSerializer { get; protected set; } = new FeedbackMessageStoreSerializer();
-        
+        public IFeedbackMessageStoreSerializer StoreSerializer => storeSerializerFactory();
+
         /// <summary>
         /// Config values
         /// </summary>
-        public FeedbackMessageConfig Config { get; protected set; } = new FeedbackMessageConfig();
+        public FeedbackMessageConfig Config => configFactory.Invoke();
     }
 }

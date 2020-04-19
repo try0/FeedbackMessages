@@ -73,9 +73,9 @@ namespace FeedbackMessages.Test
             var config = new FeedbackMessageSettings.FeedbackMessageConfig();
 
             FeedbackMessageSettings.Initializer
-                .SetMessageRenderer(renderer)
-                .SetScriptBuilder(scriptBuilder)
-                .SetConfig(config)
+                .SetMessageRendererInstance(renderer)
+                .SetScriptBuilderInstance(scriptBuilder)
+                .SetConfigInstance(config)
                 .Initialize();
 
             return FeedbackMessageSettings.Instance;
