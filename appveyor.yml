@@ -3,7 +3,11 @@ before_build:
   - nuget restore
 build_script:
  - choco install "sonarscanner-msbuild-net46" -y
- - SonarScanner.MSBuild.exe begin /k:"FeedbackMessages" /d:"sonar.cs.vstest.reportsPaths=C:\projects\feedbackmessages\TestResults\*.trx" /d:"sonar.host.url=https://sonarcloud.io" /o:%SONAR_ORG_KEY% /d:sonar.login=%SONAR_TOKEN%
+ - SonarScanner.MSBuild.exe begin /k:"FeedbackMessages" /d:sonar.cs.opencover.reportsPaths="Tests/coverrage.xml" /d:"sonar.host.url=https://sonarcloud.io" /o:%SONAR_ORG_KEY% /d:sonar.login=%SONAR_TOKEN%
  - msbuild /verbosity:quiet "FeedbackMessages.sln"
+test_script:
+ - .\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:administrator -target:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" -targetargs:"Tests\FeedbackMessages.Test\bin\Debug\FeedbackMessages.Test.dll" -output:"Tests\coverrage.xml"
+ - .\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:administrator -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test C:\projects\feedbackmessages\Tests\FeedbackMessages.AspNetCore.Test\FeedbackMessages.AspNetCore.Test.csproj" -mergeoutput -output:"Tests\coverrage.xml" -oldstyle
 after_test:
  - SonarScanner.MSBuild.exe end /d:sonar.login=%SONAR_TOKEN%
+ 
