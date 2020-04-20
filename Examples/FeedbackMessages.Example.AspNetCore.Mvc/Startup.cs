@@ -1,5 +1,4 @@
-﻿using FeedbackMessages.Frontends;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +34,8 @@ namespace FeedbackMessages.Example.AspNetCore.Mvc
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSession(options => {
+            services.AddSession(options =>
+            {
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 
             });
@@ -63,7 +63,8 @@ namespace FeedbackMessages.Example.AspNetCore.Mvc
             app.UseFeedackMessages();
 
             FeedbackMessageSettings.Initializer
-                .SetMessageRendererFactory(() => {
+                .SetMessageRendererFactory(() =>
+                {
 
                     var messageRenderer = new FeedbackMessageRenderer();
                     messageRenderer.OuterTagName = "div";

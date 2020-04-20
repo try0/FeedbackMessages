@@ -1,5 +1,4 @@
-﻿using FeedbackMessages.Frontends;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace FeedbackMessages.Test

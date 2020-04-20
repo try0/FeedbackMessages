@@ -1,4 +1,3 @@
-using FeedbackMessages.Frontends;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -60,7 +59,8 @@ namespace FeedbackMessages.Example.AspNetCore.RazorPages
             app.UseFeedackMessages();
 
             FeedbackMessageSettings.Initializer
-                .SetMessageRendererFactory(() => {
+                .SetMessageRendererFactory(() =>
+                {
 
                     var messageRenderer = new FeedbackMessageRenderer();
                     messageRenderer.OuterTagName = "div";

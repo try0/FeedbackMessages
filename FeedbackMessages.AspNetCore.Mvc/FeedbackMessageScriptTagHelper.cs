@@ -1,5 +1,4 @@
-﻿using FeedbackMessages.Frontends;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace FeedbackMessages
 {

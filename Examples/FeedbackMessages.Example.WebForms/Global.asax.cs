@@ -1,13 +1,7 @@
-﻿using FeedbackMessages;
-using FeedbackMessages.Frontends;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
 using static FeedbackMessages.FeedbackMessage;
 
 namespace FeedbackMessages.Example.WebForms
@@ -21,7 +15,8 @@ namespace FeedbackMessages.Example.WebForms
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             FeedbackMessageSettings.Initializer
-                .SetMessageRendererFactory(() => {
+                .SetMessageRendererFactory(() =>
+                {
 
                     var messageRenderer = new FeedbackMessageRenderer();
                     messageRenderer.OuterTagName = "div";

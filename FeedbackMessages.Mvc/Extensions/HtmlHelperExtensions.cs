@@ -1,5 +1,4 @@
-﻿using FeedbackMessages.Frontends;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace FeedbackMessages.Extensions

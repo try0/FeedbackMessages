@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace FeedbackMessages.Frontends
+namespace FeedbackMessages
 {
     /// <summary>
     /// This class provides js integration functionality. Used to display the message using javascript.
