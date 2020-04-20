@@ -3,8 +3,6 @@ using FeedbackMessages.Extensions;
 using FeedbackMessages.Test;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.IO;
-using System.Text.Encodings.Web;
 using System.Web.Mvc;
 
 namespace FeedbackMessages.AspNetCore.Test
@@ -14,7 +12,7 @@ namespace FeedbackMessages.AspNetCore.Test
     {
 
         [TestMethod]
-        public void TestRender()
+        public void TestRenderPanel()
         {
             InitializeHttpContext();
 
@@ -33,6 +31,26 @@ namespace FeedbackMessages.AspNetCore.Test
 
             var warnMessage = warnArea.FirstChild;
             Assert.AreEqual(warnMessage.TextContent, "Warning");
+        }
+
+        [TestMethod]
+        public void TestRenderScript()
+        {
+            InitializeHttpContext();
+            FeedbackMessageSettings.Initializer
+                .SetScriptBuilderInstance(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+                .Initialize();
+
+
+            WarnMessage("Warning");
+            var helper = new HtmlHelper(new ViewContext(), new Mock<IViewDataContainer>().Object);
+
+            var content = helper.FeedbackMessageScript();
+
+            var script = content.ToHtmlString();
+
+            Assert.IsTrue(script.Contains("document.addEventListener(\"DOMContentLoaded\", function(){alert('Warning');});"));
+
         }
     }
 }

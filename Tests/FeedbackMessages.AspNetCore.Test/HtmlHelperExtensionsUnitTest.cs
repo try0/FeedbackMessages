@@ -18,7 +18,7 @@ namespace FeedbackMessages.AspNetCore.Test
     {
 
         [TestMethod]
-        public void TestRender()
+        public void TestRenderPanel()
         {
             InitializeHttpContext();
 
@@ -49,6 +49,36 @@ namespace FeedbackMessages.AspNetCore.Test
             var warnMessage = warnArea.FirstChild;
 
             Assert.AreEqual(warnMessage.TextContent, "Warning");
+        }
+
+        [TestMethod]
+        public void TestRenderScript()
+        {
+            InitializeHttpContext();
+            FeedbackMessageSettings.Initializer
+                .SetScriptBuilderInstance(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+                .Initialize();
+
+
+            WarnMessage("Warning");
+            var helper = new HtmlHelper(
+                new Mock<IHtmlGenerator>().Object,
+                new Mock<ICompositeViewEngine>().Object,
+                new Mock<IModelMetadataProvider>().Object,
+                new Mock<IViewBufferScope>().Object,
+                NullHtmlEncoder.Default,
+                new Mock<UrlEncoder>().Object);
+
+            var content = helper.FeedbackMessageScript();
+
+
+            var writer = new StringWriter();
+            content.WriteTo(writer, NullHtmlEncoder.Default);
+
+            var script = writer.ToString();
+           
+            Assert.IsTrue(script.Contains("document.addEventListener(\"DOMContentLoaded\", function(){alert('Warning');});"));
+
         }
     }
 }
