@@ -228,6 +228,79 @@ namespace FeedbackMessages.Test
             Assert.AreEqual(deserializeStore.Count, 1);
 
         }
+
+        [TestMethod]
+        public void TestRemove()
+        {
+
+
+            var store = new FeedbackMessageStore();
+
+            var message = FeedbackMessage.Info("Test");
+            store.AddMessage(message);
+            store.AddMessage(FeedbackMessage.Info("Test2"));
+            Assert.AreEqual(store.Count, 2);
+
+            store.Remove(message);
+            Assert.AreEqual(store.Count, 1);
+
+        }
+
+        [TestMethod]
+        public void TestContains()
+        {
+
+
+            var store = new FeedbackMessageStore();
+
+            var message = FeedbackMessage.Info("Test");
+            store.AddMessage(message);
+            store.AddMessage(FeedbackMessage.Info("Test2"));
+            Assert.AreEqual(store.Count, 2);
+
+            Assert.IsTrue(store.Contains(message));
+            Assert.IsFalse(store.Contains(FeedbackMessage.Warn("Test")));
+
+        }
+
+        [TestMethod]
+        public void TestClear()
+        {
+
+
+            var store = new FeedbackMessageStore();
+
+            var message = FeedbackMessage.Info("Test");
+            store.AddMessage(message);
+            store.AddMessage(FeedbackMessage.Info("Test2"));
+            Assert.AreEqual(store.Count, 2);
+
+            store.Clear();
+            Assert.AreEqual(store.Count, 0);
+
+        }
+
+        [TestMethod]
+        public void TestClearLevel()
+        {
+
+
+            var store = new FeedbackMessageStore();
+
+            var message = FeedbackMessage.Info("Test");
+            store.AddMessage(message);
+            store.AddMessage(FeedbackMessage.Info("Test2"));
+            store.AddMessage(FeedbackMessage.Warn("Test2"));
+            Assert.AreEqual(store.Count, 3);
+
+            store.Clear(FeedbackMessageLevel.INFO);
+            Assert.AreEqual(store.Count, 1);
+
+
+            store.Clear(FeedbackMessageLevel.WARN);
+            Assert.AreEqual(store.Count, 0);
+
+        }
     }
 
 
