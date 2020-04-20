@@ -15,7 +15,7 @@ namespace FeedbackMessages.Extensions
         /// <returns></returns>
         public static IHtmlString FeedbackMessagePanel(this HtmlHelper helper)
         {
-            return MvcHtmlString.Create(new FeedbackMessageRenderer().RenderMessages().ToString());
+            return MvcHtmlString.Create(FeedbackMessageSettings.Instance.MessageRenderer.RenderMessages().ToString());
         }
 
         /// <summary>
