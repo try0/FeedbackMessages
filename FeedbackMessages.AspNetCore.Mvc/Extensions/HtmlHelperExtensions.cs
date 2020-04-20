@@ -35,7 +35,7 @@ namespace FeedbackMessages.Extensions
         /// </summary>
         /// <param name="helper"></param>
         /// <returns></returns>
-        public static IHtmlContent FeedbackMessageScripts(this IHtmlHelper helper)
+        public static IHtmlContent FeedbackMessageScript(this IHtmlHelper helper)
         {
             return new HtmlString("<script>" + FeedbackMessageSettings.Instance.ScriptBuilder.GetDomReadyScript() + "</script>");
         }
