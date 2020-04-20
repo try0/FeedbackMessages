@@ -38,6 +38,8 @@ namespace FeedbackMessages.AspNetCore.Test
         [TestMethod]
         public void TestInitialize()
         {
+            FeedbackMessageStoreHolder.ContextAccessor = null;
+            FeedbackMessageStoreHolder.IsAvailableSession = true;
 
             var serviceProvider = new MockServiceProvier();
             serviceProvider.IsAvailabelHttpContextAccessor = true;
@@ -58,6 +60,8 @@ namespace FeedbackMessages.AspNetCore.Test
         [TestMethod]
         public void TestInitializeIsFailed()
         {
+            FeedbackMessageStoreHolder.ContextAccessor = null;
+            FeedbackMessageStoreHolder.IsAvailableSession = true;
 
             var serviceProvider = new MockServiceProvier();
             serviceProvider.IsAvailabelHttpContextAccessor = false;
@@ -75,6 +79,8 @@ namespace FeedbackMessages.AspNetCore.Test
         [TestMethod]
         public void TestInitializeUnavailableSession()
         {
+            FeedbackMessageStoreHolder.ContextAccessor = null;
+            FeedbackMessageStoreHolder.IsAvailableSession = true;
 
             var serviceProvider = new MockServiceProvier();
             serviceProvider.IsAvailabelHttpContextAccessor = true;
@@ -92,11 +98,12 @@ namespace FeedbackMessages.AspNetCore.Test
         [TestMethod]
         public void TestInitializeAvailableSession()
         {
+            FeedbackMessageStoreHolder.ContextAccessor = null;
+            FeedbackMessageStoreHolder.IsAvailableSession = true;
 
             var serviceProvider = new MockServiceProvier();
             serviceProvider.IsAvailabelHttpContextAccessor = true;
-            serviceProvider.IsAvailabelSession = true;
-
+            serviceProvider.IsAvailabelSession = true; 
 
             IApplicationBuilder builder = new ApplicationBuilder(serviceProvider);
             builder.ApplicationServices = serviceProvider;
