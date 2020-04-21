@@ -58,7 +58,7 @@ namespace FeedbackMessages.Example.AspNetCore.RazorPages
             app.UseSession();
             app.UseFeedackMessages();
 
-            FeedbackMessageSettings.Initializer
+            FeedbackMessageSettings.CreateInitializer()
                 .SetMessageRendererFactory(() =>
                 {
 

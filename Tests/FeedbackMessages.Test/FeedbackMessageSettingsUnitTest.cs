@@ -15,7 +15,7 @@ namespace FeedbackMessages.Test
             var config = new FeedbackMessageSettings.FeedbackMessageConfig();
             var storeSerializer = new FeedbackMessageStoreSerializer();
 
-            FeedbackMessageSettings.Initializer
+            FeedbackMessageSettings.CreateInitializer()
                 .SetMessageRendererInstance(renderer)
                 .SetScriptBuilderInstance(scriptBuilder)
                 .SetConfigInstance(config)
@@ -40,7 +40,7 @@ namespace FeedbackMessages.Test
             var config = new FeedbackMessageSettings.FeedbackMessageConfig();
             var storeSerializer = new FeedbackMessageStoreSerializer();
 
-            FeedbackMessageSettings.Initializer
+            FeedbackMessageSettings.CreateInitializer()
                 .SetMessageRendererFactory(() => renderer)
                 .SetScriptBuilderFactory(() => scriptBuilder)
                 .SetConfigFactory(() => config)

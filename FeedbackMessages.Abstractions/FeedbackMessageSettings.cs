@@ -12,9 +12,9 @@ namespace FeedbackMessages
         }
 
         /// <summary>
-        /// Gets setting initializer.
+        /// Creates setting initializer.
         /// </summary>
-        public static FeedbackMessageSettingsInitializer Initializer => new FeedbackMessageSettingsInitializer();
+        public static FeedbackMessageSettingsInitializer CreateInitializer() => new FeedbackMessageSettingsInitializer();
 
         /// <summary>
         /// <see cref="FeedbackMessageSettings"/> initializer.

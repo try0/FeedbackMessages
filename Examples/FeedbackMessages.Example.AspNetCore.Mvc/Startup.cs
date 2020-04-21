@@ -62,7 +62,7 @@ namespace FeedbackMessages.Example.AspNetCore.Mvc
             app.UseSession();
             app.UseFeedackMessages();
 
-            FeedbackMessageSettings.Initializer
+            FeedbackMessageSettings.CreateInitializer()
                 .SetMessageRendererFactory(() =>
                 {
 

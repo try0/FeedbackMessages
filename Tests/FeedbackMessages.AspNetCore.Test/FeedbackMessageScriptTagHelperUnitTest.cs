@@ -15,7 +15,7 @@ namespace FeedbackMessages.AspNetCore.Test
         public void TestRenderPanel()
         {
             InitializeHttpContext();
-            FeedbackMessageSettings.Initializer
+            FeedbackMessageSettings.CreateInitializer()
                 .SetScriptBuilderInstance(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
                 .Initialize();
 

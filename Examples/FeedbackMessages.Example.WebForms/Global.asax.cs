@@ -14,7 +14,7 @@ namespace FeedbackMessages.Example.WebForms
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            FeedbackMessageSettings.Initializer
+            FeedbackMessageSettings.CreateInitializer()
                 .SetMessageRendererFactory(() =>
                 {
 

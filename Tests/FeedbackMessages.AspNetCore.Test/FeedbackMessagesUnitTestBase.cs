@@ -117,7 +117,7 @@ namespace FeedbackMessages.Test
             var scriptBuilder = new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}')");
             var config = new FeedbackMessageSettings.FeedbackMessageConfig();
 
-            FeedbackMessageSettings.Initializer
+            FeedbackMessageSettings.CreateInitializer()
                 .SetMessageRendererInstance(renderer)
                 .SetScriptBuilderInstance(scriptBuilder)
                 .SetConfigInstance(config)
