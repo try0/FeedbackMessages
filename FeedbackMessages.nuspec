@@ -27,12 +27,10 @@
         <dependency id="Microsoft.AspNetCore.Http.Extensions" version="2.1.1" />
         <dependency id="Microsoft.AspNetCore.Http" version="2.1.1" />
         <dependency id="Microsoft.AspNetCore.Html.Abstractions" version="2.1.1" /> 
-        <dependency id="System.Text.Json" version="4.6.0" /> 
       </group>
       <group targetFramework=".NETFramework4.6.1">
         <dependency id="FeedbackMessages.Abstractions" version="0.3.0"/>
         <dependency id="Microsoft.Web.Infrastructure" version="1.0.0"/>
-        <dependency id="System.Text.Json" version="4.6.0" /> 
       </group>
     </dependencies>
 
