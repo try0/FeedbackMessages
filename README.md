@@ -10,7 +10,7 @@ Messages that could not be rendered in the current request are persisted in the 
 
 ## Version
 
-0.2.0
+0.3.0
 
 version >=.NETFramework 4.6.1, .NET Standard 2.0
 
@@ -18,11 +18,11 @@ version >=.NETFramework 4.6.1, .NET Standard 2.0
 ## Usage
 
 ### NuGet
-[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.2.0) .NETFramework WebForms
+[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.3.0) .NETFramework WebForms
 
-[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.2.0) .NETFramework Mvc
+[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.3.0) .NETFramework Mvc
 
-[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.2.0) .NETCore Mvc, RazorPages
+[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.3.0) .NETCore Mvc, RazorPages
 
 
 ---
@@ -32,9 +32,9 @@ version >=.NETFramework 4.6.1, .NET Standard 2.0
 
 In your application's start up process.
 ```C#
-FeedbackMessageSettings.Initializer
+FeedbackMessageSettings.CreateInitializer()
     // custom renderer for feedback-message-panel
-    .SetMessageRenderer(() => {
+    .SetMessageRendererFactory(() => {
 
         var messageRenderer = new FeedbackMessageRenderer();
         messageRenderer.OuterTagName = "div";
@@ -48,7 +48,13 @@ FeedbackMessageSettings.Initializer
         return messageRenderer;
     })
     // custom script builder.
-    .SetScriptBuilder(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+    .SetScriptBuilderInstance(new FeedbackMessageScriptBuilder(msg => $"alert('{msg.ToString()}');"))
+    // custom store serializer.
+    .SetStoreSerializerInstance(new FeedbackMessageStoreSerializer()
+    {
+        Deserializer = serial => /* TODO */ new FeedbackMessageStore(),
+        Serializer = store => /* TODO */ ""
+    })
     // init configs
     .Initialize();
 ```
@@ -59,6 +65,7 @@ FeedbackMessageSettings.Initializer
 
 * FeedbackMessageScriptBuilder throws Exception.
 
+* FeedbackMessageStoreSerializer use System.Text.Json.JsonSerializer
 
 ---
 
@@ -99,7 +106,7 @@ In the case of display messages using JavaScript.
 
 using FeedbackMessages.Extensions;
 
-this.AppendFeedbackMessageScripts();
+this.AppendFeedbackMessageScript();
 ```
 
 ---
@@ -142,7 +149,7 @@ In the case of display messages using JavaScript.
 
 @using FeedbackMessages.Extensions;
 
-@Html.FeedbackMessageScripts()
+@Html.FeedbackMessageScript()
 ```
 
 
@@ -159,7 +166,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddMvc(options =>
     {
         // Required add filter
-        options.Filters.Add(FeedbackMessageFilter.Instance);
+        options.Filters.Add(FeedbackMessageActionFilter.Instance);
     });
 
     // Required add context accessor
@@ -206,7 +213,7 @@ In the case of display messages using JavaScript.
 @using FeedbackMessages.Extensions;
 
 <!-- render message area -->
-@Html.FeedbackMessageScripts()
+@Html.FeedbackMessageScript()
 
 ```
 
@@ -224,7 +231,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddMvc(options =>
     {
         // Required add filter
-        options.Filters.Add(FeedbackMessageFilter.Instance);
+        options.Filters.Add(FeedbackMessageActionFilter.Instance);
     });
 
     // Required add context accessor
