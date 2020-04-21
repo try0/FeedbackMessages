@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControllerExtensionsUnitTest.cs" />
+    <Compile Include="FeedbackMessageConverterUnitTest.cs" />
     <Compile Include="FeedbackMessagePanelUnitTest.cs" />
     <Compile Include="FeedbackMessageRendererUnitTest.cs" />
     <Compile Include="FeedbackMessageScriptBuilderUnitTest.cs" />
