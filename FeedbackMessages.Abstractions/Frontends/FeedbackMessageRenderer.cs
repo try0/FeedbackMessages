@@ -65,18 +65,6 @@ namespace FeedbackMessages
         }
 
         /// <summary>
-        /// Appends attribute value to inner tag.
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="attrValue"></param>
-        /// <returns></returns>
-        public FeedbackMessageRenderer AppendInnerAttributeValue(string key, string attrValue)
-        {
-            InnerTagAttributes.AppendAttribute(key, attrValue);
-            return this;
-        }
-
-        /// <summary>
         /// Appends attribute value to outer tag.
         /// </summary>
         /// <param name="level"></param>
@@ -98,6 +86,18 @@ namespace FeedbackMessages
             }
 
             attrCollection.AppendAttribute(key, attrValue);
+            return this;
+        }
+
+        /// <summary>
+        /// Appends attribute value to inner tag.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="attrValue"></param>
+        /// <returns></returns>
+        public FeedbackMessageRenderer AppendInnerAttributeValue(string key, string attrValue)
+        {
+            InnerTagAttributes.AppendAttribute(key, attrValue);
             return this;
         }
 
