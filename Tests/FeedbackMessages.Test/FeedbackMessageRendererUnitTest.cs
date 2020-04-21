@@ -11,6 +11,23 @@ namespace FeedbackMessages.Test
     {
 
         [TestMethod]
+        public void TestDefaultProperties()
+        {
+            var renderer = new FeedbackMessageRenderer();
+
+            Assert.IsNotNull(renderer.OuterTagName);
+            Assert.IsNotNull(renderer.InnerTagName);
+
+            Assert.AreEqual(renderer.OuterTagName, "ul");
+            Assert.AreEqual(renderer.InnerTagName, "li");
+
+            Assert.IsFalse(renderer.EscapeMessage);
+
+            Assert.IsNotNull(renderer.StringConverter);
+        }
+
+
+        [TestMethod]
         public void TestAppendAttributeValue()
         {
 
