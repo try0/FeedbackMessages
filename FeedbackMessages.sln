@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages", "FeedbackMessages\FeedbackMessages.csproj", "{0D84F8DE-3ACF-40F2-AD6F-B56EC636B5AF}"
 EndProject
@@ -27,7 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedbackMessages.AspNetCore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedbackMessages.AspNetCore.Mvc", "FeedbackMessages.AspNetCore.Mvc\FeedbackMessages.AspNetCore.Mvc.csproj", "{671CCAB4-5228-406D-B217-B60673CB23A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.AspNetCore.Test", "Tests\FeedbackMessages.AspNetCore.Test\FeedbackMessages.AspNetCore.Test.csproj", "{D2279153-0FEB-4854-81FE-146E7FE7D900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedbackMessages.AspNetCore.Test", "Tests\FeedbackMessages.AspNetCore.Test\FeedbackMessages.AspNetCore.Test.csproj", "{D2279153-0FEB-4854-81FE-146E7FE7D900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.Example.ServerSideBlazor", "Examples\FeedbackMessages.Example.ServerSideBlazor\FeedbackMessages.Example.ServerSideBlazor.csproj", "{A8723A71-B45D-4325-A1DD-8B0D4274D898}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.AspNetCore.Blazor", "FeedbackMessages.AspNetCore.Blazor\FeedbackMessages.AspNetCore.Blazor.csproj", "{3CE373F1-FF6A-4535-8760-C9B1163FD593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMessages.AspNetCore3.Test", "Tests\FeedbackMessages.AspNetCore3.Test\FeedbackMessages.AspNetCore3.Test.csproj", "{F70C237A-0570-4B90-95A0-525DF59DAEED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +85,18 @@ Global
 		{D2279153-0FEB-4854-81FE-146E7FE7D900}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2279153-0FEB-4854-81FE-146E7FE7D900}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2279153-0FEB-4854-81FE-146E7FE7D900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8723A71-B45D-4325-A1DD-8B0D4274D898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8723A71-B45D-4325-A1DD-8B0D4274D898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8723A71-B45D-4325-A1DD-8B0D4274D898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8723A71-B45D-4325-A1DD-8B0D4274D898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CE373F1-FF6A-4535-8760-C9B1163FD593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CE373F1-FF6A-4535-8760-C9B1163FD593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CE373F1-FF6A-4535-8760-C9B1163FD593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CE373F1-FF6A-4535-8760-C9B1163FD593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F70C237A-0570-4B90-95A0-525DF59DAEED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70C237A-0570-4B90-95A0-525DF59DAEED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70C237A-0570-4B90-95A0-525DF59DAEED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70C237A-0570-4B90-95A0-525DF59DAEED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +108,8 @@ Global
 		{91CB7F9A-CAD6-4573-B3DD-672728865B97} = {68AAC9F3-D806-4BB6-AF6E-79F85AB065D4}
 		{B236C815-EB6E-44C2-B354-018B80E2B0B7} = {36767EF6-8F8B-47EC-A4A5-E2FF3376FE16}
 		{D2279153-0FEB-4854-81FE-146E7FE7D900} = {36767EF6-8F8B-47EC-A4A5-E2FF3376FE16}
+		{A8723A71-B45D-4325-A1DD-8B0D4274D898} = {68AAC9F3-D806-4BB6-AF6E-79F85AB065D4}
+		{F70C237A-0570-4B90-95A0-525DF59DAEED} = {36767EF6-8F8B-47EC-A4A5-E2FF3376FE16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C0A1762-BBC0-4A8C-BE2A-A25C4345E5C4}
