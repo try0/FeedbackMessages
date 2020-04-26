@@ -1,0 +1,20 @@
+﻿@page "/"
+
+
+@using FeedbackMessages.Extensions;
+@namespace FeedbackMessages.Components
+
+<FeedbackMessagePanel></FeedbackMessagePanel>
+
+@code{
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        this.InfoMessage("Information message.");
+        this.SuccessMessage("Success message.");
+        this.WarnMessage("Warning message.");
+        this.ErrorMessage("Error message.");
+    }
+}
