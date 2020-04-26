@@ -23,8 +23,9 @@ version >=.NETFramework 4.6.1, .NET Standard 2.0
 [FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.3.0) .NETFramework Mvc
 
 [FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.3.0) .NETCore Mvc, RazorPages
-
+<!--
 [FeedbackMessages.AspNetCore.Blazor](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Blazor/0.4.0) .NETCore ServerSideBlazor
+-->
 
 ---
 
