@@ -59,7 +59,8 @@ namespace FeedbackMessages
             var messageStore = Current;
             messageStore.CleanRendered();
 
-            if (messageStore.Items.ContainsKey(META_DATA_SESSION_KEY))
+            if (messageStore.Items.ContainsKey(META_DATA_SESSION_KEY)
+                && messageStore.Items[META_DATA_SESSION_KEY] != null)
             {
                 ISession session = (ISession)messageStore.Items[META_DATA_SESSION_KEY];
 
