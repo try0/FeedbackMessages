@@ -49,18 +49,19 @@ namespace FeedbackMessages
             var messageStore = Current;
             messageStore.CleanRendered();
 
-            if (messageStore.Items.ContainsKey(META_DATA_SESSION_KEY))
+            if (messageStore.Items.ContainsKey(META_DATA_SESSION_KEY) 
+                && messageStore.Items[META_DATA_SESSION_KEY] != null)
             {
                 HttpSessionState session = (HttpSessionState)messageStore.Items[META_DATA_SESSION_KEY];
 
                 if (messageStore.HasUnrenderedMessage())
                 {
-                    session[ITEM_KEY] = messageStore;
+                    session.SetStore(ITEM_KEY, messageStore);
                 }
                 else
                 {
                     messageStore.Items.Remove(session);
-                    HttpContext.Current.Session[ITEM_KEY] = null;
+                    session[ITEM_KEY] = null;
                 }
 
                 return;
