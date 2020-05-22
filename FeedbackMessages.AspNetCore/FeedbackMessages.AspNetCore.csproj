@@ -3,11 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>FeedbackMessages</RootNamespace>
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\ryoMac\Source\Repos\FeedbackMessages\FeedbackMessages.AspNetCore\FeedbackMessages.AspNetCore.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.xml</DocumentationFile>
+    <OutputPath>bin\Release\netstandard2.0\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>Full</DebugType>

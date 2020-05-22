@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>FeedbackMessages.AspNetCore.Mvc</id>
+    <id>FeedbackMessages.AspNetCore.Blazor</id>
     <version>0.4.0</version>
-    <title>FeedbackMessages.AspNetCore.Mvc</title>
+    <title>FeedbackMessages.AspNetCore.Blazor</title>
     <authors>Ryo Tsunoda</authors>
     <owners>Ryo Tsunoda</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,7 +12,7 @@
     <description>ASP.NET feedback messages utility. Display your feedbacks for web clients and users easily.</description>
     <releaseNotes>pre-release.</releaseNotes>
     <copyright>Copyright 2020 Ryo Tsunoda</copyright>
-    <tags>web asp utility message feedback netcoreapp mvc razor </tags>
+    <tags>web asp utility message feedback netcoreapp mvc razor blazor </tags>
 
     <frameworkAssemblies>
 
@@ -21,16 +21,15 @@
     <dependencies>
       <group targetFramework="netstandard2.0">
         <dependency id="FeedbackMessages" version="0.4.0"/>
-        <dependency id="Microsoft.AspNetCore.Mvc.Core" version="2.1.3"/>
-        <dependency id="Microsoft.AspNetCore.Mvc.RazorPages" version="2.1.3"/>
+        <dependency id="FeedbackMessages.AspNetCore.Mvc" version="0.4.0"/>
       </group>
     </dependencies>
 
   </metadata>
 
   <files>
-    <file src="FeedbackMessages.AspNetCore.Mvc\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.Mvc.dll" target="lib\netstandard2.0" />
-    <file src="FeedbackMessages.AspNetCore.Mvc\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.Mvc.pdb" target="lib\netstandard2.0" />
-    <file src="FeedbackMessages.AspNetCore.Mvc\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.Mvc.xml" target="lib\netstandard2.0" />
+    <file src="FeedbackMessages.AspNetCore.Blazor\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.Blazor.dll" target="lib\netstandard2.0" />
+    <file src="FeedbackMessages.AspNetCore.Blazor\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.Blazor.pdb" target="lib\netstandard2.0" />
+    <file src="FeedbackMessages.AspNetCore.Blazor\bin\Release\netstandard2.0\FeedbackMessages.AspNetCore.Blazor.xml" target="lib\netstandard2.0" />
   </files>
 </package>

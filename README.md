@@ -10,7 +10,7 @@ Messages that could not be rendered in the current request are persisted in the 
 
 ## Version
 
-0.3.0
+0.4.0
 
 version >=.NETFramework 4.6.1, .NET Standard 2.0
 
@@ -23,9 +23,9 @@ version >=.NETFramework 4.6.1, .NET Standard 2.0
 [FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.3.0) .NETFramework Mvc
 
 [FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.3.0) .NETCore Mvc, RazorPages
-<!--
+
 [FeedbackMessages.AspNetCore.Blazor](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Blazor/0.4.0) .NETCore ServerSideBlazor
--->
+
 
 ---
 
@@ -281,7 +281,7 @@ In the case of display messages using JavaScript.
 ---
 
 
-<!---
+
 ### Blazor(server-side) .NETCore
 Add FeedbackMessages.AspNetCore.Blazor dependency.
 
@@ -321,10 +321,10 @@ this.ErrorMessage("Error feedback message.");
 ```
 ```xml
 <!-- .razor file -->
-<!---
+
 @using FeedbackMessages.Extensions;
 
-@code{
+@code {
     this.InfoMessage("Information message.");
     this.SuccessMessage("Success message.");
     this.WarnMessage("Warning message.");
@@ -335,7 +335,7 @@ this.ErrorMessage("Error feedback message.");
 In the case of display messages as html element.
 ```xml
 <!-- .razor file -->
-<!---
+
 @namespace FeedbackMessages.Components
 <FeedbackMessagePanel></FeedbackMessagePanel>
 ```
@@ -343,7 +343,7 @@ In the case of display messages as html element.
 In the case of display messages using JavaScript. 
 ```xml
 <!-- .razor file -->
-<!---
+
 @namespace FeedbackMessages.Components
 <FeedbackMessageScript></FeedbackMessageScript>
 ```
