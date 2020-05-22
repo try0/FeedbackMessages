@@ -20,7 +20,7 @@ namespace FeedbackMessages
         public static IHttpContextAccessor ContextAccessor { get; set; }
 
         /// <summary>
-        /// Whether availbale session or not. 
+        /// Whether available session or not. 
         /// </summary>
         public static bool IsAvailableSession { get; set; } = true;
 
