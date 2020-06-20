@@ -4,9 +4,9 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=FeedbackMessages&metric=coverage)](https://sonarcloud.io/dashboard?id=FeedbackMessages) 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=FeedbackMessages&metric=alert_status)](https://sonarcloud.io/dashboard?id=FeedbackMessages)
 
-ASP.NET feedback messages utility.  
+Feedback messages utility for .NET Web application.  
 Display your feedbacks for web clients and users easily.  
-Messages that could not be rendered in the current request are persisted in the session.
+Messages that could not be rendered are persisted in the session until rendered.
 
 ## Version
 
