@@ -7,11 +7,13 @@
 // </自動生成>
 //------------------------------------------------------------------------------
 
-namespace FeedbackMessages.Example.WebForms {
-    
-    
-    public partial class FirstPage {
-        
+namespace FeedbackMessages.Example.WebForms
+{
+
+
+    public partial class FirstPage
+    {
+
         /// <summary>
         /// FeedbackMessagePanel コントロール。
         /// </summary>
@@ -20,7 +22,7 @@ namespace FeedbackMessages.Example.WebForms {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::FeedbackMessages.Components.FeedbackMessagePanel FeedbackMessagePanel;
-        
+
         /// <summary>
         /// Message コントロール。
         /// </summary>
@@ -29,7 +31,16 @@ namespace FeedbackMessages.Example.WebForms {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Message;
-        
+
+        /// <summary>
+        /// MessageRequiredFieldValidator コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator MessageRequiredFieldValidator;
+
         /// <summary>
         /// BtnResponseRedirect コントロール。
         /// </summary>
@@ -38,7 +49,7 @@ namespace FeedbackMessages.Example.WebForms {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnResponseRedirect;
-        
+
         /// <summary>
         /// BtnServerTransfer コントロール。
         /// </summary>
@@ -47,7 +58,7 @@ namespace FeedbackMessages.Example.WebForms {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnServerTransfer;
-        
+
         /// <summary>
         /// BtnSubmit コントロール。
         /// </summary>

@@ -11,7 +11,7 @@ namespace FeedbackMessages.Example.WebForms
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
- 
+
             BtnResponseRedirect.Click += (object sender, EventArgs eClick) =>
             {
                 this.InfoMessage(Message.Text);
@@ -28,6 +28,11 @@ namespace FeedbackMessages.Example.WebForms
 
             BtnSubmit.Click += (object sender, EventArgs eClick) =>
             {
+                if (!Page.IsValid)
+                {
+                    return;
+                }
+
                 this.InfoMessage(Message.Text);
             };
 

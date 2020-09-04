@@ -5,13 +5,14 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <!-- feedback message area -->
-    <fm:FeedbackMessagePanel runat="server" ID="FeedbackMessagePanel"></fm:FeedbackMessagePanel>
+    <fm:FeedbackMessagePanel runat="server" ID="FeedbackMessagePanel" ShowValidationErrors="true"></fm:FeedbackMessagePanel>
 
 
     <!-- simple form -->
     <div class="ui form" style="padding-top:3em;">
         <div class="field"  >
             <asp:TextBox runat="server" ID="Message" Rows="4" TextMode="MultiLine"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="MessageRequiredFieldValidator" runat="server" ControlToValidate="Message" ErrorMessage="必須" Display="None" EnableClientScript="false"></asp:RequiredFieldValidator>
         </div>
 
         <div class="field">
