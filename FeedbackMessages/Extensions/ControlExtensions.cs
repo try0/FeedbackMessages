@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeedbackMessages.Utils;
+using System;
 using System.Web.UI;
 
 namespace FeedbackMessages.Extensions
@@ -62,21 +63,48 @@ namespace FeedbackMessages.Extensions
         /// Appends javascript for display messages.
         /// </summary>
         /// <param name="control"></param>
-        public static void AppendFeedbackMessageScripts(this Control control)
+        public static void AppendFeedbackMessageScripts(this Control control, FeedbackMessageRenderOption option = default)
         {
-            control.Page.PreRenderComplete += Page_PreRenderComplete;
+            control.Page.PreRenderComplete += (object sender, System.EventArgs e) =>
+            {
+                Page page = (Page)sender;
+
+                FeedbackMessageUtil.AppendValidationErrorsToStore(page, option);
+
+                page.ClientScript.RegisterStartupScript(page.GetType(), "FeedbackMessages.OnReady", FeedbackMessageSettings.Instance.ScriptBuilder.GetDomReadyScript(), true);
+            };
+
+
         }
 
         /// <summary>
-        /// Appends script for display messages.
+        /// Adds validation error messages to <see cref="FeedbackMessageStore"/>. 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private static void Page_PreRenderComplete(object sender, System.EventArgs e)
+        /// <param name="page"></param>
+        public static void AppendValidationErrorsToStore(this Page page)
         {
-            Page page = (Page)sender;
-
-            page.ClientScript.RegisterStartupScript(page.GetType(), "FeedbackMessages.OnReady", FeedbackMessageSettings.Instance.ScriptBuilder.GetDomReadyScript(), true);
+            FeedbackMessageUtil.AppendValidationErrorsToStore(page);
         }
+
+        /// <summary>
+        /// Adds validation error messages to <see cref="FeedbackMessageStore"/>. 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="option"></param>
+        public static void AppendValidationErrorsToStore(this Page page, FeedbackMessageRenderOption option)
+        {
+            FeedbackMessageUtil.AppendValidationErrorsToStore(page, option);
+        }
+
+        /// <summary>
+        /// Adds validation error messages to <see cref="FeedbackMessageStore"/>. 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="validationGroup"></param>
+        public static void AppendValidationErrorsToStore(this Page page, string validationGroup)
+        {
+            FeedbackMessageUtil.AppendValidationErrorsToStore(page, validationGroup);
+        }
+
     }
 }

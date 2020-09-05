@@ -2,9 +2,7 @@
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections.Generic;
-using System.Web.ModelBinding;
-using System;
+using FeedbackMessages.Utils;
 
 namespace FeedbackMessages.Components
 {
@@ -111,51 +109,15 @@ namespace FeedbackMessages.Components
         /// </summary>
         private void AddValidationErrors()
         {
-            List<FeedbackMessage> errorMessages = new List<FeedbackMessage>();
-
-            if (ShowValidationErrors)
+            var renderOption = new FeedbackMessageRenderOption()
             {
-                ValidatorCollection validators = Page.GetValidators(ValidationGroup);
+                ShowModelStateErrors = this.ShowModelStateErrors,
+                ShowValidationErrors = this.ShowValidationErrors,
+                ValidationGroup = this.ValidationGroup
+            };
 
-                foreach (IValidator validator in validators)
-                {
-                    if (validator.IsValid)
-                    {
-                        continue;
-                    }
+            FeedbackMessageUtil.AppendValidationErrorsToStore(Page, renderOption);
 
-                    if (String.IsNullOrEmpty(validator.ErrorMessage))
-                    {
-                        continue;
-                    }
-
-                    var feedbackMessage = FeedbackMessage.Error(String.Copy(validator.ErrorMessage));
-                    errorMessages.Add(feedbackMessage);
-                }
-            }
-
-            if (ShowModelStateErrors)
-            {
-                ModelStateDictionary modelState = Page.ModelState;
-                if (!modelState.IsValid)
-                {
-                    foreach (KeyValuePair<string, ModelState> pair in modelState)
-                    {
-                        foreach (ModelError error in pair.Value.Errors)
-                        {
-                            if (String.IsNullOrEmpty(error.ErrorMessage))
-                            {
-                                continue;
-                            }
-
-                            var feedbackMessage = FeedbackMessage.Error(error.ErrorMessage);
-                            errorMessages.Add(feedbackMessage);
-                        }
-                    }
-                }
-            }
-
-            FeedbackMessageStore.Current.AddMessages(errorMessages);
         }
     }
 }
