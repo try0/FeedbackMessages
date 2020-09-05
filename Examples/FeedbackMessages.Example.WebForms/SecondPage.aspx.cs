@@ -11,7 +11,11 @@ namespace FeedbackMessages.Example.WebForms
         {
             base.OnInit(e);
 
-            this.AppendFeedbackMessageScripts();
+            var renderOption = new FeedbackMessageRenderOption()
+            {
+                ShowValidationErrors = true
+            };
+            this.AppendFeedbackMessageScripts(renderOption);
 
             //var messageRenderer = new FeedbackMessageRenderer();
             //messageRenderer.OuterTagName = "div";

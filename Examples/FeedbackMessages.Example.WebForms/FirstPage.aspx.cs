@@ -1,4 +1,5 @@
 ﻿using FeedbackMessages.Extensions;
+using FeedbackMessages.Utils;
 using System;
 using System.Web.UI;
 using static FeedbackMessages.FeedbackMessage;
@@ -14,14 +15,25 @@ namespace FeedbackMessages.Example.WebForms
 
             BtnResponseRedirect.Click += (object sender, EventArgs eClick) =>
             {
-                this.InfoMessage(Message.Text);
+                this.AppendValidationErrorsToStore();
+
+                if (Page.IsValid)
+                {
+                    this.InfoMessage(Message.Text);
+                }
 
                 Response.Redirect("SecondPage.aspx");
             };
 
             BtnServerTransfer.Click += (object sender, EventArgs eClick) =>
             {
-                this.InfoMessage(Message.Text);
+                this.AppendValidationErrorsToStore();
+
+                if (Page.IsValid)
+                {
+                    this.InfoMessage(Message.Text);
+                }
+
 
                 Server.Transfer("SecondPage.aspx");
             };
