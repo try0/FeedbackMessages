@@ -19,7 +19,7 @@ namespace FeedbackMessages.Components
         [
         Category("Behavior"),
         Themeable(false),
-        DefaultValue(true),
+        DefaultValue(false),
         Description(" Whether to render validation error messages.")
         ]
         public bool ShowValidationErrors
@@ -41,7 +41,7 @@ namespace FeedbackMessages.Components
         [
         Category("Behavior"),
         Themeable(false),
-        DefaultValue(true),
+        DefaultValue(false),
         Description("Whether to render model state error messages.")
         ]
         public bool ShowModelStateErrors
