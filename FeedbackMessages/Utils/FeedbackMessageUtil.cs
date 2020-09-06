@@ -16,32 +16,70 @@ namespace FeedbackMessages.Utils
     {
 
         /// <summary>
+        /// Extracts error messages from <see cref="ValidatorCollection"/> as <see cref="FeedbackMessage"/>.
+        /// </summary>
+        /// <param name="validators"></param>
+        /// <returns></returns>
+        public static IEnumerable<FeedbackMessage> GetErrorsAsFeedbackMessage(ValidatorCollection validators)
+        {
+            foreach (IValidator validator in validators)
+            {
+                if (validator.IsValid)
+                {
+                    continue;
+                }
+
+                if (String.IsNullOrEmpty(validator.ErrorMessage))
+                {
+                    continue;
+                }
+
+                var feedbackMessage = FeedbackMessage.Error(String.Copy(validator.ErrorMessage));
+                yield return feedbackMessage;
+            }
+        }
+
+        /// <summary>
+        /// Extracts error messages from <see cref="ModelStateDictionary"/> as <see cref="FeedbackMessage"/>.
+        /// </summary>
+        /// <param name="modelState"></param>
+        /// <returns></returns>
+        public static IEnumerable<FeedbackMessage> GetErrorsAsFeedbackMessage(ModelStateDictionary modelState)
+        {
+            if (!modelState.IsValid)
+            {
+                foreach (KeyValuePair<string, ModelState> pair in modelState)
+                {
+                    foreach (ModelError error in pair.Value.Errors)
+                    {
+                        if (String.IsNullOrEmpty(error.ErrorMessage))
+                        {
+                            continue;
+                        }
+
+                        var feedbackMessage = FeedbackMessage.Error(error.ErrorMessage);
+                        yield return feedbackMessage;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Adds validation error messages to <see cref="FeedbackMessageStore"/>. 
         /// </summary>
         /// <param name="page"></param>
         /// <param name="option"></param>
         public static void AppendValidationErrorsToStore(Page page, FeedbackMessageRenderOption option)
         {
-            List<FeedbackMessage> errorMessages = new List<FeedbackMessage>();
+            var messageStore = FeedbackMessageStore.Current;
 
             if (option.ShowValidationErrors)
             {
                 ValidatorCollection validators = page.GetValidators(option.ValidationGroup);
 
-                foreach (IValidator validator in validators)
+                foreach (FeedbackMessage errorMessage in GetErrorsAsFeedbackMessage(validators))
                 {
-                    if (validator.IsValid)
-                    {
-                        continue;
-                    }
-
-                    if (String.IsNullOrEmpty(validator.ErrorMessage))
-                    {
-                        continue;
-                    }
-
-                    var feedbackMessage = FeedbackMessage.Error(String.Copy(validator.ErrorMessage));
-                    errorMessages.Add(feedbackMessage);
+                    messageStore.Add(errorMessage);
                 }
             }
 
@@ -50,23 +88,13 @@ namespace FeedbackMessages.Utils
                 ModelStateDictionary modelState = page.ModelState;
                 if (!modelState.IsValid)
                 {
-                    foreach (KeyValuePair<string, ModelState> pair in modelState)
+                    foreach (FeedbackMessage errorMessage in GetErrorsAsFeedbackMessage(modelState))
                     {
-                        foreach (ModelError error in pair.Value.Errors)
-                        {
-                            if (String.IsNullOrEmpty(error.ErrorMessage))
-                            {
-                                continue;
-                            }
-
-                            var feedbackMessage = FeedbackMessage.Error(error.ErrorMessage);
-                            errorMessages.Add(feedbackMessage);
-                        }
+                        messageStore.Add(errorMessage);
                     }
                 }
             }
 
-            FeedbackMessageStore.Current.AddMessages(errorMessages);
         }
 
         /// <summary>
@@ -96,5 +124,6 @@ namespace FeedbackMessages.Utils
                 ValidationGroup = validationGroup
             });
         }
+
     }
 }
