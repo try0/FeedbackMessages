@@ -14,8 +14,13 @@ namespace FeedbackMessages.Extensions
         /// </summary>
         /// <param name="helper"></param>
         /// <returns></returns>
-        public static IHtmlString FeedbackMessagePanel(this HtmlHelper helper)
+        public static IHtmlString FeedbackMessagePanel(this HtmlHelper helper, bool showValidationErrors = false)
         {
+            if (showValidationErrors)
+            {
+                FeedbackMessageUtil.AppendValidationErrorsToStore(helper.ViewContext);
+            }
+
             return MvcHtmlString.Create(FeedbackMessageSettings.Instance.MessageRenderer.RenderMessages().ToString());
         }
 
