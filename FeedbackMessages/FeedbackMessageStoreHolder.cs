@@ -1,4 +1,5 @@
 ﻿using FeedbackMessages.Extensions;
+using System;
 using System.Web;
 using System.Web.SessionState;
 
@@ -49,39 +50,52 @@ namespace FeedbackMessages
             var messageStore = Current;
             messageStore.CleanRendered();
 
-            if (messageStore.Items.ContainsKey(META_DATA_SESSION_KEY) 
+            if (messageStore.Items.ContainsKey(META_DATA_SESSION_KEY)
                 && messageStore.Items[META_DATA_SESSION_KEY] != null)
             {
                 HttpSessionState session = (HttpSessionState)messageStore.Items[META_DATA_SESSION_KEY];
 
-                if (messageStore.HasUnrenderedMessage())
+                if (!session.IsReadOnly)
                 {
-                    session.SetStore(ITEM_KEY, messageStore);
-                }
-                else
-                {
-                    messageStore.Items.Remove(session);
-                    session[ITEM_KEY] = null;
+                    if (messageStore.HasUnrenderedMessage())
+                    {
+                        session.SetStore(ITEM_KEY, messageStore);
+                    }
+                    else
+                    {
+                        messageStore.Items.Remove(session);
+                        session[ITEM_KEY] = null;
+                    }
+
+                    return;
                 }
 
-                return;
             }
 
             if (!ExistsSession())
             {
                 return;
             }
-
-
-            if (messageStore.HasUnrenderedMessage())
-            {
-                HttpContext.Current.Session.SetStore(ITEM_KEY, messageStore);
-            }
             else
             {
-                messageStore.Items[META_DATA_SESSION_KEY] = null;
-                HttpContext.Current.Session[ITEM_KEY] = null;
+                var session = HttpContext.Current.Session;
+
+                if (!session.IsReadOnly)
+                {
+                    if (messageStore.HasUnrenderedMessage())
+                    {
+                        session.SetStore(ITEM_KEY, messageStore);
+                    }
+                    else
+                    {
+                        messageStore.Items[META_DATA_SESSION_KEY] = null;
+                        session[ITEM_KEY] = null;
+                    }
+                }
             }
+
+
+
         }
 
         /// <summary>
