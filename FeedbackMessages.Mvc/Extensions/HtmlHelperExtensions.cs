@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using FeedbackMessages.Utils.Mvc;
+using System.Web;
 using System.Web.Mvc;
 
 namespace FeedbackMessages.Extensions
@@ -23,9 +24,15 @@ namespace FeedbackMessages.Extensions
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="messageRenderer"></param>
+        /// <param name="showValidationErrors"></param>
         /// <returns></returns>
-        public static IHtmlString FeedbackMessagePanel(this HtmlHelper helper, FeedbackMessageRenderer messageRenderer)
+        public static IHtmlString FeedbackMessagePanel(this HtmlHelper helper, FeedbackMessageRenderer messageRenderer, bool showValidationErrors = false)
         {
+            if (showValidationErrors)
+            {
+                FeedbackMessageUtil.AppendValidationErrorsToStore(helper.ViewContext);
+            }
+
             return MvcHtmlString.Create(messageRenderer.RenderMessages().ToString());
         }
 
@@ -33,9 +40,15 @@ namespace FeedbackMessages.Extensions
         /// Renders script block for display messages.
         /// </summary>
         /// <param name="helper"></param>
+        /// <param name="showValidationErrors"></param>
         /// <returns></returns>
-        public static IHtmlString FeedbackMessageScript(this HtmlHelper helper)
+        public static IHtmlString FeedbackMessageScript(this HtmlHelper helper, bool showValidationErrors = false)
         {
+            if (showValidationErrors)
+            {
+                FeedbackMessageUtil.AppendValidationErrorsToStore(helper.ViewContext);
+            }
+
             return MvcHtmlString.Create("<script>" + FeedbackMessageSettings.Instance.ScriptBuilder.GetDomReadyScript() + "</script>");
         }
     }
