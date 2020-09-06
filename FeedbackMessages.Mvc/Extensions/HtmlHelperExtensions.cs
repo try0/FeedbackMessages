@@ -9,10 +9,12 @@ namespace FeedbackMessages.Extensions
     /// </summary>
     public static class HtmlHelperExtensions
     {
+
         /// <summary>
         /// Renders feedback messages as ul, li.
         /// </summary>
         /// <param name="helper"></param>
+        /// <param name="showValidationErrors"></param>
         /// <returns></returns>
         public static IHtmlString FeedbackMessagePanel(this HtmlHelper helper, bool showValidationErrors = false)
         {
