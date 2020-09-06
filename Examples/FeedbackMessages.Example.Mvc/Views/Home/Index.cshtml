@@ -7,7 +7,7 @@
 
 
 <!-- render message area -->
-@Html.FeedbackMessagePanel(MessageModel.MESSAGE_RENDERER)
+@Html.FeedbackMessagePanel(MessageModel.MESSAGE_RENDERER, true)
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {

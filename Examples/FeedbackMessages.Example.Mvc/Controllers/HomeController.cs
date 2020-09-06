@@ -23,13 +23,18 @@ namespace FeedbackMessages.Example.Mvc.Controllers
         {
             this.InfoMessage(model.Message);
 
-            switch (submitButton)
+            if (ModelState.IsValid)
             {
-                case "SecondPage":
-                    return RedirectToAction("SecondPage");
-                default:
-                    return View();
+                switch (submitButton)
+                {
+                    case "SecondPage":
+                        return RedirectToAction("SecondPage");
+                    default:
+                        return View();
+                }
             }
+
+            return View(model);
         }
 
         public ActionResult SecondPage()

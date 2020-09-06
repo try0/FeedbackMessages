@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using static FeedbackMessages.FeedbackMessage;
@@ -22,6 +23,7 @@ namespace FeedbackMessages.Example.Mvc.Models
  
         }
 
+        [Required]
         public string Message { get; set; }
     }
 
