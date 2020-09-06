@@ -3,4 +3,15 @@
 
 
 @addTagHelper *, FeedbackMessages.AspNetCore.Mvc
-<feedback-message-panel></feedback-message-panel>
+<feedback-message-panel show-validation-errors="true"></feedback-message-panel>
+
+
+<form method="post" class="ui form" style="padding-top:3em;">
+    <div class="field">
+        <textarea asp-for="Message" class="ui"></textarea>
+    </div>
+
+    <div class="field">
+        <input type="submit" value="Submit" class="ui primary button" />
+    </div>
+</form>
