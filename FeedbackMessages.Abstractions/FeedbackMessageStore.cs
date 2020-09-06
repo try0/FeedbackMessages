@@ -49,7 +49,6 @@ namespace FeedbackMessages
         /// </summary>
         public static void Flash()
         {
-
             holder.FlashFeedbackMessageStore();
         }
 
