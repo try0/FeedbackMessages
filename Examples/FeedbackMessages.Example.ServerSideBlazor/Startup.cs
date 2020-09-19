@@ -21,10 +21,7 @@ namespace FeedbackMessages.Example.ServerSideBlazor
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages().AddMvcOptions(options =>
-            {
-                options.Filters.Add(FeedbackMessageActionFilter.Instance);
-            });
+            services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpContextAccessor();
             services.AddSession();
@@ -55,7 +52,7 @@ namespace FeedbackMessages.Example.ServerSideBlazor
 
                     var messageRenderer = new FeedbackMessageRenderer();
                     messageRenderer.OuterTagName = "div";
-                    messageRenderer.InnerTagName = "span";
+                    messageRenderer.InnerTagName = "p";
 
                     messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.INFO, "class", "ui info message");
                     messageRenderer.AppendOuterAttributeValue(FeedbackMessageLevel.SUCCESS, "class", "ui success message");

@@ -1,20 +1,61 @@
 ﻿@page "/"
 
+@using FeedbackMessages.Example.ServerSideBlazor.Models
 
 @using FeedbackMessages.Extensions;
 @namespace FeedbackMessages.Components
 
-<FeedbackMessagePanel></FeedbackMessagePanel>
+
+
+<EditForm Model="@model" OnSubmit="@OnSubmit" @onload="@OnLoad">
+    <DataAnnotationsValidator />
+
+    <FeedbackMessagePanel ShowValidationErrors="true"></FeedbackMessagePanel>
+
+    <div class="ui form" style="padding-top:3em;">
+        <div class="field">
+            <InputTextArea @bind-Value="model.Message"></InputTextArea>
+        </div>
+
+        <div class="field">
+            <button type="submit" class="ui primary button">Submit</button>
+        </div>
+    </div>
+
+</EditForm>
 
 @code{
+
+    private IndexModel model = new IndexModel();
+
+    private bool firstRender = true;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
         this.InfoMessage("Information message.");
         this.SuccessMessage("Success message.");
         this.WarnMessage("Warning message.");
         this.ErrorMessage("Error message.");
+
+    
+
+    }
+
+
+    public void OnLoad()
+    {
+
+    }
+
+
+    public void OnSubmit(EditContext editContext)
+    {
+        if (editContext.Validate())
+        {
+
+            this.SuccessMessage("OK");
+            StateHasChanged();
+        }
     }
 }
