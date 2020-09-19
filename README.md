@@ -289,12 +289,6 @@ Initialize FeedbackMessages in Startup.cs.
 ```C#
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddRazorPages().AddMvcOptions(options =>
-    {
-        // Required add filter
-        options.Filters.Add(FeedbackMessageActionFilter.Instance);
-    });
-
     // Required add context accessor
     services.AddHttpContextAccessor();
 }
