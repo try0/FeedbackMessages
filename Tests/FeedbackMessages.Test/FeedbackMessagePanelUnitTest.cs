@@ -23,6 +23,7 @@ namespace FeedbackMessages.Test
 
             var panel = new FeedbackMessagePanel();
             panel.ID = "fm";
+            panel.Page = new Page();
 
 
             var writer = new StringWriter();
@@ -53,6 +54,7 @@ namespace FeedbackMessages.Test
 
             var panel = new FeedbackMessagePanel();
             panel.ID = "fm";
+            panel.Page = new Page();
 
             var renderer = new FeedbackMessageRenderer();
             renderer.OuterTagName = "div";
