@@ -1,0 +1,17 @@
+﻿
+@using FeedbackMessages.Extensions;
+@using FeedbackMessages;
+@using FeedbackMessages.Example.Mvc.Models;
+
+
+<div style="padding-bottom: 3em;">
+
+    @Html.ActionLink("Back", "Index", null, new { @class = "ui button" })
+ 
+</div>
+
+<!-- render message area -->
+@*@Html.FeedbackMessagePanel(MessageModel.MESSAGE_RENDERER)*@
+
+@Html.FeedbackMessageScript(true)
+

@@ -42,7 +42,11 @@ namespace FeedbackMessages.Example.AspNetCore.Mvc.Controllers
             return View(model);
         }
 
-
+        public ActionResult SecondPage()
+        {
+            this.InfoMessage("SecondPage");
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

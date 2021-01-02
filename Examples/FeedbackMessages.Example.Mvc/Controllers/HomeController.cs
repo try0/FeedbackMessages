@@ -39,6 +39,7 @@ namespace FeedbackMessages.Example.Mvc.Controllers
 
         public ActionResult SecondPage()
         {
+            this.InfoMessage("SecondPage");
             return View();
         }
 
