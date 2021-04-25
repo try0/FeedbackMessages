@@ -10,7 +10,7 @@ Messages that could not be rendered are persisted in the session until rendered.
 
 ## Version
 
-0.4.0
+0.5.0
 
 version >=.NETFramework 4.6.1, .NET Standard 2.0
 
@@ -18,13 +18,13 @@ version >=.NETFramework 4.6.1, .NET Standard 2.0
 ## Usage
 
 ### NuGet
-[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.4.0) .NETFramework WebForms
+[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.5.0) .NETFramework WebForms
 
-[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.4.0) .NETFramework Mvc
+[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.5.0) .NETFramework Mvc
 
-[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.4.0) .NETCore Mvc, RazorPages
+[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.5.0) .NETCore Mvc, RazorPages
 
-[FeedbackMessages.AspNetCore.Blazor](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Blazor/0.4.0) .NETCore ServerSideBlazor
+[FeedbackMessages.AspNetCore.Blazor](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Blazor/0.5.0) .NETCore ServerSideBlazor
 
 
 ---
@@ -62,7 +62,7 @@ FeedbackMessageSettings.CreateInitializer()
 ```
 
 #### Default
-* FeedbackMessageRenderer renders ul and li tags that has "feedback-LEVEL" class attribute value.  
+* FeedbackMessageRenderer renders ul and li tags that has "feedback-level" class attribute value.  
 ![output](https://user-images.githubusercontent.com/17096601/79125786-b2d68580-7dd9-11ea-9bd4-4e067d844d17.PNG)
 
 * FeedbackMessageScriptBuilder throws Exception.
