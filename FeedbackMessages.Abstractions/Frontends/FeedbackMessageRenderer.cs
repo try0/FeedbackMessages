@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 using static FeedbackMessages.FeedbackMessage;
 
@@ -136,8 +137,6 @@ namespace FeedbackMessages
 
             StringBuilder output = new StringBuilder();
 
-
-
             var messageStore = FeedbackMessageStore.Current;
             foreach (var messages in messageStore.Messages)
             {
@@ -146,8 +145,6 @@ namespace FeedbackMessages
                 {
                     continue;
                 }
-
-
 
                 FeedbackMessageAttributeCollection outerAttrs;
                 if (PerLevelOuterTagAttributes.ContainsKey(messages.Key))
@@ -174,7 +171,8 @@ namespace FeedbackMessages
 
 
                 output.Append($"<{OuterTagName} {outerAttrs.Build().ToString()}>");
-                messages.Value.ForEach(msg =>
+
+                foreach (var msg in messages.Value)
                 {
                     output.Append($"<{InnerTagName} {innerAttrs.Build().ToString()}>");
 
@@ -182,7 +180,8 @@ namespace FeedbackMessages
                     output.Append(EscapeMessage ? System.Web.HttpUtility.HtmlEncode(message) : message);
                     output.Append($"</{InnerTagName}>");
                     msg.MarkRendered();
-                });
+                }
+
                 output.Append($"</{OuterTagName}>");
 
             }

@@ -99,11 +99,11 @@ namespace FeedbackMessages.Test
 
             store.AddMessage(feedbackMessage);
 
-            List<FeedbackMessage> infoMessages = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
+            IList<FeedbackMessage> infoMessages = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
             Assert.AreEqual(infoMessages.Count, 1);
             Assert.IsTrue(infoMessages.Contains(feedbackMessage));
 
-            List<FeedbackMessage> errorMessages = store.GetFeedbackMessages(FeedbackMessageLevel.ERROR);
+            IList<FeedbackMessage> errorMessages = store.GetFeedbackMessages(FeedbackMessageLevel.ERROR);
             Assert.AreEqual(errorMessages.Count, 0);
         }
 
@@ -127,18 +127,18 @@ namespace FeedbackMessages.Test
 
             store.AddMessages(messages);
 
-            List<FeedbackMessage> infoMessages = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
+            IList<FeedbackMessage> infoMessages = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
             Assert.AreEqual(infoMessages.Count, 1);
             Assert.IsTrue(infoMessages.Contains(info));
 
-            List<FeedbackMessage> successMessages = store.GetFeedbackMessages(FeedbackMessageLevel.SUCCESS);
+            IList<FeedbackMessage> successMessages = store.GetFeedbackMessages(FeedbackMessageLevel.SUCCESS);
             Assert.AreEqual(successMessages.Count, 0);
 
-            List<FeedbackMessage> warnMessages = store.GetFeedbackMessages(FeedbackMessageLevel.WARN);
+            IList<FeedbackMessage> warnMessages = store.GetFeedbackMessages(FeedbackMessageLevel.WARN);
             Assert.AreEqual(warnMessages.Count, 1);
             Assert.IsTrue(warnMessages.Contains(warn));
 
-            List<FeedbackMessage> errorMessages = store.GetFeedbackMessages(FeedbackMessageLevel.ERROR);
+            IList<FeedbackMessage> errorMessages = store.GetFeedbackMessages(FeedbackMessageLevel.ERROR);
             Assert.AreEqual(errorMessages.Count, 0);
         }
 

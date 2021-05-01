@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 
@@ -52,19 +53,41 @@ namespace FeedbackMessages
             holder.FlashFeedbackMessageStore();
         }
 
+        private readonly object createLock = new object();
 
+        /// <summary>
+        /// Temporary objects in current request.
+        /// </summary>
         [NonSerialized]
         private readonly IDictionary<Object, Object> items = new Dictionary<Object, Object>();
+
+        /// <summary>
+        /// Feedback messages for each level.
+        /// </summary>
+        private Dictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>> messagesHolder = new Dictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>>();
 
         /// <summary>
         /// Temporary objects in current request.
         /// </summary>
         public IDictionary<Object, Object> Items => items;
 
+
         /// <summary>
-        /// Feedback messages holder
+        /// Readonly feedback messages for each level.
         /// </summary>
-        public IDictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>> Messages { get; } = new Dictionary<FeedbackMessage.FeedbackMessageLevel, List<FeedbackMessage>>();
+        public IDictionary<FeedbackMessage.FeedbackMessageLevel, ReadOnlyCollection<FeedbackMessage>> Messages
+        {
+            get
+            {
+                var returnMessages = new Dictionary<FeedbackMessage.FeedbackMessageLevel, ReadOnlyCollection<FeedbackMessage>>();
+
+                foreach (var kv in messagesHolder)
+                {
+                    returnMessages.Add(kv.Key, GetOrNewFeedbackMessages(kv.Key).AsReadOnly());
+                }
+                return returnMessages;
+            }
+        }
 
         /// <summary>
         /// Gets messages count.
@@ -90,6 +113,7 @@ namespace FeedbackMessages
 
 
 
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -97,33 +121,46 @@ namespace FeedbackMessages
         {
         }
 
-        /// <summary>
-        /// Gets feedback messages.
-        /// </summary>
-        /// <param name="level"></param>
-        /// <returns></returns>
-        public List<FeedbackMessage> GetFeedbackMessages(FeedbackMessage.FeedbackMessageLevel level)
+
+        private List<FeedbackMessage> GetOrNewFeedbackMessages(FeedbackMessage.FeedbackMessageLevel level)
         {
-            if (!Messages.ContainsKey(level))
+            if (!messagesHolder.ContainsKey(level))
             {
-                var messageList = new List<FeedbackMessage>();
-                Messages[level] = messageList;
-                return messageList;
+                lock (createLock)
+                {
+                    if (!messagesHolder.ContainsKey(level))
+                    {
+                        var messageList = new List<FeedbackMessage>();
+                        messagesHolder[level] = messageList;
+                        return messageList;
+                    }
+                }
             }
 
-            return Messages[level];
+            return messagesHolder[level];
         }
 
         /// <summary>
-        /// Gets feedback messages.
+        /// Gets feedback messages as readonly.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public IList<FeedbackMessage> GetFeedbackMessages(FeedbackMessage.FeedbackMessageLevel level)
+        {
+            var messages = GetOrNewFeedbackMessages(level);
+            return messages.AsReadOnly();
+        }
+
+        /// <summary>
+        /// Gets feedback messages as readonly.
         /// </summary>
         /// <returns></returns>
-        public List<FeedbackMessage> GetFeedbackMessages()
+        public IList<FeedbackMessage> GetFeedbackMessages()
         {
             var messages = new List<FeedbackMessage>();
             if (Messages.Keys.Count == 0)
             {
-                return messages;
+                return messages.AsReadOnly();
             }
 
             foreach (var entry in Messages)
@@ -131,7 +168,7 @@ namespace FeedbackMessages
                 messages.AddRange(entry.Value);
             }
 
-            return messages;
+            return messages.AsReadOnly();
         }
 
         /// <summary>
@@ -145,7 +182,7 @@ namespace FeedbackMessages
                 return;
             }
 
-            var messageList = GetFeedbackMessages(message.Level);
+            var messageList = GetOrNewFeedbackMessages(message.Level);
             messageList.Add(message);
         }
 
@@ -166,7 +203,7 @@ namespace FeedbackMessages
         /// </summary>
         public void CleanRendered()
         {
-            foreach (var messageList in Messages.Values)
+            foreach (var messageList in messagesHolder.Values)
             {
                 var unrenderdMessages = messageList.Where(msg => !msg.IsRendered).ToList();
 
@@ -181,7 +218,7 @@ namespace FeedbackMessages
         /// <returns></returns>
         public bool HasUnrenderedMessage()
         {
-            foreach (var messageList in Messages.Values)
+            foreach (var messageList in messagesHolder.Values)
             {
                 var hasUnrenderd = messageList.Any(msg => !msg.IsRendered);
 
@@ -200,7 +237,7 @@ namespace FeedbackMessages
         /// <param name="level"></param>
         public void Clear(FeedbackMessage.FeedbackMessageLevel level)
         {
-            GetFeedbackMessages(level).Clear();
+            GetOrNewFeedbackMessages(level).Clear();
         }
 
         /// <summary>
@@ -235,7 +272,7 @@ namespace FeedbackMessages
         /// </summary>
         public void Clear()
         {
-            Messages.Clear();
+            messagesHolder.Clear();
         }
 
         /// <summary>
@@ -245,7 +282,7 @@ namespace FeedbackMessages
         /// <returns></returns>
         public bool Contains(FeedbackMessage item)
         {
-            foreach (var entry in Messages)
+            foreach (var entry in messagesHolder)
             {
 
                 if (entry.Value.Contains(item))
@@ -279,7 +316,7 @@ namespace FeedbackMessages
         /// <returns></returns>
         public bool Remove(FeedbackMessage item)
         {
-            foreach (var entry in Messages)
+            foreach (var entry in messagesHolder)
             {
                 if (entry.Value.Remove(item))
                 {
