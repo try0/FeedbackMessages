@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets message store in current request.
         /// </summary>
-        FeedbackMessageStore Current { get;  }
+        FeedbackMessageStore Current { get; }
 
         /// <summary>
         /// Loads message store.
