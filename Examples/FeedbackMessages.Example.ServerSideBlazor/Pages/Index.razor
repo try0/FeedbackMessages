@@ -10,7 +10,7 @@
 <EditForm Model="@model" OnSubmit="@OnSubmit" @onload="@OnLoad">
     <DataAnnotationsValidator />
 
-    <FeedbackMessagePanel ShowValidationErrors="true"></FeedbackMessagePanel>
+    <FeedbackMessagePanel ShowValidationErrors="true" @ref="feedbackMessagePanel"></FeedbackMessagePanel>
 
     <div class="ui form" style="padding-top:3em;">
         <div class="field">
@@ -30,6 +30,8 @@
 
     private bool firstRender = true;
 
+    private FeedbackMessagePanel feedbackMessagePanel;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -38,7 +40,7 @@
         this.WarnMessage("Warning message.");
         this.ErrorMessage("Error message.");
 
-    
+
 
     }
 
@@ -53,9 +55,9 @@
     {
         if (editContext.Validate())
         {
-
             this.SuccessMessage("OK");
-            StateHasChanged();
         }
+
+        feedbackMessagePanel.StateHasChanged();
     }
 }

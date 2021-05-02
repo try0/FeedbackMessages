@@ -17,7 +17,6 @@ namespace FeedbackMessages.Utils.Blazor
                 var feedbackMessage = FeedbackMessage.Error(validationMessage);
                 messageStore.Add(feedbackMessage);
             }
-
         }
     }
 }

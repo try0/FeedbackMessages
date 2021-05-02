@@ -8,17 +8,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Transactions;
 
 namespace FeedbackMessages.Components
 {
     /// <summary>
     /// Web component that render feedback messages. 
     /// </summary>
-    public class FeedbackMessagePanel : ComponentBase, IDisposable
+    public class FeedbackMessagePanel : ComponentBase
     {
         private EditContext previousEditContext;
         private readonly EventHandler<ValidationStateChangedEventArgs> validationStateChangedHandler;
-        private readonly EventHandler<MessageAppendedEventArgs> messageAppendedHandler;
 
         /// <summary>
         /// Whether to render validation error messages.
@@ -44,18 +44,17 @@ namespace FeedbackMessages.Components
             validationStateChangedHandler = (sender, eventArgs) => {
                 if (ShowValidationErrors)
                 {
-                    StateHasChanged();
+                    if (ShowValidationErrors && CurrentEditContext != null)
+                    {
+                        FeedbackMessageUtil.AppendValidationErrorsToStore(CurrentEditContext);
+                    }
                 }
-            };
-
-
-            messageAppendedHandler = (sender, args) =>
-            {
-                StateHasChanged();
             };
         }
 
-
+        public new void StateHasChanged() {
+            base.StateHasChanged();
+        }
 
         protected override void OnParametersSet()
         {
@@ -68,17 +67,12 @@ namespace FeedbackMessages.Components
                 previousEditContext = CurrentEditContext;
             }
 
-            FeedbackMessageStore.Current.OnMessageAppeded += messageAppendedHandler;
         }
+
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             base.BuildRenderTree(builder);
-
-            if (ShowValidationErrors && CurrentEditContext != null)
-            {
-                FeedbackMessageUtil.AppendValidationErrorsToStore(CurrentEditContext);
-            }
 
             builder.OpenElement(0, "div");
             if (AdditionalAttributes != null)
@@ -96,6 +90,7 @@ namespace FeedbackMessages.Components
 
             FeedbackMessageStore.Current.CleanRendered();
             FeedbackMessageStore.Flash();
+
         }
 
 
@@ -107,9 +102,5 @@ namespace FeedbackMessages.Components
             }
         }
 
-        public void Dispose()
-        {
-            FeedbackMessageStore.Current.OnMessageAppeded -= messageAppendedHandler;
-        }
     }
 }
