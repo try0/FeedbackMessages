@@ -185,9 +185,14 @@ namespace FeedbackMessages
             }
 
             var messageList = GetOrNewFeedbackMessages(message.Level);
-            messageList.Add(message);
 
-            OnMessageAppeded?.Invoke(this, new MessageAppendedEventArgs(message));
+            if (!messageList.Contains(message))
+            {
+                messageList.Add(message);
+
+                OnMessageAppeded?.Invoke(this, new MessageAppendedEventArgs(message));
+            }
+
         }
 
         /// <summary>
