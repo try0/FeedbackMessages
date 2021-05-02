@@ -11,11 +11,14 @@ using System.Text;
 
 namespace FeedbackMessages.Components
 {
-
-    public class FeedbackMessagePanel : ComponentBase
+    /// <summary>
+    /// Web component that render feedback messages. 
+    /// </summary>
+    public class FeedbackMessagePanel : ComponentBase, IDisposable
     {
         private EditContext previousEditContext;
         private readonly EventHandler<ValidationStateChangedEventArgs> validationStateChangedHandler;
+        private readonly EventHandler<MessageAppendedEventArgs> messageAppendedHandler;
 
         /// <summary>
         /// Whether to render validation error messages.
@@ -44,16 +47,28 @@ namespace FeedbackMessages.Components
                     StateHasChanged();
                 }
             };
+
+
+            messageAppendedHandler = (sender, args) =>
+            {
+                StateHasChanged();
+            };
         }
+
+
 
         protected override void OnParametersSet()
         {
+            base.OnParametersSet();
+
             if (CurrentEditContext != previousEditContext)
             {
                 DetachValidationStateChangedListener();
                 CurrentEditContext.OnValidationStateChanged += validationStateChangedHandler;
                 previousEditContext = CurrentEditContext;
             }
+
+            FeedbackMessageStore.Current.OnMessageAppeded += messageAppendedHandler;
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -83,6 +98,7 @@ namespace FeedbackMessages.Components
             FeedbackMessageStore.Flash();
         }
 
+
         private void DetachValidationStateChangedListener()
         {
             if (previousEditContext != null)
@@ -91,5 +107,9 @@ namespace FeedbackMessages.Components
             }
         }
 
+        public void Dispose()
+        {
+            FeedbackMessageStore.Current.OnMessageAppeded -= messageAppendedHandler;
+        }
     }
 }

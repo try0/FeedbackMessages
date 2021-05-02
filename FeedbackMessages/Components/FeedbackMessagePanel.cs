@@ -7,7 +7,7 @@ using FeedbackMessages.Utils;
 namespace FeedbackMessages.Components
 {
     /// <summary>
-    /// Render feedback messages. 
+    /// Web component that render feedback messages. 
     /// </summary>
     [ToolboxData("<{0}:FeedbackMessagePanel runat=server></{0}:FeedbackMessagePanel>")]
     public class FeedbackMessagePanel : WebControl

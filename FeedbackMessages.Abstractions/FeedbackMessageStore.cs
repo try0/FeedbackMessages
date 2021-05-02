@@ -55,6 +55,8 @@ namespace FeedbackMessages
 
         private readonly object createLock = new object();
 
+        public event EventHandler<MessageAppendedEventArgs> OnMessageAppeded;
+
         /// <summary>
         /// Temporary objects in current request.
         /// </summary>
@@ -184,6 +186,8 @@ namespace FeedbackMessages
 
             var messageList = GetOrNewFeedbackMessages(message.Level);
             messageList.Add(message);
+
+            OnMessageAppeded?.Invoke(this, new MessageAppendedEventArgs(message));
         }
 
         /// <summary>
