@@ -15,7 +15,10 @@ namespace FeedbackMessages
     [Serializable]
     public class FeedbackMessageStore : ICollection<FeedbackMessage>
     {
-
+        /// <summary>
+        /// Empty message list.
+        /// </summary>
+        private static IList<FeedbackMessage> EMPTY_LIST = new List<FeedbackMessage>().AsReadOnly();
         /// <summary>
         /// Store holder
         /// </summary>
@@ -159,12 +162,13 @@ namespace FeedbackMessages
         /// <returns></returns>
         public IList<FeedbackMessage> GetFeedbackMessages()
         {
-            var messages = new List<FeedbackMessage>();
+
             if (Messages.Keys.Count == 0)
             {
-                return messages.AsReadOnly();
+                return EMPTY_LIST;
             }
 
+            var messages = new List<FeedbackMessage>();
             foreach (var entry in Messages)
             {
                 messages.AddRange(entry.Value);
@@ -214,10 +218,7 @@ namespace FeedbackMessages
         {
             foreach (var messageList in messagesHolder.Values)
             {
-                var unrenderdMessages = messageList.Where(msg => !msg.IsRendered).ToList();
-
-                messageList.Clear();
-                messageList.AddRange(unrenderdMessages);
+                messageList.RemoveAll(msg => msg.IsRendered);
             }
         }
 
