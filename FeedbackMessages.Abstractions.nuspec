@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>FeedbackMessages.Abstractions</id>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
     <title>FeedbackMessages.Abstractions</title>
     <authors>Ryo Tsunoda</authors>
     <owners>Ryo Tsunoda</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/try0/FeedbackMessages</projectUrl>
-    <description>ASP.NET feedback messages utility. Display your feedbacks for web clients and users easily.</description>
+    <description>Feedback messages utility for .NET Web application. Display your feedbacks for web clients easily.</description>
     <releaseNotes>pre-release.</releaseNotes>
     <copyright>Copyright 2020 Ryo Tsunoda</copyright>
     <tags>web asp utility message feedback </tags>

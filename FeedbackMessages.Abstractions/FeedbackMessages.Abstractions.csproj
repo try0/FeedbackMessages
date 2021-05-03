@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>FeedbackMessages</RootNamespace>
-    <AssemblyVersion>0.5.0.0</AssemblyVersion>
-    <FileVersion>0.5.0.0</FileVersion>
-    <Version>0.5.0</Version>
+    <AssemblyVersion>0.6.0.0</AssemblyVersion>
+    <FileVersion>0.6.0.0</FileVersion>
+    <Version>0.6.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -14,6 +14,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>Full</DebugType>
+    <Description>Feedback messages utility for .NET Web application. Display your feedbacks for web clients easily.</Description>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="FeedbackMessages.Abstractions.xml" />

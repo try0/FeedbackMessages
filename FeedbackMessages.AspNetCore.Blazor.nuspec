@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>FeedbackMessages.AspNetCore.Blazor</id>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
     <title>FeedbackMessages.AspNetCore.Blazor</title>
     <authors>Ryo Tsunoda</authors>
     <owners>Ryo Tsunoda</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/try0/FeedbackMessages</projectUrl>
-    <description>ASP.NET feedback messages utility. Display your feedbacks for web clients and users easily.</description>
+    <description>Feedback messages utility for .NET Web application. Display your feedbacks for web clients easily.</description>
     <releaseNotes>pre-release.</releaseNotes>
     <copyright>Copyright 2020 Ryo Tsunoda</copyright>
     <tags>web asp utility message feedback netcoreapp mvc razor blazor </tags>
@@ -20,8 +20,8 @@
 
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="FeedbackMessages" version="0.5.0"/>
-        <dependency id="FeedbackMessages.AspNetCore.Mvc" version="0.5.0"/>
+        <dependency id="FeedbackMessages" version="0.6.0"/>
+        <dependency id="FeedbackMessages.AspNetCore.Mvc" version="0.6.0"/>
       </group>
     </dependencies>
 
