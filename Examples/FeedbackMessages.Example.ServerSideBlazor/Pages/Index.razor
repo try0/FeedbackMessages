@@ -11,6 +11,7 @@
     <DataAnnotationsValidator />
 
     <FeedbackMessagePanel ShowValidationErrors="true" @ref="feedbackMessagePanel"></FeedbackMessagePanel>
+    @*<FeedbackMessageScript ShowValidationErrors="true" @ref="feedbackMessageScript"></FeedbackMessageScript>*@
 
     <div class="ui form" style="padding-top:3em;">
         <div class="field">
@@ -32,6 +33,8 @@
 
     private FeedbackMessagePanel feedbackMessagePanel;
 
+    //private FeedbackMessageScript feedbackMessageScript;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -39,17 +42,12 @@
         this.SuccessMessage("Success message.");
         this.WarnMessage("Warning message.");
         this.ErrorMessage("Error message.");
-
-
-
     }
-
 
     public void OnLoad()
     {
 
     }
-
 
     public void OnSubmit(EditContext editContext)
     {
@@ -59,5 +57,6 @@
         }
 
         feedbackMessagePanel.RefreshRender();
+        //feedbackMessageScript.RefreshRender();
     }
 }
