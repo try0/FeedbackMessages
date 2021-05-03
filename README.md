@@ -10,7 +10,7 @@ Messages that could not be rendered are persisted in the session until rendered.
 
 ## Version
 
-0.6.0
+0.6.0 (pre-release)
 
 version >=.NETFramework 4.6.1, .NET Standard 2.0
 
