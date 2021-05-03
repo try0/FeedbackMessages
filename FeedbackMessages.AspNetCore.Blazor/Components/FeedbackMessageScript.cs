@@ -12,6 +12,14 @@ namespace FeedbackMessages.Components
 
     public class FeedbackMessageScript : ComponentBase
     {
+        private static readonly string RENDER_SCRIPT =
+                @"
+                function renderFeedbackMessage() {
+                    var script = document.createElement('script');
+                    var fms = document.getElementById('fms');
+                    script.innerHTML = fms.getAttribute('data-fmscript');
+                    document.head.appendChild(script);
+                }";
         private EditContext previousEditContext;
         private readonly EventHandler<ValidationStateChangedEventArgs> validationStateChangedHandler;
 
@@ -86,16 +94,7 @@ namespace FeedbackMessages.Components
             }
 
             builder.AddMultipleAttributes(1, attributes);
-            var renderFeedbackMessageFunction =
-                @"
-                function renderFeedbackMessage() {
-                    var script = document.createElement('script');
-                    var fms = document.getElementById('fms');
-                    script.innerHTML = fms.getAttribute('data-fmscript');
-                    document.head.appendChild(script);
-                }";
-
-            builder.AddMarkupContent(1, renderFeedbackMessageFunction);
+            builder.AddMarkupContent(1, RENDER_SCRIPT);
             builder.CloseElement();
         }
 
