@@ -1,5 +1,6 @@
 ﻿using FeedbackMessages.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Web;
 using static FeedbackMessages.FeedbackMessage;
@@ -324,6 +325,40 @@ namespace FeedbackMessages.Test
 
             store.Clear(FeedbackMessageLevel.WARN);
             Assert.AreEqual(store.Count, 0);
+
+        }
+
+        /// <summary>
+        /// <see cref="FeedbackMessageStore.AddMessages(IEnumerable{FeedbackMessage})"/> test.
+        /// </summary>
+        [TestMethod]
+        public void TestMessageAppendedEvent()
+        {
+            InitializeHttpContext();
+
+            var store = new FeedbackMessageStore();
+
+            var feedbackMessage = FeedbackMessage.Info("test raise appended event.");
+            int countRaiseEvent = 0;
+
+            EventHandler<MessageAppendedEventArgs> handler = (sender, args) =>
+            {
+                Assert.AreEqual(sender, store);
+                Assert.AreEqual(args.Message, feedbackMessage);
+                countRaiseEvent++;
+            };
+
+            // register
+            store.OnMessageAppeded += handler;
+
+
+            store.AddMessage(feedbackMessage);
+            Assert.AreEqual(countRaiseEvent, 1);
+
+            // unregister
+            store.OnMessageAppeded -= handler;
+            store.AddMessage(FeedbackMessage.Warn("test unregister event"));
+            Assert.AreEqual(countRaiseEvent, 1);
 
         }
     }
