@@ -108,6 +108,31 @@ namespace FeedbackMessages.Test
         }
 
         /// <summary>
+        /// <see cref="FeedbackMessageStore.AddMessage(FeedbackMessage)"/> test.
+        /// </summary>
+        [TestMethod]
+        public void TestAddDuplicaateMessages()
+        {
+            InitializeHttpContext();
+
+            var store = new FeedbackMessageStore();
+
+            var info1 = FeedbackMessage.Info("Test message.");
+            var info2 = FeedbackMessage.Info("Test message.");
+
+            store.AddMessage(info1);
+            store.AddMessage(info2);
+
+            Assert.AreEqual(store.Count, 1);
+
+            var warn = FeedbackMessage.Warn("Test message.");
+
+            store.AddMessage(warn);
+            Assert.AreEqual(store.Count, 2);
+
+        }
+
+        /// <summary>
         /// <see cref="FeedbackMessageStore.AddMessages(IEnumerable{FeedbackMessage})"/> test.
         /// </summary>
         [TestMethod]
@@ -178,11 +203,11 @@ namespace FeedbackMessages.Test
             Assert.IsFalse(store.HasUnrenderedMessage());
 
 
-            var infoMessage1 = FeedbackMessage.Info("Test warn message");
+            var infoMessage1 = FeedbackMessage.Info("Test warn message1");
             store.AddMessage(infoMessage1);
-            var infoMessage2 = FeedbackMessage.Info("Test warn message");
+            var infoMessage2 = FeedbackMessage.Info("Test warn message2");
             store.AddMessage(infoMessage2);
-            var infoMessage3 = FeedbackMessage.Info("Test warn message");
+            var infoMessage3 = FeedbackMessage.Info("Test warn message3");
             store.AddMessage(infoMessage3);
 
             store.CleanRendered();
