@@ -52,7 +52,10 @@ namespace FeedbackMessages.Components
             };
         }
 
-        public new void StateHasChanged() {
+        /// <summary>
+        /// Refresh this component. Delegate processing to StateHasChanged().
+        /// </summary>
+        public void RefreshRender() {
             base.StateHasChanged();
         }
 
