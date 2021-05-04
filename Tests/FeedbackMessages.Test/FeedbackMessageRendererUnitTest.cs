@@ -18,8 +18,8 @@ namespace FeedbackMessages.Test
             Assert.IsNotNull(renderer.OuterTagName);
             Assert.IsNotNull(renderer.InnerTagName);
 
-            Assert.AreEqual(renderer.OuterTagName, "ul");
-            Assert.AreEqual(renderer.InnerTagName, "li");
+            Assert.AreEqual("ul", renderer.OuterTagName);
+            Assert.AreEqual("li", renderer.InnerTagName);
 
             Assert.IsFalse(renderer.EscapeMessage);
 
@@ -100,15 +100,15 @@ namespace FeedbackMessages.Test
 
             var outer = htmlDoc.GetElementById("outer");
             Assert.IsNotNull(outer);
-            Assert.AreEqual(outer.NodeName.ToLower(), "div");
+            Assert.AreEqual("div", outer.NodeName.ToLower());
             Assert.IsTrue(outer.Attributes["class"].Value.Contains("feedback-info"));
 
 
 
             var inner = htmlDoc.GetElementById("inner");
             Assert.IsNotNull(inner);
-            Assert.AreEqual(inner.NodeName.ToLower(), "div");
-            Assert.AreEqual(inner.TextContent, "TestMessage");
+            Assert.AreEqual("div", inner.NodeName.ToLower());
+            Assert.AreEqual("TestMessage", inner.TextContent);
         }
 
         [TestMethod]
@@ -136,22 +136,22 @@ namespace FeedbackMessages.Test
 
             var outer = htmlDoc.GetElementById("outer");
             Assert.IsNotNull(outer);
-            Assert.AreEqual(outer.NodeName.ToLower(), "div");
+            Assert.AreEqual("div", outer.NodeName.ToLower());
             Assert.IsTrue(outer.Attributes["class"].Value.Contains("feedback-info"));
 
 
-            Assert.AreEqual(outer.ChildElementCount, 2);
+            Assert.AreEqual(2, outer.ChildElementCount);
 
             var mes1 = outer.FirstChild;
 
             Assert.IsNotNull(mes1);
-            Assert.AreEqual(mes1.NodeName.ToLower(), "div");
-            Assert.AreEqual(mes1.TextContent, "TestMessage1");
+            Assert.AreEqual("div", mes1.NodeName.ToLower());
+            Assert.AreEqual("TestMessage1", mes1.TextContent);
 
             var mes2 = mes1.NextSibling;
             Assert.IsNotNull(mes2);
-            Assert.AreEqual(mes2.NodeName.ToLower(), "div");
-            Assert.AreEqual(mes2.TextContent, "TestMessage2");
+            Assert.AreEqual("div", mes2.NodeName.ToLower());
+            Assert.AreEqual("TestMessage2", mes2.TextContent);
         }
 
         [TestMethod]
@@ -186,49 +186,49 @@ namespace FeedbackMessages.Test
             {
                 var outer = htmlDoc.GetElementById("outer-info");
                 Assert.IsNotNull(outer);
-                Assert.AreEqual(outer.NodeName.ToLower(), "div");
+                Assert.AreEqual("div", outer.NodeName.ToLower());
                 Assert.IsTrue(outer.Attributes["class"].Value.Contains("feedback-info"));
 
 
-                Assert.AreEqual(outer.ChildElementCount, 2);
+                Assert.AreEqual(2, outer.ChildElementCount);
 
                 var mes1 = outer.FirstChild;
 
                 Assert.IsNotNull(mes1);
-                Assert.AreEqual(mes1.NodeName.ToLower(), "span");
-                Assert.AreEqual(mes1.TextContent, "InfoTestMessage1");
+                Assert.AreEqual("span", mes1.NodeName.ToLower());
+                Assert.AreEqual("InfoTestMessage1", mes1.TextContent);
 
                 var mes2 = mes1.NextSibling;
                 Assert.IsNotNull(mes2);
-                Assert.AreEqual(mes2.NodeName.ToLower(), "span");
-                Assert.AreEqual(mes2.TextContent, "InfoTestMessage2");
+                Assert.AreEqual("span", mes2.NodeName.ToLower());
+                Assert.AreEqual("InfoTestMessage2", mes2.TextContent);
             }
 
             // error
             {
                 var outer = htmlDoc.GetElementById("outer-error");
                 Assert.IsNotNull(outer);
-                Assert.AreEqual(outer.NodeName.ToLower(), "div");
+                Assert.AreEqual("div", outer.NodeName.ToLower());
                 Assert.IsTrue(outer.Attributes["class"].Value.Contains("feedback-error"));
 
 
-                Assert.AreEqual(outer.ChildElementCount, 3);
+                Assert.AreEqual(3, outer.ChildElementCount);
 
                 var mes1 = outer.FirstChild;
 
                 Assert.IsNotNull(mes1);
-                Assert.AreEqual(mes1.NodeName.ToLower(), "span");
-                Assert.AreEqual(mes1.TextContent, "ErrorTestMessage1");
+                Assert.AreEqual("span", mes1.NodeName.ToLower());
+                Assert.AreEqual("ErrorTestMessage1", mes1.TextContent);
 
                 var mes2 = mes1.NextSibling;
                 Assert.IsNotNull(mes2);
-                Assert.AreEqual(mes2.NodeName.ToLower(), "span");
-                Assert.AreEqual(mes2.TextContent, "ErrorTestMessage2");
+                Assert.AreEqual("span", mes2.NodeName.ToLower());
+                Assert.AreEqual("ErrorTestMessage2", mes2.TextContent);
 
                 var mes3 = mes2.NextSibling;
                 Assert.IsNotNull(mes3);
-                Assert.AreEqual(mes3.NodeName.ToLower(), "span");
-                Assert.AreEqual(mes3.TextContent, "ErrorTestMessage3");
+                Assert.AreEqual("span", mes3.NodeName.ToLower());
+                Assert.AreEqual("ErrorTestMessage3", mes3.TextContent);
 
             }
 

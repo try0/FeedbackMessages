@@ -36,7 +36,7 @@ namespace FeedbackMessages.Test
             var loadedStore = HttpContext.Current.Items[FeedbackMessageStoreHolder.ITEM_KEY] as FeedbackMessageStore;
 
             Assert.IsNotNull(loadedStore);
-            Assert.AreEqual(loadedStore.Count, 0);
+            Assert.AreEqual(0, loadedStore.Count);
         }
 
         /// <summary>
@@ -77,13 +77,13 @@ namespace FeedbackMessages.Test
             var flashedStore = HttpContext.Current.Session.GetStore(FeedbackMessageStoreHolder.ITEM_KEY);
 
             Assert.IsNotNull(flashedStore);
-            Assert.AreEqual(flashedStore.Count, 1);
+            Assert.AreEqual(1, flashedStore.Count);
 
             Assert.IsTrue(flashedStore.HasUnrenderedMessage());
 
             var message = flashedStore.GetFeedbackMessages()[0];
-            Assert.AreEqual(message.Level, FeedbackMessageLevel.INFO);
-            Assert.AreEqual(message.ToString(), "test message.");
+            Assert.AreEqual(FeedbackMessageLevel.INFO, message.Level);
+            Assert.AreEqual("test message.", message.ToString());
         }
 
         /// <summary>
@@ -101,11 +101,11 @@ namespace FeedbackMessages.Test
             store.AddMessage(feedbackMessage);
 
             IList<FeedbackMessage> infoMessages = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
-            Assert.AreEqual(infoMessages.Count, 1);
+            Assert.AreEqual(1, infoMessages.Count);
             Assert.IsTrue(infoMessages.Contains(feedbackMessage));
 
             IList<FeedbackMessage> errorMessages = store.GetFeedbackMessages(FeedbackMessageLevel.ERROR);
-            Assert.AreEqual(errorMessages.Count, 0);
+            Assert.AreEqual(0, errorMessages.Count);
         }
 
         /// <summary>
@@ -124,12 +124,12 @@ namespace FeedbackMessages.Test
             store.AddMessage(info1);
             store.AddMessage(info2);
 
-            Assert.AreEqual(store.Count, 1);
+            Assert.AreEqual(1, store.Count);
 
             var warn = FeedbackMessage.Warn("Test message.");
 
             store.AddMessage(warn);
-            Assert.AreEqual(store.Count, 2);
+            Assert.AreEqual(2, store.Count);
 
         }
 
@@ -154,18 +154,18 @@ namespace FeedbackMessages.Test
             store.AddMessages(messages);
 
             IList<FeedbackMessage> infoMessages = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
-            Assert.AreEqual(infoMessages.Count, 1);
+            Assert.AreEqual(1, infoMessages.Count);
             Assert.IsTrue(infoMessages.Contains(info));
 
             IList<FeedbackMessage> successMessages = store.GetFeedbackMessages(FeedbackMessageLevel.SUCCESS);
-            Assert.AreEqual(successMessages.Count, 0);
+            Assert.AreEqual(0, successMessages.Count);
 
             IList<FeedbackMessage> warnMessages = store.GetFeedbackMessages(FeedbackMessageLevel.WARN);
-            Assert.AreEqual(warnMessages.Count, 1);
+            Assert.AreEqual(1, warnMessages.Count);
             Assert.IsTrue(warnMessages.Contains(warn));
 
             IList<FeedbackMessage> errorMessages = store.GetFeedbackMessages(FeedbackMessageLevel.ERROR);
-            Assert.AreEqual(errorMessages.Count, 0);
+            Assert.AreEqual(0, errorMessages.Count);
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace FeedbackMessages.Test
 
             var infoMessages = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
 
-            Assert.AreEqual(infoMessages.Count, 3);
+            Assert.AreEqual(3, infoMessages.Count);
 
             infoMessage1.MarkRendered();
             infoMessage2.MarkRendered();
@@ -223,7 +223,7 @@ namespace FeedbackMessages.Test
 
             var infoMessagesCleanedRendered = store.GetFeedbackMessages(FeedbackMessageLevel.INFO);
 
-            Assert.AreEqual(infoMessagesCleanedRendered.Count, 1);
+            Assert.AreEqual(1, infoMessagesCleanedRendered.Count);
             Assert.IsTrue(infoMessagesCleanedRendered.Contains(infoMessage3));
 
             infoMessage3.MarkRendered();
@@ -249,9 +249,9 @@ namespace FeedbackMessages.Test
             var deserializeStore = serializer.Deserialize(str);
 
             Assert.IsTrue(deserializeStore.HasUnrenderedMessage());
-            Assert.AreEqual(deserializeStore.GetFeedbackMessages()[0].ToString(), "情報メッセージ");
+            Assert.AreEqual("情報メッセージ", deserializeStore.GetFeedbackMessages()[0].ToString());
 
-            Assert.AreEqual(deserializeStore.Count, 1);
+            Assert.AreEqual(1, deserializeStore.Count);
 
         }
 
@@ -265,10 +265,10 @@ namespace FeedbackMessages.Test
             var message = FeedbackMessage.Info("Test");
             store.AddMessage(message);
             store.AddMessage(FeedbackMessage.Info("Test2"));
-            Assert.AreEqual(store.Count, 2);
+            Assert.AreEqual(2, store.Count);
 
             store.Remove(message);
-            Assert.AreEqual(store.Count, 1);
+            Assert.AreEqual(1, store.Count);
 
         }
 
@@ -282,7 +282,7 @@ namespace FeedbackMessages.Test
             var message = FeedbackMessage.Info("Test");
             store.AddMessage(message);
             store.AddMessage(FeedbackMessage.Info("Test2"));
-            Assert.AreEqual(store.Count, 2);
+            Assert.AreEqual(2, store.Count);
 
             Assert.IsTrue(store.Contains(message));
             Assert.IsFalse(store.Contains(FeedbackMessage.Warn("Test")));
@@ -299,32 +299,29 @@ namespace FeedbackMessages.Test
             var message = FeedbackMessage.Info("Test");
             store.AddMessage(message);
             store.AddMessage(FeedbackMessage.Info("Test2"));
-            Assert.AreEqual(store.Count, 2);
+            Assert.AreEqual(2, store.Count);
 
             store.Clear();
-            Assert.AreEqual(store.Count, 0);
+            Assert.AreEqual(0, store.Count);
 
         }
 
         [TestMethod]
         public void TestClearLevel()
         {
-
-
             var store = new FeedbackMessageStore();
 
             var message = FeedbackMessage.Info("Test");
             store.AddMessage(message);
             store.AddMessage(FeedbackMessage.Info("Test2"));
             store.AddMessage(FeedbackMessage.Warn("Test2"));
-            Assert.AreEqual(store.Count, 3);
+            Assert.AreEqual(3, store.Count);
 
             store.Clear(FeedbackMessageLevel.INFO);
-            Assert.AreEqual(store.Count, 1);
-
+            Assert.AreEqual(1, store.Count);
 
             store.Clear(FeedbackMessageLevel.WARN);
-            Assert.AreEqual(store.Count, 0);
+            Assert.AreEqual(0, store.Count);
 
         }
 
@@ -343,8 +340,8 @@ namespace FeedbackMessages.Test
 
             EventHandler<MessageAppendedEventArgs> handler = (sender, args) =>
             {
-                Assert.AreEqual(sender, store);
-                Assert.AreEqual(args.Message, feedbackMessage);
+                Assert.AreEqual(store, sender);
+                Assert.AreEqual(feedbackMessage, args.Message);
                 countRaiseEvent++;
             };
 
@@ -353,12 +350,12 @@ namespace FeedbackMessages.Test
 
 
             store.AddMessage(feedbackMessage);
-            Assert.AreEqual(countRaiseEvent, 1);
+            Assert.AreEqual(1, countRaiseEvent);
 
             // unregister
             store.OnMessageAppeded -= handler;
             store.AddMessage(FeedbackMessage.Warn("test unregister event"));
-            Assert.AreEqual(countRaiseEvent, 1);
+            Assert.AreEqual(1, countRaiseEvent);
 
         }
     }

@@ -14,7 +14,8 @@ namespace FeedbackMessages.Test
     public class PageModelExtensionsUnitTest : FeedbackMessagesUnitTestBase
     {
 
-        public class MockPageModel : PageModel {
+        public class MockPageModel : PageModel
+        {
         }
 
         [TestMethod]
@@ -34,11 +35,11 @@ namespace FeedbackMessages.Test
 
 
             var store = FeedbackMessageStore.Current;
-            Assert.AreEqual(store.Count, 5);
-            Assert.AreEqual(store.GetFeedbackMessages(FeedbackMessageLevel.INFO).Count, 2);
-            Assert.AreEqual(store.GetFeedbackMessages(FeedbackMessageLevel.SUCCESS).Count, 1);
-            Assert.AreEqual(store.GetFeedbackMessages(FeedbackMessageLevel.WARN).Count, 1);
-            Assert.AreEqual(store.GetFeedbackMessages(FeedbackMessageLevel.ERROR).Count, 1);
+            Assert.AreEqual(5, store.Count);
+            Assert.AreEqual(2, store.GetFeedbackMessages(FeedbackMessageLevel.INFO).Count);
+            Assert.AreEqual(1, store.GetFeedbackMessages(FeedbackMessageLevel.SUCCESS).Count);
+            Assert.AreEqual(1, store.GetFeedbackMessages(FeedbackMessageLevel.WARN).Count);
+            Assert.AreEqual(1, store.GetFeedbackMessages(FeedbackMessageLevel.ERROR).Count);
 
         }
     }

@@ -35,7 +35,7 @@ namespace FeedbackMessages.Test
             var loadedStore = httpContext.Items[FeedbackMessageStoreHolder.ITEM_KEY] as FeedbackMessageStore;
 
             Assert.IsNotNull(loadedStore);
-            Assert.AreEqual(loadedStore.Count, 0);
+            Assert.AreEqual(0, loadedStore.Count);
         }
 
         /// <summary>
@@ -76,13 +76,13 @@ namespace FeedbackMessages.Test
             var flashedStore = httpContext.Session.GetStore(FeedbackMessageStoreHolder.ITEM_KEY);
 
             Assert.IsNotNull(flashedStore);
-            Assert.AreEqual(flashedStore.Count, 1);
+            Assert.AreEqual(1, flashedStore.Count);
 
             Assert.IsTrue(flashedStore.HasUnrenderedMessage());
 
             var message = flashedStore.GetFeedbackMessages()[0];
-            Assert.AreEqual(message.Level, FeedbackMessageLevel.INFO);
-            Assert.AreEqual(message.ToString(), "test message.");
+            Assert.AreEqual(FeedbackMessageLevel.INFO, message.Level);
+            Assert.AreEqual("test message.", message.ToString());
         }
 
     }

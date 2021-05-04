@@ -13,8 +13,8 @@ namespace FeedbackMessages.Test
 
             attributes.AppendAttribute("class", "test1");
 
-            Assert.AreEqual(attributes.Count, 1);
-            Assert.AreEqual(attributes["class"].Count, 1);
+            Assert.AreEqual(1, attributes.Count);
+            Assert.AreEqual(1, attributes["class"].Count);
         }
 
 
@@ -25,12 +25,12 @@ namespace FeedbackMessages.Test
 
             attributes.AppendAttribute("class", "test1");
 
-            Assert.AreEqual(attributes.Count, 1);
-            Assert.AreEqual(attributes["class"].Count, 1);
+            Assert.AreEqual(1, attributes.Count);
+            Assert.AreEqual(1, attributes["class"].Count);
 
             attributes.AppendAttribute("class", "test2");
-            Assert.AreEqual(attributes.Count, 1);
-            Assert.AreEqual(attributes["class"].Count, 2);
+            Assert.AreEqual(1, attributes.Count);
+            Assert.AreEqual(2, attributes["class"].Count);
 
         }
 
@@ -42,12 +42,12 @@ namespace FeedbackMessages.Test
 
             attributes.AppendAttribute("class", "test1");
 
-            Assert.AreEqual(attributes.Count, 1);
-            Assert.AreEqual(attributes["class"].Count, 1);
+            Assert.AreEqual(1, attributes.Count);
+            Assert.AreEqual(1, attributes["class"].Count);
 
             attributes.AppendAttribute("class", "test1");
-            Assert.AreEqual(attributes.Count, 1);
-            Assert.AreEqual(attributes["class"].Count, 1);
+            Assert.AreEqual(1, attributes.Count);
+            Assert.AreEqual(1, attributes["class"].Count);
 
         }
 
@@ -58,12 +58,12 @@ namespace FeedbackMessages.Test
 
             attributes.AppendAttribute("class", "test1");
 
-            Assert.AreEqual(attributes.Count, 1);
-            Assert.AreEqual(attributes["class"].Count, 1);
+            Assert.AreEqual(1, attributes.Count);
+            Assert.AreEqual(1, attributes["class"].Count);
 
             attributes.AppendAttribute("data-test", "test1");
-            Assert.AreEqual(attributes.Count, 2);
-            Assert.AreEqual(attributes["data-test"].Count, 1);
+            Assert.AreEqual(2, attributes.Count);
+            Assert.AreEqual(1, attributes["data-test"].Count);
 
         }
 
@@ -78,8 +78,8 @@ namespace FeedbackMessages.Test
 
             var mergedAttributes = attributes1.Merge(attributes2);
 
-            Assert.AreEqual(mergedAttributes.Count, 1);
-            Assert.AreEqual(mergedAttributes["class"].Count, 2);
+            Assert.AreEqual(1, mergedAttributes.Count);
+            Assert.AreEqual(2, mergedAttributes["class"].Count);
 
         }
 
@@ -94,9 +94,9 @@ namespace FeedbackMessages.Test
 
             var mergedAttributes = attributes1.Merge(attributes2);
 
-            Assert.AreEqual(mergedAttributes.Count, 2);
-            Assert.AreEqual(mergedAttributes["class"].Count, 1);
-            Assert.AreEqual(mergedAttributes["name"].Count, 1);
+            Assert.AreEqual(2, mergedAttributes.Count);
+            Assert.AreEqual(1, mergedAttributes["class"].Count);
+            Assert.AreEqual(1, mergedAttributes["name"].Count);
         }
 
         [TestMethod]
@@ -110,13 +110,14 @@ namespace FeedbackMessages.Test
 
             var mergedAttributes = attributes1.Merge(attributes2);
 
-            Assert.AreEqual(mergedAttributes.Count, 1);
-            Assert.AreEqual(mergedAttributes["class"].Count, 1);
+            Assert.AreEqual(1, mergedAttributes.Count);
+            Assert.AreEqual(1, mergedAttributes["class"].Count);
 
         }
 
         [TestMethod]
-        public void TestBuild() {
+        public void TestBuild()
+        {
 
             var attributes = new FeedbackMessageAttributeCollection();
             attributes.AppendAttribute("class", "val1");
@@ -126,7 +127,7 @@ namespace FeedbackMessages.Test
 
             var str = attributes.Build().ToString();
 
-            Assert.AreEqual(str, "class=\"val1 val2 val3 val4\" ");
+            Assert.AreEqual("class=\"val1 val2 val3 val4\" ", str);
 
         }
 
@@ -144,7 +145,7 @@ namespace FeedbackMessages.Test
 
             var str = attributes.Build().ToString();
 
-            Assert.AreEqual(str, "class=\"val1 val2 val3 val4\" name=\"nameval\" ");
+            Assert.AreEqual("class=\"val1 val2 val3 val4\" name=\"nameval\" ", str);
 
         }
 

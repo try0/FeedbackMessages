@@ -58,7 +58,7 @@ namespace FeedbackMessages.Test
             var message = FeedbackMessage.Info("Info message");
 
             Assert.IsNotNull(builder.ScriptFactory);
-            Assert.AreEqual(builder.ScriptFactory.Convert(message), func.Invoke(message));
+            Assert.AreEqual(func.Invoke(message), builder.ScriptFactory.Convert(message));
 
         }
     }

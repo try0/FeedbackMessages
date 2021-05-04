@@ -54,7 +54,7 @@ namespace FeedbackMessages.AspNetCore.Test
 
             Assert.IsTrue(FeedbackMessageStoreHolder.IsAvailableSession);
 
-            
+
         }
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace FeedbackMessages.AspNetCore.Test
 
             var serviceProvider = new MockServiceProvier();
             serviceProvider.IsAvailabelHttpContextAccessor = true;
-            serviceProvider.IsAvailabelSession = true; 
+            serviceProvider.IsAvailabelSession = true;
 
             IApplicationBuilder builder = new ApplicationBuilder(serviceProvider);
             builder.ApplicationServices = serviceProvider;

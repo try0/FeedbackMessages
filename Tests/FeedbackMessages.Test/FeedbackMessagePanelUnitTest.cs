@@ -36,11 +36,11 @@ namespace FeedbackMessages.Test
             var htmlDoc = parser.ParseDocument(htmlString);
 
             var panelElement = htmlDoc.GetElementById(panel.ClientID);
-            Assert.AreEqual(panelElement.TagName.ToLower(), "div");
+            Assert.AreEqual("div", panelElement.TagName.ToLower());
 
             var infoArea = panelElement.GetElementsByClassName("feedback-info")[0];
             var mes1 = infoArea.FirstChild;
-            Assert.AreEqual(mes1.TextContent, "Test message");
+            Assert.AreEqual("Test message", mes1.TextContent);
 
         }
 
@@ -72,12 +72,12 @@ namespace FeedbackMessages.Test
             var htmlDoc = parser.ParseDocument(htmlString);
 
             var panelElement = htmlDoc.GetElementById(panel.ClientID);
-            Assert.AreEqual(panelElement.TagName.ToLower(), "div");
+            Assert.AreEqual("div", panelElement.TagName.ToLower());
 
             var infoArea = panelElement.GetElementsByClassName("feedback-info")[0];
             var mes1 = infoArea.FirstChild;
-            Assert.AreEqual(mes1.NodeName.ToLower(), "p");
-            Assert.AreEqual(mes1.TextContent, "Test message");
+            Assert.AreEqual("p", mes1.NodeName.ToLower());
+            Assert.AreEqual("Test message", mes1.TextContent);
 
         }
 

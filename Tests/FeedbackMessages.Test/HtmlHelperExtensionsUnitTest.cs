@@ -27,10 +27,10 @@ namespace FeedbackMessages.AspNetCore.Test
             var htmlDoc = parser.ParseDocument(htmlString);
 
             var warnArea = htmlDoc.GetElementsByClassName("feedback-warn")[0];
-            Assert.AreEqual(warnArea.ChildElementCount, 1);
+            Assert.AreEqual(1, warnArea.ChildElementCount);
 
             var warnMessage = warnArea.FirstChild;
-            Assert.AreEqual(warnMessage.TextContent, "Warning");
+            Assert.AreEqual("Warning", warnMessage.TextContent);
         }
 
         [TestMethod]

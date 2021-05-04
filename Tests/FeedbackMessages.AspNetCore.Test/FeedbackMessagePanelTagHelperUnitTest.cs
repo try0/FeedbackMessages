@@ -41,22 +41,22 @@ namespace FeedbackMessages.AspNetCore.Test
 
             // information message
             var infoArea = htmlDoc.GetElementsByClassName("feedback-info")[0];
-            Assert.AreEqual(infoArea.TagName.ToLower(), "ul");
-            Assert.AreEqual(infoArea.ChildElementCount, 1);
+            Assert.AreEqual("ul", infoArea.TagName.ToLower());
+            Assert.AreEqual(1, infoArea.ChildElementCount);
 
             var infoMessage = infoArea.FirstChild;
-            Assert.AreEqual(infoMessage.NodeName.ToLower(), "li");
-            Assert.AreEqual(infoMessage.TextContent, "InfoMessage");
+            Assert.AreEqual("li", infoMessage.NodeName.ToLower());
+            Assert.AreEqual("InfoMessage", infoMessage.TextContent);
 
 
             // error message
             var errorArea = htmlDoc.GetElementsByClassName("feedback-error")[0];
-            Assert.AreEqual(infoArea.TagName.ToLower(), "ul");
-            Assert.AreEqual(infoArea.ChildElementCount, 1);
+            Assert.AreEqual("ul", infoArea.TagName.ToLower());
+            Assert.AreEqual(1, infoArea.ChildElementCount);
 
             var errorMessage = errorArea.FirstChild;
-            Assert.AreEqual(errorMessage.NodeName.ToLower(), "li");
-            Assert.AreEqual(errorMessage.TextContent, "ErrorMessage");
+            Assert.AreEqual("li", errorMessage.NodeName.ToLower());
+            Assert.AreEqual("ErrorMessage", errorMessage.TextContent);
         }
     }
 }

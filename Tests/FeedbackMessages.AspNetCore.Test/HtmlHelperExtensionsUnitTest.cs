@@ -44,11 +44,11 @@ namespace FeedbackMessages.AspNetCore.Test
 
             var warnArea = htmlDoc.GetElementsByClassName("feedback-warn")[0];
 
-            Assert.AreEqual(warnArea.ChildElementCount, 1);
+            Assert.AreEqual(1, warnArea.ChildElementCount);
 
             var warnMessage = warnArea.FirstChild;
 
-            Assert.AreEqual(warnMessage.TextContent, "Warning");
+            Assert.AreEqual("Warning", warnMessage.TextContent);
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace FeedbackMessages.AspNetCore.Test
             content.WriteTo(writer, NullHtmlEncoder.Default);
 
             var script = writer.ToString();
-           
+
             Assert.IsTrue(script.Contains("document.addEventListener(\"DOMContentLoaded\", function(){alert('Warning');});"));
 
         }

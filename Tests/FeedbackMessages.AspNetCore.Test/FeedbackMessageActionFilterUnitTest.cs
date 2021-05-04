@@ -22,7 +22,7 @@ namespace FeedbackMessages.AspNetCore.Test
 
             var loadedStore = httpContext.Items[FeedbackMessageStoreHolder.ITEM_KEY] as FeedbackMessageStore;
             Assert.IsNotNull(loadedStore);
-            Assert.AreEqual(loadedStore.Count, 1);
+            Assert.AreEqual(1, loadedStore.Count);
 
         }
 
@@ -41,7 +41,7 @@ namespace FeedbackMessages.AspNetCore.Test
 
             var flashedStore = httpContext.Session.GetStore(FeedbackMessageStoreHolder.ITEM_KEY);
             Assert.IsNotNull(flashedStore);
-            Assert.AreEqual(flashedStore.Count, 1);
+            Assert.AreEqual(1, flashedStore.Count);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace FeedbackMessages.AspNetCore.Test
 
             var loadedStore = httpContext.Items[FeedbackMessageStoreHolder.ITEM_KEY] as FeedbackMessageStore;
             Assert.IsNotNull(loadedStore);
-            Assert.AreEqual(loadedStore.Count, 1);
+            Assert.AreEqual(1, loadedStore.Count);
 
         }
 
@@ -78,7 +78,7 @@ namespace FeedbackMessages.AspNetCore.Test
 
             var flashedStore = httpContext.Session.GetStore(FeedbackMessageStoreHolder.ITEM_KEY);
             Assert.IsNotNull(flashedStore);
-            Assert.AreEqual(flashedStore.Count, 1);
+            Assert.AreEqual(1, flashedStore.Count);
         }
     }
 }
