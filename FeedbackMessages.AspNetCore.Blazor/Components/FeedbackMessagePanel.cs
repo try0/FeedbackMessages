@@ -41,13 +41,11 @@ namespace FeedbackMessages.Components
         /// </summary>
         public FeedbackMessagePanel()
         {
-            validationStateChangedHandler = (sender, eventArgs) => {
-                if (ShowValidationErrors)
+            validationStateChangedHandler = (sender, eventArgs) =>
+            {
+                if (ShowValidationErrors && CurrentEditContext != null)
                 {
-                    if (ShowValidationErrors && CurrentEditContext != null)
-                    {
-                        FeedbackMessageUtil.AppendValidationErrorsToStore(CurrentEditContext);
-                    }
+                    FeedbackMessageUtil.AppendValidationErrorsToStore(CurrentEditContext);
                 }
             };
         }
@@ -55,7 +53,8 @@ namespace FeedbackMessages.Components
         /// <summary>
         /// Refresh this component. Delegate processing to StateHasChanged().
         /// </summary>
-        public void RefreshRender() {
+        public void RefreshRender()
+        {
             base.StateHasChanged();
         }
 

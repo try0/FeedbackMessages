@@ -44,12 +44,9 @@ namespace FeedbackMessages.Components
         {
             validationStateChangedHandler = (sender, eventArgs) =>
             {
-                if (ShowValidationErrors)
+                if (ShowValidationErrors && CurrentEditContext != null)
                 {
-                    if (ShowValidationErrors && CurrentEditContext != null)
-                    {
-                        FeedbackMessageUtil.AppendValidationErrorsToStore(CurrentEditContext);
-                    }
+                    FeedbackMessageUtil.AppendValidationErrorsToStore(CurrentEditContext);
                 }
             };
         }
