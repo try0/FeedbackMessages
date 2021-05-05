@@ -14,17 +14,21 @@ Messages that could not be rendered are persisted in the session until rendered.
 
 version >=.NETFramework 4.6.1, .NET Standard 2.0
 
+## Demo
+
+[FeedbackMessages.Example.WebForms](http://feedbackmessages-webforms.azurewebsites.net)
+
 
 ## Usage
 
 ### NuGet
-[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.6.0) .NETFramework WebForms
+[FeedbackMessages](https://www.nuget.org/packages/FeedbackMessages/0.6.0) WebForms
 
-[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.6.0) .NETFramework Mvc
+[FeedbackMessages.Mvc](https://www.nuget.org/packages/FeedbackMessages.Mvc/0.6.0) Mvc (.NETFramework)
 
-[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.6.0) .NETCore Mvc, RazorPages
+[FeedbackMessages.AspNetCore.Mvc](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Mvc/0.6.0) Mvc, RazorPages
 
-[FeedbackMessages.AspNetCore.Blazor](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Blazor/0.6.0) .NETCore ServerSideBlazor
+[FeedbackMessages.AspNetCore.Blazor](https://www.nuget.org/packages/FeedbackMessages.AspNetCore.Blazor/0.6.0) ServerSideBlazor
 
 
 ---
@@ -72,7 +76,7 @@ FeedbackMessageSettings.CreateInitializer()
 ---
 
 
-### WebForms .NETFramework  
+### WebForms  
 
 Add FeedbackMessages dependency.  
 There is nothing you need to do to initialize. When start up application, add FeedbackMessages.FeedbackMessageHttpModule automatically.
@@ -114,7 +118,7 @@ this.AppendFeedbackMessageScript();
 ---
 
 
-### Mvc .NETFramework
+### Mvc (.NETFramework)
 
 Add FeedbackMessages.Mvc dependency.  
 There is nothing you need to do to initialize. When start up application, add FeedbackMessages.FeedbackMessageHttpModule automatically.
@@ -158,7 +162,7 @@ In the case of display messages using JavaScript.
 ---
 
 
-### Mvc .NETCore
+### Mvc
 Add FeedbackMessages.AspNetCore.Mvc dependency.
 
 Initialize FeedbackMessages in Startup.cs.
@@ -223,7 +227,7 @@ In the case of display messages using JavaScript.
 ---
 
 
-### RazorPages .NETCore
+### RazorPages
 Add FeedbackMessages.AspNetCore.Mvc dependency.
 
 Initialize FeedbackMessages in Startup.cs.
@@ -282,7 +286,7 @@ In the case of display messages using JavaScript.
 
 
 
-### Blazor(server-side) .NETCore
+### Blazor(server-side)
 Add FeedbackMessages.AspNetCore.Blazor dependency.
 
 Initialize FeedbackMessages in Startup.cs.
