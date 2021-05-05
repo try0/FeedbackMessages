@@ -3,7 +3,10 @@
 <%@ Register Assembly="FeedbackMessages" Namespace="FeedbackMessages.Components" TagPrefix="fm" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
+    <div class="ui basic segment ">
+        <a style="font-size:1.5em; float:right" title="show sample code on GitHub" href="https://github.com/try0/FeedbackMessages/blob/master/Examples/FeedbackMessages.Example.WebForms/FirstPage.aspx.cs"><i class="github icon"></i></a>
+    </div>
+    
     <!-- feedback message area -->
     <fm:FeedbackMessagePanel runat="server" ID="FeedbackMessagePanel" ShowValidationErrors="true"></fm:FeedbackMessagePanel>
 
