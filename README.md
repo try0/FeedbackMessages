@@ -158,7 +158,46 @@ In the case of display messages using JavaScript.
 @Html.FeedbackMessageScript()
 ```
 
+Ajax lazy load
+```C#
+public class YourController : Controller
+{
+    public ActionResult AjaxFeedbackMessage()
+    {
+        var messageHtml = FeedbackMessageSettings.Instance.MessageRenderer.RenderMessages().ToString();
 
+        return new ContentResult()
+        {
+            ContentType = "text/html",
+            ContentEncoding = System.Text.Encoding.UTF8,
+            Content = messageHtml
+        };
+    }
+}
+```
+```html
+<script>
+
+    $(function () {
+       $.ajax({
+            type: "POST", // GET
+            url: "/Your/AjaxFeedbackMessage",
+            success: function (messageHtml) {
+                if (!messageHtml) {
+                    return;
+                }
+
+                $("#ajax-feedback-msg-container").html(messageHtml);
+            },
+            error: function (jqXHR, status, error) {
+                // TODO
+            }
+        });
+    });
+</script>
+
+<div id="ajax-feedback-msg-container"></div>
+```
 ---
 
 
