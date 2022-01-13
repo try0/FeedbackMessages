@@ -24,3 +24,31 @@
     </div>
 
 }
+
+<hr style="margin:2em;">
+
+<script>
+
+    $(function () {
+
+        $("#btn-ajax-feedback-msg").on("click", function () {
+            $.ajax({
+                type: "POST",
+                url: "/Home/AjaxFeedbackMessage",
+                success: function (messageHtml) {
+                    if (!messageHtml) {
+                        return;
+                    }
+
+                    $("#ajax-feedback-msg-container").html(messageHtml);
+                },
+                error: function (jqXHR, status, error) {
+                    console.error(error);
+                    console.error(status);
+                }
+            });
+        });
+    });
+</script>
+<button id="btn-ajax-feedback-msg" type="button" class="ui primary button">Lazy Load Feedback Messages</button>
+<div id="ajax-feedback-msg-container" style="padding-top:3em;"></div>

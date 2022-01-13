@@ -48,6 +48,24 @@ namespace FeedbackMessages.Example.AspNetCore.Mvc.Controllers
             return View();
         }
 
+        public ActionResult AjaxFeedbackMessage()
+        {
+
+            this.InfoMessage("Ajax Information message.");
+            this.SuccessMessage("Ajax Success message.");
+            this.WarnMessage("Ajax Warning message.");
+            this.ErrorMessage("Ajax Error message.");
+
+
+            var messageHtml = FeedbackMessageSettings.Instance.MessageRenderer.RenderMessages().ToString();
+
+            return new ContentResult()
+            {
+                ContentType = "text/html",
+                Content = messageHtml
+            };
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

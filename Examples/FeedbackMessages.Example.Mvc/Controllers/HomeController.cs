@@ -6,7 +6,7 @@ namespace FeedbackMessages.Example.Mvc.Controllers
 {
     public class HomeController : Controller
     {
- 
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -41,6 +41,25 @@ namespace FeedbackMessages.Example.Mvc.Controllers
         {
             this.InfoMessage("SecondPage");
             return View();
+        }
+
+        public ActionResult AjaxFeedbackMessage()
+        {
+
+            this.InfoMessage("Ajax Information message.");
+            this.SuccessMessage("Ajax Success message.");
+            this.WarnMessage("Ajax Warning message.");
+            this.ErrorMessage("Ajax Error message.");
+
+
+            var messageHtml = FeedbackMessageSettings.Instance.MessageRenderer.RenderMessages().ToString();
+
+            return new ContentResult()
+            {
+                ContentType = "text/html",
+                ContentEncoding = System.Text.Encoding.UTF8,
+                Content = messageHtml
+            };
         }
 
     }
